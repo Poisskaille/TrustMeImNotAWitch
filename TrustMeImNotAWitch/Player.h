@@ -1,25 +1,23 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "textureManager.h"
 
-enum class State{GROUNDED, JUMPING};
+enum class State { GROUNDED, JUMPING };
 
-class Player
-{
+class Player {
 public:
+    Player(const sf::Texture& texture, textureManager& texManager);
+    ~Player();
 
-	Player();
-	~Player();
-
-	void Update(float dT);
-	void Draw(sf::RenderWindow& window);
-	void HandleInput();
+    void Update(float dT);
+    void Draw(sf::RenderWindow& window);
+    void HandleInput();
 
 private:
+    sf::Sprite player;
+    State playerState;
+    float speed;
+    float deltaTime;
 
-	State playerState;
-	sf::RectangleShape playerShape;
-	float speed;
-	float deltaTime;
-	
+    textureManager& texManager; // keep a reference if you’ll use animations later
 };
-

@@ -1,14 +1,19 @@
 #include "Game.h"
+#include "Player.h"
 
 Game::Game()
 	:window(sf::VideoMode({ 1920, 1080 }), "Trust Me, I'm Not A Witch!")
+
 {
 }
 Game::~Game(){}
 
+
 void Game::run()
 {
-    Player player;
+    textureManager texManager;
+    texManager.loadAll();
+    Player player(texManager.test, texManager);
 
     sf::Clock clock;
 

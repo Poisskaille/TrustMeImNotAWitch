@@ -1,9 +1,10 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player(const sf::Texture& texture, textureManager& texManager)
+	: player(texture), texManager(texManager)
 {
-	playerShape.setPosition(sf::Vector2(0.f, 600.f));
-	playerShape.setSize(sf::Vector2(5.f, 5.f));
+	player.setPosition(sf::Vector2f(0.0f, 600.0f));
+	player.setScale(sf::Vector2f(2.f, 2.f));
 	speed = 100.f;
 	deltaTime = 0.f;
 
@@ -19,7 +20,6 @@ void Player::Update(float dT)
 	deltaTime = dT;
 	HandleInput();
 	
-
 }
 
 void Player::Draw(sf::RenderWindow& window)
