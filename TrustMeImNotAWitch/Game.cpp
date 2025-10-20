@@ -1,7 +1,7 @@
 #include "Game.h"
 
 Game::Game()
-	:window(sf::VideoMode({ 1920, 1080 }), "Trust me im not a Witch")
+	:window(sf::VideoMode({ 1920, 1080 }), "Trust Me, I'm Not A Witch!")
 {
 }
 Game::~Game(){}
