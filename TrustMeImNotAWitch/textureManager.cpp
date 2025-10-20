@@ -2,30 +2,41 @@
 #include <stdexcept>
 
 void textureManager::loadAll() {
-    //grassTile.loadFromFile("assets/tiles/grass.png");
-    test.loadFromFile("assets/test.png");
+    // Check the return value of loadFromFile and handle errors appropriately
+    if (!test.loadFromFile("assets/test.png")) {
+        throw std::runtime_error("Failed to load texture: assets/test.png");
+    }
 
-    //AnimationData idle, run, jump;
+    AnimationData idle, run, jump;
 
-    //// Example: all spritesheets are horizontal strips
-    //idle.texture.loadFromFile("assets/player/idle.png");
-    //idle.frameCount = 4;
-    //idle.frameSize = { 64, 64 };
+    // Example: all spritesheets are horizontal strips
+    if (!idle.texture.loadFromFile("assets/character/notta_Idle.png")) {
+        throw std::runtime_error("Failed to load texture: assets/character/notta_Idle.png");
+    }
+    idle.frameCount = 8;
+    idle.frameSize = { 32, 32 };
 
-    //run.texture.loadFromFile("assets/player/run.png");
-    //run.frameCount = 6;
-    //run.frameSize = { 64, 64 };
+    // Uncomment and handle other animations similarly if needed
+    /*
+    if (!run.texture.loadFromFile("assets/player/run.png")) {
+        throw std::runtime_error("Failed to load texture: assets/player/run.png");
+    }
+    run.frameCount = 6;
+    run.frameSize = { 64, 64 };
 
-    //jump.texture.loadFromFile("assets/player/jump.png");
-    //jump.frameCount = 3;
-    //jump.frameSize = { 64, 64 };
+    if (!jump.texture.loadFromFile("assets/player/jump.png")) {
+        throw std::runtime_error("Failed to load texture: assets/player/jump.png");
+    }
+    jump.frameCount = 3;
+    jump.frameSize = { 64, 64 };
 
-    //playerAnimations[playerAnimation::Idle] = idle;
-    //playerAnimations[playerAnimation::Run] = run;
-    //playerAnimations[playerAnimation::Jump] = jump;
+    playerAnimations[playerAnimation::Idle] = idle;
+    playerAnimations[playerAnimation::Run] = run;
+    playerAnimations[playerAnimation::Jump] = jump;
 
     // Default animation
-    //setplayerAnimation(playerAnimation::Idle);
+    setplayerAnimation(playerAnimation::Idle);
+    */
 }
 
 void textureManager::setplayerAnimation(playerAnimation anim, sf::Sprite& player) {
@@ -36,7 +47,12 @@ void textureManager::setplayerAnimation(playerAnimation anim, sf::Sprite& player
     animData.timer = 0.0f;
 
     player.setTexture(animData.texture);
-    player.setTextureRect(sf::IntRect(0, 0, animData.frameSize.x, animData.frameSize.y));
+    player.setTextureRect(sf::IntRect(
+        { animData.currentFrame * animData.frameSize.x, 0 },
+        { animData.frameSize.x, animData.frameSize.y }
+    ));
+
+
 }
 
 void textureManager::update(float deltaTime, sf::Sprite& player) {
@@ -48,10 +64,10 @@ void textureManager::update(float deltaTime, sf::Sprite& player) {
         animData.currentFrame = (animData.currentFrame + 1) % animData.frameCount;
 
         player.setTextureRect(sf::IntRect(
-            animData.currentFrame * animData.frameSize.x,
-            0,
-            animData.frameSize.x,
-            animData.frameSize.y
+            { animData.currentFrame * animData.frameSize.x, 0 },
+            { animData.frameSize.x, animData.frameSize.y }
         ));
+
+
     }
 }

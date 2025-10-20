@@ -6,6 +6,7 @@ enum class State { GROUNDED, JUMPING };
 
 class Player {
 public:
+    textureManager& texManager;
     Player(const sf::Texture& texture, textureManager& texManager);
     ~Player();
 
@@ -19,5 +20,5 @@ private:
     float speed;
     float deltaTime;
 
-    textureManager& texManager; // keep a reference if you’ll use animations later
+    
 };

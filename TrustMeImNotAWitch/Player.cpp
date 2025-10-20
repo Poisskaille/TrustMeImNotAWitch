@@ -24,10 +24,10 @@ void Player::Update(float dT)
 
 void Player::Draw(sf::RenderWindow& window)
 {
-	window.draw(playerShape);
+	window.draw(player);
 }
 
 void Player::HandleInput()
 {
-	playerShape.move(sf::Vector2(speed * deltaTime, 0.f));
+	player.move(sf::Vector2(speed * deltaTime, 0.f));
 }
