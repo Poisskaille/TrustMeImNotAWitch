@@ -2,9 +2,11 @@
 #include <stdexcept>
 
 void textureManager::loadAll() {
-    // Check the return value of loadFromFile and handle errors appropriately
     if (!test.loadFromFile("assets/test.png")) {
         throw std::runtime_error("Failed to load texture: assets/test.png");
+    }
+    if (!backgroundTexture.loadFromFile("assets/background.png")) {
+        throw std::runtime_error("Failed to load texture: assets/background.png");
     }
 
     AnimationData idle, run, jump;

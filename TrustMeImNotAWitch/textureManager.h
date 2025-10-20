@@ -23,12 +23,14 @@ struct AnimationData {
 class textureManager {
 private:
 
+
     sf::Texture grassTile;
     std::unordered_map<playerAnimation, AnimationData> playerAnimations;
     playerAnimation currentAnim = playerAnimation::Idle;
 
 public:
     sf::Texture test;
+    sf::Texture backgroundTexture;
     void loadAll();
     void setplayerAnimation(playerAnimation anim, sf::Sprite& player);
     void update(float deltaTime, sf::Sprite& player);

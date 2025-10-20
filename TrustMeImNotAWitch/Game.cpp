@@ -9,11 +9,18 @@ Game::Game()
 Game::~Game(){}
 
 
+void Game::init(sf::RenderWindow& window, textureManager& texManager) {
+    background.setTexture(&texManager.backgroundTexture);
+	background.setSize(sf::Vector2f(1920.f, 1080.f));
+}
+
 void Game::run()
 {
     textureManager texManager;
     texManager.loadAll();
     Player player(texManager.test, texManager);
+	init(window, texManager);
+	
 
     sf::Clock clock;
 
@@ -30,7 +37,9 @@ void Game::run()
 
         window.clear();
         player.Update(deltaTime);
+        window.draw(background);
         player.Draw(window);
+		
         window.display();
     }
 }
