@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "SFML/Graphics.hpp"
 #include "textureManager.h"
 
@@ -10,9 +11,15 @@ public:
     Player(const sf::Texture& texture, textureManager& texManager);
     ~Player();
 
-    void Update(float dT);
-    void Draw(sf::RenderWindow& window);
-    void HandleInput();
+	Player();
+	~Player();
+
+	void Update(float dT);
+	void Draw(sf::RenderWindow& window);
+	void HandleInput();
+	void Jump();
+
+	void Collision();
 
 private:
     sf::Sprite player;
@@ -20,5 +27,16 @@ private:
     float speed;
     float deltaTime;
 
-    
+	State playerState;
+	sf::RectangleShape playerShape;
+
+	sf::Vector2f velocity;
+	float speed;
+	float deltaTime;
+	float jumpForce;
+	float gravity;
+
+	// A supprimer plus tard, juste pour test
+	sf::RectangleShape ground;
+	
 };
