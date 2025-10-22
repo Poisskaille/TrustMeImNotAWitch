@@ -44,6 +44,8 @@ void Player::Draw(sf::RenderWindow& window)
 	window.draw(playerCollider);
 	window.draw(playerSprite);
 	window.setView(cam.getCam());
+
+	cam.Draw(window);
 }
 
 void Player::HandleInput()
