@@ -4,7 +4,7 @@
 #include "textureManager.h"
 #include "map.h"
 
-enum class State { GROUNDED, JUMPING };
+enum class State { GROUNDED, JUMPING, SLIDING};
 
 class Player {
 public:
@@ -19,6 +19,12 @@ public:
 	void Collision(const std::vector<Tile>& tile);
 
 private:
+	playerAnimation currentAnimation = playerAnimation::Idle; // default
+
+	int walkingSpeed = 100; //Permet d'ajuster la vitesse plus facilement
+	int runningSpeed = 200;
+	bool isWalking = false;
+
 	sf::Sprite playerSprite;
     State playerState;
     float speed;

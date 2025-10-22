@@ -150,6 +150,10 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\assets\maps\section1.txt" />
+    <Text Include="..\assets\maps\section2.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
