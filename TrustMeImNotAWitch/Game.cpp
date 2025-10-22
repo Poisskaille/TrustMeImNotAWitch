@@ -20,8 +20,9 @@ void Game::init(sf::RenderWindow& window, textureManager& texManager) {
 
 void Game::run()
 {
-    Map map;
+ 
     textureManager texManager;
+    Map map(texManager);
     texManager.loadAll();
     std::shared_ptr<Player> player = std::make_shared<Player>(texManager.test, texManager);
 	init(window, texManager);
@@ -29,7 +30,7 @@ void Game::run()
 
     sf::Clock clock;
     map.loadAllSections();
-    map.generate(5);
+    map.generate();
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -42,10 +43,10 @@ void Game::run()
         clock.restart();
 
         window.clear();
-        player->Update(deltaTime);
+        player->Update(deltaTime, map.getSolidTiles());
         window.draw(background);
         player->Draw(window);
-        map.draw(window, texManager.grassTile, 16);
+        map.draw(window, texManager.grassTile, 32);
 		
         window.display();
     }

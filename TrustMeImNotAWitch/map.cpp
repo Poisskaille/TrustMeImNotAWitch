@@ -4,7 +4,9 @@
 #include <iostream>
 #include <algorithm>
 
-Map::Map() {
+Map::Map(textureManager& texManager)
+    : texManager(texManager) // initialize the reference here
+{
     std::random_device rd;
     rng.seed(rd());
 }
@@ -50,28 +52,27 @@ void Map::loadAllSections() {
 
 void Map::appendSection(const std::vector<std::string>& section) {
     if (combinedMap.empty()) {
-        // start from the new section
         combinedMap = section;
         return;
     }
 
-    // If heights differ, pad the shorter one with '.' (air)
-    std::size_t currentH = combinedMap.size();
-    std::size_t newH = section.size();
-    std::size_t maxH = std::max(currentH, newH);
+    size_t currentH = combinedMap.size();
+    size_t newH = section.size();
+    size_t maxH = std::max(currentH, newH);
+    combinedMap.resize(maxH, std::string()); // pad with empty strings
 
-    if (currentH < maxH) combinedMap.resize(maxH, std::string());
-    // ensure each row has at least something (avoid undefined behaviour)
-    for (auto& row : combinedMap) if (row.empty()) row = std::string();
+    for (size_t y = 0; y < maxH; ++y) {
+        std::string& combinedRow = combinedMap[y];
+        const std::string& sectionRow = (y < newH) ? section[y] : std::string(section[0].size(), '.');
 
-    // pad section rows if needed while concatenating
-    for (std::size_t y = 0; y < maxH; ++y) {
-        std::string right = (y < newH) ? section[y] : std::string();
-        // ensure the right part contains '.' where empty
-        if (right.empty()) right = std::string(combinedMap[y].size() > 0 ? 0 : 0, '.');
-        combinedMap[y] += right;
+        // pad combinedRow with dots if needed
+        if (combinedRow.size() < sectionRow.size())
+            combinedRow.resize(combinedRow.size(), '.');
+
+        combinedRow += sectionRow; // now append safely
     }
 }
+
 
 void Map::randomizeNextSection() {
     if (sections.empty()) {
@@ -82,29 +83,34 @@ void Map::randomizeNextSection() {
     appendSection(sections[idx]);
 }
 
-void Map::generate(std::size_t numberOfSections) {
-    if (sections.empty()) {
-        throw std::runtime_error("No sections loaded. Call loadAllSections() first.");
-    }
-
+void Map::generate() {
     combinedMap.clear();
-    for (std::size_t i = 0; i < numberOfSections; ++i) {
+    solidTiles.clear();
+
+    for (int i = 0; i < 5; ++i)
         randomizeNextSection();
+
+    const int tileSize = 32;
+
+    for (size_t y = 0; y < combinedMap.size(); ++y) {
+        for (size_t x = 0; x < combinedMap[y].size(); ++x) {
+            if (combinedMap[y][x] == '#') {
+                solidTiles.emplace_back(
+                    texManager.grassTile, // texture
+                    '#',                  // type
+                    sf::Vector2f(static_cast<float>(x * tileSize),
+                        static_cast<float>(y * tileSize)) // position
+                );
+            }
+        }
     }
 }
 
+
+
+
 void Map::draw(sf::RenderWindow& window, const sf::Texture& groundTex, int tileSize) const {
-    if (combinedMap.empty()) return;
-
-    sf::Sprite tile(groundTex);
-
-    for (std::size_t y = 0; y < combinedMap.size(); ++y) {
-        for (std::size_t x = 0; x < combinedMap[y].size(); ++x) {
-            char c = combinedMap[y][x];
-            if (c == '#') {
-                tile.setPosition(sf::Vector2f(static_cast<float>(x * tileSize), static_cast<float>(y * tileSize)));
-                window.draw(tile);
-            }
-        }
+    for (const auto& tile : solidTiles) {
+        window.draw(tile.sprite);
     }
 }
