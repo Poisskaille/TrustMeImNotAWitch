@@ -1,11 +1,16 @@
 #include "Player.h"
 
 Player::Player(const sf::Texture& texture, textureManager& texManager)
-	: player(texture), texManager(texManager)
+	: playerSprite(texture), texManager(texManager)
 {
-	playerShape.setPosition(sf::Vector2(0.f, 400.f));
-	playerShape.setSize(sf::Vector2(15.f, 15.f));
-	playerShape.setFillColor(sf::Color::Red);
+
+	playerSprite.setOrigin(sf::Vector2f(16,16));
+	playerCollider.setPosition(sf::Vector2(0.f, 400.f));
+	playerCollider.setSize(sf::Vector2(32.f, 32.f));
+	playerCollider.setOrigin(sf::Vector2f(16.f,16.f));
+	playerCollider.setFillColor(sf::Color::Red);
+
+	playerSprite.setPosition(sf::Vector2(0.f,400.f));
 
 	speed = 200.f;
 	deltaTime = 0.f;
@@ -35,12 +40,13 @@ void Player::Update(float dT)
 void Player::Draw(sf::RenderWindow& window)
 {
 	window.draw(ground);
-	window.draw(playerShape);
+	window.draw(playerCollider);
+	window.draw(playerSprite);
 }
 
 void Player::HandleInput()
 {
-	playerShape.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
+	playerCollider.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
 	velocity.y += gravity * deltaTime;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED) { Jump(); }
@@ -51,7 +57,7 @@ void Player::HandleInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState != State::GROUNDED)
 		velocity.y = 1000.f;
 
-	
+	playerSprite.setPosition(playerCollider.getPosition());
 }
 
 void Player::Jump()
@@ -62,10 +68,10 @@ void Player::Jump()
 
 void Player::Collision()
 {
-	if (playerShape.getGlobalBounds().findIntersection(ground.getGlobalBounds()))
+	if (playerCollider.getGlobalBounds().findIntersection(ground.getGlobalBounds()))
 	{
 
-		playerShape.setPosition(sf::Vector2f(playerShape.getPosition().x, playerShape.getPosition().y - 0.0001f));
+		playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f));
 		velocity.y = 0.f;
 		playerState = State::GROUNDED;
 	}

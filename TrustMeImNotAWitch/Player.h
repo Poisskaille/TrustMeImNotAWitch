@@ -7,12 +7,8 @@ enum class State { GROUNDED, JUMPING };
 
 class Player {
 public:
-    textureManager& texManager;
     Player(const sf::Texture& texture, textureManager& texManager);
     ~Player();
-
-	Player();
-	~Player();
 
 	void Update(float dT);
 	void Draw(sf::RenderWindow& window);
@@ -22,19 +18,18 @@ public:
 	void Collision();
 
 private:
-    sf::Sprite player;
+	sf::Sprite playerSprite;
     State playerState;
     float speed;
     float deltaTime;
 
-	State playerState;
-	sf::RectangleShape playerShape;
+	sf::RectangleShape playerCollider;
 
 	sf::Vector2f velocity;
-	float speed;
-	float deltaTime;
 	float jumpForce;
 	float gravity;
+
+	textureManager& texManager;
 
 	// A supprimer plus tard, juste pour test
 	sf::RectangleShape ground;
