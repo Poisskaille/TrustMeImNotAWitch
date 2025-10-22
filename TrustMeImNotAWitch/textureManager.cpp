@@ -8,6 +8,10 @@ void textureManager::loadAll() {
     if (!backgroundTexture.loadFromFile("assets/background.png")) {
         throw std::runtime_error("Failed to load texture: assets/background.png");
     }
+    if (!grassTile.loadFromFile("assets/tiles/ground.png")) {
+        throw std::runtime_error("Failed to load texture: assets/tiles/ground.png");
+    }
+
 
     AnimationData idle, run, jump;
 
@@ -18,7 +22,7 @@ void textureManager::loadAll() {
     idle.frameCount = 8;
     idle.frameSize = { 32, 32 };
 
-    // Uncomment and handle other animations similarly if needed
+    // Uncomment and handle other animations similarly if neede  d
     /*
     if (!run.texture.loadFromFile("assets/player/run.png")) {
         throw std::runtime_error("Failed to load texture: assets/player/run.png");

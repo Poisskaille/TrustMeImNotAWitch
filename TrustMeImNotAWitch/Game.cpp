@@ -29,6 +29,7 @@ void Game::run()
 
     sf::Clock clock;
     map.loadAllSections();
+    map.generate(5);
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -44,6 +45,7 @@ void Game::run()
         player->Update(deltaTime);
         window.draw(background);
         player->Draw(window);
+        map.draw(window, texManager.grassTile, 16);
 		
         window.display();
     }

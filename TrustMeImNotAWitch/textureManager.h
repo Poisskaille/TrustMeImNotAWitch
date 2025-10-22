@@ -24,11 +24,12 @@ class textureManager {
 private:
 
 
-    sf::Texture grassTile;
+    
     std::unordered_map<playerAnimation, AnimationData> playerAnimations;
     playerAnimation currentAnim = playerAnimation::Idle;
 
 public:
+    sf::Texture grassTile;
     sf::Texture test;
     sf::Texture backgroundTexture;
     void loadAll();
