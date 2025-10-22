@@ -21,8 +21,13 @@ public:
 private:
     sf::Sprite player;
     State playerState;
-    float speed;
-    float deltaTime;
+	sf::Vector2f velocity;
+	float speed;
+	float deltaTime;
+	float jumpForce;
+	float gravity;
 
-    
+	// A supprimer plus tard, juste pour test
+	sf::RectangleShape ground;
+	
 };

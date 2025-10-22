@@ -37,7 +37,7 @@ void Player::Draw(sf::RenderWindow& window)
 
 void Player::HandleInput()
 {
-	playerShape.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
+	player.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
 	velocity.y += gravity * deltaTime;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED) { Jump(); }
@@ -59,10 +59,10 @@ void Player::Jump()
 
 void Player::Collision()
 {
-	if (playerShape.getGlobalBounds().findIntersection(ground.getGlobalBounds()))
+	if (player.getGlobalBounds().findIntersection(ground.getGlobalBounds()))
 	{
 
-		playerShape.setPosition(sf::Vector2f(playerShape.getPosition().x, playerShape.getPosition().y - 0.0001f));
+		player.setPosition(sf::Vector2f(player.getPosition().x, player.getPosition().y - 0.0001f));
 		velocity.y = 0.f;
 		playerState = State::GROUNDED;
 	}
