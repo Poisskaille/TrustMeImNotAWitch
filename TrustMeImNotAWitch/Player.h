@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include "SFML/Graphics.hpp"
 #include "textureManager.h"
 
@@ -10,9 +11,12 @@ public:
     Player(const sf::Texture& texture, textureManager& texManager);
     ~Player();
 
-    void Update(float dT);
-    void Draw(sf::RenderWindow& window);
-    void HandleInput();
+	void Update(float dT);
+	void Draw(sf::RenderWindow& window);
+	void HandleInput();
+	void Jump();
+
+	void Collision();
 
 private:
     sf::Sprite player;
