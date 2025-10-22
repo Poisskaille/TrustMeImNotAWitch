@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Player.h"
+#include "memory.h"
 
 Game::Game()
 	:window(sf::VideoMode({ 1920, 1080 }), "Trust Me, I'm Not A Witch!")
@@ -18,7 +19,7 @@ void Game::run()
 {
     textureManager texManager;
     texManager.loadAll();
-    Player player(texManager.test, texManager);
+    std::shared_ptr<Player> player = std::make_shared<Player>(texManager.test, texManager);
 	init(window, texManager);
 	
 
@@ -36,9 +37,9 @@ void Game::run()
         clock.restart();
 
         window.clear();
-        player.Update(deltaTime);
+        player->Update(deltaTime);
         window.draw(background);
-        player.Draw(window);
+        player->Draw(window);
 		
         window.display();
     }
