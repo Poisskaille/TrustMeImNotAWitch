@@ -33,6 +33,9 @@
     <ClCompile Include="textureManager.cpp">
       <Filter>Fichiers sources\Animation &amp; Texture</Filter>
     </ClCompile>
+    <ClCompile Include="CameraUI.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -43,6 +46,9 @@
     </ClInclude>
     <ClInclude Include="textureManager.h">
       <Filter>Fichiers d%27en-tête\Animation &amp; Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraUI.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
