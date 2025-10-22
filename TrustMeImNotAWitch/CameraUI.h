@@ -2,8 +2,8 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "memory.h"
-#include "UI.h"
 #include <vector>
+#include "UIImage.h"
 
 class CameraUI
 {
@@ -14,7 +14,7 @@ public:
 	void Update(sf::Vector2f playerPos);
 	void Draw(sf::RenderWindow& window);
 
-	void UpdateUI(sf::Vector2f);
+	void UpdateUI();
 
 	sf::View getCam();
 
@@ -24,6 +24,6 @@ private:
 
 	sf::View cam;
 
-	std::vector<std::shared_ptr<UI>> uiList;
+	std::vector<std::shared_ptr<UIElements>> uiList;
 };
 

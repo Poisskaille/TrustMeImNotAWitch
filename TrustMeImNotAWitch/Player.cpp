@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "UIElements.h"
 
 Player::Player(const sf::Texture& texture, textureManager& texManager)
 	: playerSprite(texture), texManager(texManager), cam(playerCollider.getPosition())

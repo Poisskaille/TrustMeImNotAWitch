@@ -6,11 +6,7 @@ CameraUI::CameraUI(sf::Vector2f pos): Y_OFFSET(pos.y + 400)
 	cam.zoom(1.5f);
 	cam.setCenter(sf::Vector2f(pos.x, Y_OFFSET));
 
-	sf::RectangleShape test1;
-	test1.setSize(sf::Vector2f(200.f, 100.f));
-	test1.setFillColor(sf::Color::Magenta);
-
-	uiList.push_back(std::make_shared<UI>(test1,"CACA", sf::Vector2f(cam.getSize())));
+	uiList.push_back(std::make_shared<UIImage>(sf::Vector2f(cam.getCenter()), sf::Vector2f(200,100), sf::Color::Blue));
 }
 
 void CameraUI::Update(sf::Vector2f playerPos)
@@ -30,7 +26,7 @@ void CameraUI::Update(sf::Vector2f playerPos)
 
 	cam.setCenter(sf::Vector2(viewCenter));
 
-	UpdateUI(cam.getCenter());
+	UpdateUI();
 }
 
 void CameraUI::Draw(sf::RenderWindow& window)
@@ -44,13 +40,13 @@ void CameraUI::Draw(sf::RenderWindow& window)
 	}
 }
 
-void CameraUI::UpdateUI(sf::Vector2f vec2)
+void CameraUI::UpdateUI()
 {
 	if(uiList.size() != 0)
 	{
 		for(auto& _ui : uiList)
 		{
-			_ui->UpdatePosition(vec2);
+			_ui->UpdatePosition(cam.getCenter());
 		}
 	}
 }
