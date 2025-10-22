@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<keyboard version="1">
+    <commands/>
+    <tools>
+        <key tool="lasso" shortcut="Q" removed="true"/>
+        <key tool="magic_wand" shortcut="W" removed="true"/>
+        <key tool="pencil" shortcut="B" removed="true"/>
+        <key tool="pencil" shortcut="Q"/>
+        <key tool="eraser" shortcut="E" removed="true"/>
+        <key tool="eraser" shortcut="W"/>
+    </tools>
+    <quicktools/>
+    <actions/>
+    <wheel/>
+    <drag/>
+</keyboard>

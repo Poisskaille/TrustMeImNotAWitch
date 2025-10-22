@@ -1,6 +1,7 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player(const sf::Texture& texture, textureManager& texManager)
+	: player(texture), texManager(texManager)
 {
 	playerShape.setPosition(sf::Vector2(0.f, 400.f));
 	playerShape.setSize(sf::Vector2(15.f, 15.f));

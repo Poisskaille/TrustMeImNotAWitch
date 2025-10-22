@@ -1,5 +1,7 @@
 #pragma once
 #include "Player.h"
+#include "textureManager.h"
+
 class Game {
 
 public:
@@ -7,9 +9,10 @@ public:
     Game();
     ~Game();
     void run();
+    void init(sf::RenderWindow& window, textureManager& texManager);
 
 private:
-
+	sf::RectangleShape background;
     sf::RenderWindow window;
 
 };

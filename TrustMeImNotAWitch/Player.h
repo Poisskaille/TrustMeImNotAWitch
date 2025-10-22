@@ -1,12 +1,15 @@
 #pragma once
 #include <iostream>
 #include "SFML/Graphics.hpp"
+#include "textureManager.h"
 
-enum class State{GROUNDED, JUMPING};
+enum class State { GROUNDED, JUMPING };
 
-class Player
-{
+class Player {
 public:
+    textureManager& texManager;
+    Player(const sf::Texture& texture, textureManager& texManager);
+    ~Player();
 
 	Player();
 	~Player();
@@ -19,6 +22,10 @@ public:
 	void Collision();
 
 private:
+    sf::Sprite player;
+    State playerState;
+    float speed;
+    float deltaTime;
 
 	State playerState;
 	sf::RectangleShape playerShape;
@@ -33,4 +40,3 @@ private:
 	sf::RectangleShape ground;
 	
 };
-
