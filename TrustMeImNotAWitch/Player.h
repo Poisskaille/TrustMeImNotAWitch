@@ -9,14 +9,14 @@ enum class State { GROUNDED, JUMPING };
 class Player : public Entity
 {
 public:
-    Player(const sf::Texture& texture, textureManager& texManager, sf::Vector2f& _pos, sf::Vector2f& _size);
+    Player(const sf::Texture& _texture, textureManager& _texManager);
     ~Player();
 	void HandleInput();
 	void Jump();
 
 	void Update(float dT) override;
 
-	void Collision(Entity& other);
+	//void Collision(Entity* other);
 
 private:
     State playerState;

@@ -1,12 +1,10 @@
 #include "Player.h"
 
-Player::Player(const sf::Texture& texture, textureManager& texManager, sf::Vector2f& _pos, sf::Vector2f& _size) : texManager(texManager), Entity('P', texture, _pos, _size)
+Player::Player(const sf::Texture& _texture, textureManager& _texManager) : texManager(_texManager), Entity('P', _texture, sf::Vector2f(0.f, 400.f), sf::Vector2f(32.f, 32.f))
 {
 
 	sprite.setOrigin(sf::Vector2f(16,16));
-	collider.setPosition(sf::Vector2f(0.f, 400.f));
-	collider.setSize(sf::Vector2f(32.f, 32.f));
-	collider.setOrigin(sf::Vector2f(16.f,16.f));
+	collider.setOrigin(sprite.getOrigin());
 	collider.setFillColor(sf::Color::Red);
 
 	sprite.setPosition(sf::Vector2(0.f,400.f));
@@ -24,12 +22,12 @@ Player::~Player()
 {
 }
 
-void Player::Update(float dT, Entity& other)
-{
-	deltaTime = dT;
-	HandleInput();
-	Collision(other);
-}
+//void Player::Update(float dT, Entity* other)
+//{
+//	deltaTime = dT;
+//	HandleInput();
+//	Collision(other);
+//}
 
 void Player::HandleInput()
 {
@@ -54,17 +52,17 @@ void Player::Jump()
 }
 
 
-void Player::Collision(Entity& other)
-{
-	if (isColliding(other))
-	{
-		switch (other.tag)
-		{
-		default:
-			break;
-		}
-		collider.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y - 0.0001f));
-		velocity.y = 0.f;
-		playerState = State::GROUNDED;
-	}
-}
+//void Player::Collision(Entity* other)
+//{
+//	if (isColliding(*other))
+//	{
+//		switch (other->tag)
+//		{
+//		default:
+//			break;
+//		}
+//		collider.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y - 0.0001f));
+//		velocity.y = 0.f;
+//		playerState = State::GROUNDED;
+//	}
+//}

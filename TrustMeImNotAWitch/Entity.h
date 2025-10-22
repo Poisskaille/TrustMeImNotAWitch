@@ -9,9 +9,9 @@ protected:
 
 public:
 	const char tag;
-	Entity(const char& tag, const sf::Texture& texture, sf::Vector2f& _pos, sf::Vector2f& _size);
+	Entity(const char& _tag, const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size);
 
-	virtual void Update(float dT);
+	virtual void Update(bool colliding, Entity& other);
 	void Draw(sf::RenderWindow& window);
-	bool isColliding(Entity& other);
+	//bool isColliding(Entity& other);
 };

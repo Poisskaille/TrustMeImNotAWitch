@@ -1,10 +1,10 @@
 #include "Entity.h"
 
-
-Entity::Entity(const char& _tag, const sf::Texture& texture, sf::Vector2f& _pos, sf::Vector2f& _size) : tag(_tag), sprite(texture)
+Entity::Entity(const char& _tag, const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size) : tag(_tag), sprite(_texture)
 {
-	collider.setPosition(sf::Vector2f(_pos));
-	collider.setSize(sf::Vector2f(_size));
+	sprite.setPosition(_pos);
+	collider.setPosition(_pos);
+	collider.setSize(_size);
 }
 
 void Entity::Draw(sf::RenderWindow& window)
