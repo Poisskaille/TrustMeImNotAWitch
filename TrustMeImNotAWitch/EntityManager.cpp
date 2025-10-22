@@ -29,6 +29,18 @@ void EntityManager::createProjectiles(sf::Vector2f _pos, sf::Texture& _text, std
 	allEntities.push_back(pr);
 }
 
+void EntityManager::deleteEntity(std::shared_ptr<Entity>& _entity)
+{
+	/*switch (_entity)
+	{
+	default:
+		break;
+	}*/
+}
+
 std::vector<std::shared_ptr<Entity>> EntityManager::getAllEntities() const { return allEntities; }
+
 std::vector<std::shared_ptr<Entity>> EntityManager::getAllPlayers() const { return allPlayers; }
+std::vector<std::shared_ptr<Entity>> EntityManager::getAllEnnemies() const { return allEnnemies; }
+
 std::vector<std::shared_ptr<Entity>> EntityManager::getAllProjectiles() const { return allprojectiles; }

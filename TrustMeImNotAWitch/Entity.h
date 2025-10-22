@@ -1,8 +1,17 @@
 #pragma once
+#include <SFML/Graphics.hpp>
+
 class Entity
 {
-private:
+protected:
+	sf::Sprite sprite;
+	sf::RectangleShape collider;
 
 public:
-	Entity();
+	const char tag;
+	Entity(const char& tag, const sf::Texture& texture, sf::Vector2f& _pos, sf::Vector2f& _size);
+
+	virtual void Update(float dT);
+	void Draw(sf::RenderWindow& window);
+	bool isColliding(Entity& other);
 };

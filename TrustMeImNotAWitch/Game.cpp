@@ -21,7 +21,6 @@ void Game::run()
     texManager.loadAll();
     std::shared_ptr<Player> player = std::make_shared<Player>(texManager.test, texManager);
 	init(window, texManager);
-	
 
     sf::Clock clock;
 

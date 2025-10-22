@@ -1,37 +1,31 @@
 #pragma once
 #include <iostream>
 #include "SFML/Graphics.hpp"
+#include "Entity.h"
 #include "textureManager.h"
 
 enum class State { GROUNDED, JUMPING };
 
-class Player {
+class Player : public Entity
+{
 public:
-    Player(const sf::Texture& texture, textureManager& texManager);
+    Player(const sf::Texture& texture, textureManager& texManager, sf::Vector2f& _pos, sf::Vector2f& _size);
     ~Player();
-
-	void Update(float dT);
-	void Draw(sf::RenderWindow& window);
 	void HandleInput();
 	void Jump();
 
-	void Collision();
+	void Update(float dT) override;
+
+	void Collision(Entity& other);
 
 private:
-	sf::Sprite playerSprite;
     State playerState;
     float speed;
     float deltaTime;
-
-	sf::RectangleShape playerCollider;
 
 	sf::Vector2f velocity;
 	float jumpForce;
 	float gravity;
 
-	textureManager& texManager;
-
-	// A supprimer plus tard, juste pour test
-	sf::RectangleShape ground;
-	
+	textureManager& texManager;	
 };

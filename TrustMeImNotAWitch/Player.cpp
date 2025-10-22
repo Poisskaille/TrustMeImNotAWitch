@@ -1,16 +1,15 @@
 #include "Player.h"
 
-Player::Player(const sf::Texture& texture, textureManager& texManager)
-	: playerSprite(texture), texManager(texManager)
+Player::Player(const sf::Texture& texture, textureManager& texManager, sf::Vector2f& _pos, sf::Vector2f& _size) : texManager(texManager), Entity('P', texture, _pos, _size)
 {
 
-	playerSprite.setOrigin(sf::Vector2f(16,16));
-	playerCollider.setPosition(sf::Vector2(0.f, 400.f));
-	playerCollider.setSize(sf::Vector2(32.f, 32.f));
-	playerCollider.setOrigin(sf::Vector2f(16.f,16.f));
-	playerCollider.setFillColor(sf::Color::Red);
+	sprite.setOrigin(sf::Vector2f(16,16));
+	collider.setPosition(sf::Vector2f(0.f, 400.f));
+	collider.setSize(sf::Vector2f(32.f, 32.f));
+	collider.setOrigin(sf::Vector2f(16.f,16.f));
+	collider.setFillColor(sf::Color::Red);
 
-	playerSprite.setPosition(sf::Vector2(0.f,400.f));
+	sprite.setPosition(sf::Vector2(0.f,400.f));
 
 	speed = 200.f;
 	deltaTime = 0.f;
@@ -19,34 +18,22 @@ Player::Player(const sf::Texture& texture, textureManager& texManager)
 	velocity = sf::Vector2f(0.f,0.f);
 
 	playerState = State::GROUNDED;
-
-	//
-
-	ground.setPosition(sf::Vector2(0.f,600.f));
-	ground.setSize(sf::Vector2(1920.f, 100.f));
 }
 
 Player::~Player()
 {
 }
 
-void Player::Update(float dT)
+void Player::Update(float dT, Entity& other)
 {
 	deltaTime = dT;
 	HandleInput();
-	Collision();
-}
-
-void Player::Draw(sf::RenderWindow& window)
-{
-	window.draw(ground);
-	window.draw(playerCollider);
-	window.draw(playerSprite);
+	Collision(other);
 }
 
 void Player::HandleInput()
 {
-	playerCollider.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
+	collider.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
 	velocity.y += gravity * deltaTime;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED) { Jump(); }
@@ -57,7 +44,7 @@ void Player::HandleInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState != State::GROUNDED)
 		velocity.y = 1000.f;
 
-	playerSprite.setPosition(playerCollider.getPosition());
+	sprite.setPosition(collider.getPosition());
 }
 
 void Player::Jump()
@@ -66,12 +53,17 @@ void Player::Jump()
 	playerState = State::JUMPING;
 }
 
-void Player::Collision()
-{
-	if (playerCollider.getGlobalBounds().findIntersection(ground.getGlobalBounds()))
-	{
 
-		playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f));
+void Player::Collision(Entity& other)
+{
+	if (isColliding(other))
+	{
+		switch (other.tag)
+		{
+		default:
+			break;
+		}
+		collider.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y - 0.0001f));
 		velocity.y = 0.f;
 		playerState = State::GROUNDED;
 	}
