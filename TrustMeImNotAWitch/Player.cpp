@@ -30,11 +30,11 @@ Player::~Player()
 {
 }
 
-void Player::Update(float dT)
+void Player::Update(float dT, const std::vector<Tile>& tile)
 {
 	deltaTime = dT;
 	HandleInput();
-	Collision();
+	Collision(tile);
 }
 
 void Player::Draw(sf::RenderWindow& window)
@@ -66,13 +66,38 @@ void Player::Jump()
 	playerState = State::JUMPING;
 }
 
-void Player::Collision()
-{
-	if (playerCollider.getGlobalBounds().findIntersection(ground.getGlobalBounds()))
-	{
+//void Player::Collision()
+//{
+//	if (playerCollider.getGlobalBounds().findIntersection(ground.getGlobalBounds()))
+//	{
+//
+//		playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f));
+//		velocity.y = 0.f;
+//		playerState = State::GROUNDED;
+//	}
+//}
 
-		playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f));
-		velocity.y = 0.f;
-		playerState = State::GROUNDED;
+void Player::Collision(const std::vector<Tile>& tiles)
+{
+	sf::FloatRect playerBounds = playerCollider.getGlobalBounds();
+
+	for (auto& tile : tiles)
+	{
+		sf::FloatRect tileBounds = tile.sprite.getGlobalBounds();
+
+		if (playerBounds.findIntersection(tileBounds))
+		{
+			switch (tile.type) {
+			case '#':
+				playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f));
+				velocity.y = 0.f;
+				playerState = State::GROUNDED;
+				break;
+			default:
+				break;
+
+			}
+		}
+		
 	}
 }

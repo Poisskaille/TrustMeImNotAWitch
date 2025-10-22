@@ -2,6 +2,7 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
 #include "textureManager.h"
+#include "map.h"
 
 enum class State { GROUNDED, JUMPING };
 
@@ -10,12 +11,12 @@ public:
     Player(const sf::Texture& texture, textureManager& texManager);
     ~Player();
 
-	void Update(float dT);
+	void Update(float dT, const std::vector<Tile>& tile);
 	void Draw(sf::RenderWindow& window);
 	void HandleInput();
 	void Jump();
 
-	void Collision();
+	void Collision(const std::vector<Tile>& tile);
 
 private:
 	sf::Sprite playerSprite;
