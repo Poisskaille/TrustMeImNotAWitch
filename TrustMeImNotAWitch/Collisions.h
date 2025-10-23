@@ -12,7 +12,7 @@ private:
 public:
 	static Collisions* instance;
 	static Collisions* getInstance();
-	~Collisions();
+	//~Collisions();
 
 	void checkCollisions();
 

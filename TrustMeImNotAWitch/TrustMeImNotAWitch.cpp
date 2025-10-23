@@ -4,8 +4,6 @@
 
 int main()
 {
-	Collisions::instance;
-	//EntityManager::instance;
 	Game* game = new Game;
 	game->run();
 	delete game;

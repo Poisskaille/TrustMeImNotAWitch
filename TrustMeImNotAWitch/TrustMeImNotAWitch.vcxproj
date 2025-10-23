@@ -148,7 +148,7 @@
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectiles.cpp" />
-    <ClCompile Include="test.cpp" />
+    <ClCompile Include="teste.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="TrustMeImNotAWitch.cpp" />
   </ItemGroup>
@@ -161,7 +161,7 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectiles.h" />
-    <ClInclude Include="test.h" />
+    <ClInclude Include="teste.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

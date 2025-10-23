@@ -1,9 +1,9 @@
-#include "test.h"
+#include "teste.h"
 #include <iostream>
 
-test::test(){}
+teste::teste(){}
 
-bool test::trythis()
+bool teste::trythis()
 {
 	std::cout << "test" << std::endl;
 	return true;

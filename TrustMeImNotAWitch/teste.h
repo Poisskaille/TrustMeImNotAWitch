@@ -1,8 +1,8 @@
 #pragma once
-class test
+class teste
 {
 	public:
-		test();
+		teste();
 		bool trythis();
 };
 
