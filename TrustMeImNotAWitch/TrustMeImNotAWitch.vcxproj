@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClCompile Include="CameraUI.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="map.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="TrustMeImNotAWitch.cpp" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="CameraUI.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="UIButton.h" />
