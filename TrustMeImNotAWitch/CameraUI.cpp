@@ -6,7 +6,7 @@ CameraUI::CameraUI(sf::Vector2f pos): Y_OFFSET(pos.y + 400)
 	cam.zoom(1.5f);
 	cam.setCenter(sf::Vector2f(pos.x, Y_OFFSET));
 
-	uiList.push_back(std::make_shared<UIImage>(sf::Vector2f(cam.getCenter()), sf::Vector2f(200,100), sf::Color::Blue));
+	InitUI();
 }
 
 void CameraUI::Update(sf::Vector2f playerPos)
@@ -26,29 +26,18 @@ void CameraUI::Update(sf::Vector2f playerPos)
 
 	cam.setCenter(sf::Vector2(viewCenter));
 
-	UpdateUI();
+	UIManagers::getInstance().UpdateCam(cam.getCenter());
 }
 
-void CameraUI::Draw(sf::RenderWindow& window)
+void CameraUI::DrawUI(sf::RenderWindow& window)
 {
-	if(uiList.size() != 0)
-	{
-		for(auto& _ui : uiList)
-		{
-			_ui->Draw(window);
-		}
-	}
+	UIManagers::getInstance().DrawCam(window);
 }
 
-void CameraUI::UpdateUI()
+void CameraUI::InitUI()
 {
-	if(uiList.size() != 0)
-	{
-		for(auto& _ui : uiList)
-		{
-			_ui->UpdatePosition(cam.getCenter());
-		}
-	}
+	UIManagers::getInstance().CreateUI(UI_TYPE::IMAGE,UI_LIST::CAMERA,sf::Vector2f(cam.getCenter().x, (cam.getSize().y / 2) - 50), sf::Vector2f(100, 50), sf::Color::Blue, "Test");
+	UIManagers::getInstance().CreateUI(UI_TYPE::BUTTON, UI_LIST::CAMERA, sf::Vector2f(cam.getCenter().x + 500, cam.getCenter().y - 600), sf::Vector2f(50, 50), sf::Color::Magenta, "B");
 }
 
 sf::View CameraUI::getCam()

@@ -46,7 +46,7 @@ void Player::Draw(sf::RenderWindow& window)
 	window.draw(playerSprite);
 	window.setView(cam.getCam());
 
-	cam.Draw(window);
+	cam.DrawUI(window);
 }
 
 void Player::HandleInput()
