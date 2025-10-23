@@ -16,8 +16,6 @@ public:
 
 	//void Update(float dT) override;
 
-	//void Collision(Entity* other);
-
 private:
     State playerState;
     float speed;

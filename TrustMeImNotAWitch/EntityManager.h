@@ -5,10 +5,11 @@
 #include "Player.h"
 #include "Projectiles.h"
 
-class EntityManager
+class entityManager
 {
 private:
-	EntityManager() {}
+	entityManager() {}
+	static entityManager* instance;
 
 	std::vector<std::shared_ptr<Entity>> allEntities;
 
@@ -19,9 +20,8 @@ private:
 
 
 public:
-	static EntityManager* instance;
-	static EntityManager* getInstance();
-	~EntityManager();
+	static entityManager* getInstance();
+	~entityManager();
 	void createProjectiles(sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _direction);
 	void createPlayer(sf::Texture& _textPlayer, textureManager& _texManager);
 
@@ -30,5 +30,9 @@ public:
 	std::vector<std::shared_ptr<Entity>> getAllPlayers() const;
 	std::vector<std::shared_ptr<Entity>> getAllProjectiles() const;
 	std::vector<std::shared_ptr<Entity>> getAllEnnemies() const;
+
+	//Tags: P = player, E = ennemy(Ennemy special tags: F = fourches, T = torches, P = Panneau, 3 = 3D), B = projectile(Projectile special tags: P = player, E = ennemy)
 	std::vector<std::shared_ptr<Entity>> getAllEntities() const;
 };
+
+extern entityManager* managerEntity;

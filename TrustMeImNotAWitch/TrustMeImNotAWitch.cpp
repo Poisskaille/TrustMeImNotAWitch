@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Game.h"
-#include "EntityManager.h"
+#include "entityManager.h"
 
 int main()
 {

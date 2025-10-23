@@ -1,25 +1,28 @@
 #include "gameManagment.h"
-#include "teste.h"
+#include <iostream>
 
-gameManagment::gameManagment(sf::RenderWindow* _window, float _updateDeltaTime) 
-	: window(_window), _updateClock(sf::Clock()), _updateDeltaTime(_updateDeltaTime), _isGameRunning(true), _isPaused(false)
+gameManagment* gameManagment::getInstance()
 {
-	EntityManager* ent = EntityManager::getInstance();
-	Collisions* coll = Collisions::getInstance();
-
-	std::shared_ptr<teste> t = std::make_shared<teste>();
-
-	std::thread tz(t->trythis());
-
-	tCollisions.join();
-
-	while (_isGameRunning)
-	{
-		while (!_isPaused)
-		{
-
-		}
-	}
+	if (instance == nullptr) { instance = new gameManagment(); }
+	return instance;
 }
 
-gameManagment::~gameManagment() {}
+gameManagment::gameManagment() : _updateClock(sf::Clock()) {}
+
+void gameManagment::init(textureManager& texManager)
+{
+	background.setTexture(&texManager.backgroundTexture);
+	background.setSize(sf::Vector2f(1920.f, 1080.f));
+}
+
+void gameManagment::update(sf::RenderWindow* _window)
+{
+	managerCollisions->garbageClear();
+	_window->clear();
+	_window->draw(background);
+	_window->display();
+}
+
+
+gameManagment* gameManagment::instance = nullptr;
+gameManagment* managerGame = gameManagment::getInstance();

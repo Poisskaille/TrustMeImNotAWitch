@@ -10,10 +10,7 @@ public:
     Game();
     ~Game();
     void run();
-    void init(sf::RenderWindow& window, textureManager& texManager);
 
 private:
-	sf::RectangleShape background;
     sf::RenderWindow window;
-
 };

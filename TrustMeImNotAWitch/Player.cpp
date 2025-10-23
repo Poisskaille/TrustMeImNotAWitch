@@ -50,19 +50,3 @@ void Player::Jump()
 	velocity.y = jumpForce;
 	playerState = State::JUMPING;
 }
-
-
-//void Player::Collision(Entity* other)
-//{
-//	if (isColliding(*other))
-//	{
-//		switch (other->tag)
-//		{
-//		default:
-//			break;
-//		}
-//		collider.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y - 0.0001f));
-//		velocity.y = 0.f;
-//		playerState = State::GROUNDED;
-//	}
-//}

@@ -140,28 +140,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Collisions.cpp" />
+    <ClCompile Include="collisionsManager.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="entityManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameManagment.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectiles.cpp" />
-    <ClCompile Include="teste.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="TrustMeImNotAWitch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Collisions.h" />
+    <ClInclude Include="collisionsManager.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="entityManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameManagment.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Projectiles.h" />
-    <ClInclude Include="teste.h" />
     <ClInclude Include="textureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

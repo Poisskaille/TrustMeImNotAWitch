@@ -1,33 +1,26 @@
 #pragma once
 #include <thread>
 #include <SFML/Graphics.hpp>
-#include "EntityManager.h"
-#include "Collisions.h"
-#include "projectiles.h"
-#include "teste.h"
+#include "entityManager.h"
+#include "collisionsManager.h"
 
 class gameManagment
 {
 private:
-	//Reference of the window that contain the game
-	sf::RenderWindow* window;
+	static gameManagment* instance;
+	gameManagment();
 
 	//Local variables
 	sf::Clock _updateClock;
-	float _updateDeltaTime;
-	bool _isPaused;
-	bool _isGameRunning;
-
-	//Threads
-	std::thread tCollisions;
-
+	sf::RectangleShape background;
 
 public:
-	gameManagment(sf::RenderWindow* _window, float _updateDeltaTime);
-	~gameManagment();
 
-	void test();
+	static gameManagment* getInstance();
 
-	void update();
+	void init(textureManager& texManager);
+
+	void update(sf::RenderWindow* _window);
 };
 
+extern gameManagment* managerGame;

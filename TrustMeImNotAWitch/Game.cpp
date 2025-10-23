@@ -7,39 +7,27 @@ Game::Game()
 }
 Game::~Game(){}
 
-
-void Game::init(sf::RenderWindow& window, textureManager& texManager) {
-    background.setTexture(&texManager.backgroundTexture);
-	background.setSize(sf::Vector2f(1920.f, 1080.f));
-}
-
 void Game::run()
 {
     textureManager texManager;
     texManager.loadAll();
 
-    gameManagment gManage(&window, 1.f);
-    
-	init(window, texManager);
+    managerGame->init(texManager);
 
-    sf::Clock clock;
+    //Threads
+    std::thread tCollisions(&collisionsManager::checkCollisions, managerCollisions);
 
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
+            {
+                managerCollisions->setGameRunning(false);
+				tCollisions.join();
                 window.close();
+            }
         }
-
-        float deltaTime = clock.getElapsedTime().asSeconds();
-        clock.restart();
-
-        window.clear();
-        //player->Update(deltaTime);
-        window.draw(background);
-        //player->Draw(window);
-		
-        window.display();
+        managerGame->update(&window);
     }
 }
