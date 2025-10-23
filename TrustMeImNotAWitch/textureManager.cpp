@@ -13,7 +13,7 @@ void textureManager::loadAll() {
     }
 
 
-    AnimationData idle, run, jump, walk;
+    AnimationData idle, run, jump, walk, fall, slide;
 
     // Example: all spritesheets are horizontal strips
     if (!idle.texture.loadFromFile("assets/character/notta_Idle.png")) {
@@ -35,16 +35,28 @@ void textureManager::loadAll() {
     walk.frameSize = { 32, 32 };
 	walk.frameTime = 0.15f; //Ajuste la vitesse de l'animation de marche
 
-    //if (!jump.texture.loadFromFile("assets/player/jump.png")) {
-    //    throw std::runtime_error("Failed to load texture: assets/player/jump.png");
-    //}
-    //jump.frameCount = 3;
-    //jump.frameSize = { 64, 64 };
+    if (!jump.texture.loadFromFile("assets/character/notta_Jump.png")) {
+        throw std::runtime_error("Failed to load texture: assets/character/notta_Jump.png");
+    }
+    jump.frameCount = 8;
+    jump.frameSize = { 32, 32 };
+
+    if (!fall.texture.loadFromFile("assets/character/notta_Fall.png")) {
+        throw std::runtime_error("Failed to load texture : assets/character/notta_Fall.png");
+    }
+    fall.frameCount = 2;
+    fall.frameSize = { 32,32 };
+    fall.frameTime = 0.20f;
+
+
 
     playerAnimations[playerAnimation::Idle] = idle;
     playerAnimations[playerAnimation::Run] = run;
     playerAnimations[playerAnimation::Jump] = jump;
 	playerAnimations[playerAnimation::Walk] = walk;
+    playerAnimations[playerAnimation::Fall] = fall;
+    playerAnimations[playerAnimation::Slide] = slide;
+
     
 }
 
