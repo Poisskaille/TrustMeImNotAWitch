@@ -1,6 +1,5 @@
 #pragma once
-#include <iostream>
-#include "SFML/Graphics.hpp"
+#include "CameraUI.h"
 #include "textureManager.h"
 #include "map.h"
 
@@ -19,6 +18,8 @@ public:
 
 	void Collision(const std::vector<Tile>& tile);
 
+
+
 private:
 	playerAnimation currentAnimation = playerAnimation::Idle; // default
 
@@ -30,7 +31,7 @@ private:
 	bool isSliding = false;
 
 	sf::Sprite playerSprite;
-    State playerState;
+    PlayerState playerState;
     float speed;
     float deltaTime;
 
@@ -44,5 +45,7 @@ private:
 
 	// A supprimer plus tard, juste pour test
 	sf::RectangleShape ground;
+
+	CameraUI cam;
 	
 };
