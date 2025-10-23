@@ -1,10 +1,12 @@
 #include "EntityManager.h"
 
-EntityManager* EntityManager::getInstance()
-{
-	if (instance == nullptr) { instance = new EntityManager(); }
-	return instance;
-}
+//EntityManager* EntityManager::instance = nullptr;
+//
+//EntityManager* EntityManager::getInstance()
+//{
+//	if (instance == nullptr) { instance = new EntityManager(); }
+//	return instance;
+//}
 
 EntityManager::~EntityManager()
 {
@@ -15,16 +17,16 @@ EntityManager::~EntityManager()
 	allEntities.clear();
 }
 
-void EntityManager::createPlayer(sf::Vector2f _pos, sf::Texture& _textPlayer, sf::Texture& _textPlayerJumpEffect, sf::Texture& _textPlayerLandEffect, float _speed, int _hp)
+void EntityManager::createPlayer(sf::Texture& _textPlayer, textureManager& _texManager)
 {
-	std::shared_ptr<Player> p = std::make_shared<Player>(_pos, _textPlayer, _textPlayerJumpEffect, _textPlayerLandEffect, _speed, _hp);
+	std::shared_ptr<Player> p = std::make_shared<Player>(_textPlayer, _texManager);
 	allPlayers.push_back(p);
 	allEntities.push_back(p);
 }
 
-void EntityManager::createProjectiles(sf::Vector2f _pos, sf::Texture& _text, std::string _direction)
+void EntityManager::createProjectiles(sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _direction)
 {
-	std::shared_ptr<Projectiles> pr = std::make_shared<Projectiles>(_pos, _text, _direction);
+	std::shared_ptr<Projectiles> pr = std::make_shared<Projectiles>(_text, _pos, _direction);
 	allprojectiles.push_back(pr);
 	allEntities.push_back(pr);
 }

@@ -8,7 +8,6 @@
 class EntityManager
 {
 private:
-	static EntityManager* instance;
 	EntityManager() {}
 
 	std::vector<std::shared_ptr<Entity>> allEntities;
@@ -20,10 +19,11 @@ private:
 
 
 public:
+	static EntityManager* instance;
 	static EntityManager* getInstance();
 	~EntityManager();
-	void createProjectiles(sf::Vector2f _pos, sf::Texture& _text, std::string _direction);
-	void createPlayer(sf::Vector2f _pos, sf::Texture& _textPlayer, sf::Texture& _textPlayerJumpEffect, sf::Texture& _textPlayerLandEffect, float _speed, int _hp);
+	void createProjectiles(sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _direction);
+	void createPlayer(sf::Texture& _textPlayer, textureManager& _texManager);
 
 	void deleteEntity(std::shared_ptr<Entity>& entity);
 
@@ -32,5 +32,3 @@ public:
 	std::vector<std::shared_ptr<Entity>> getAllEnnemies() const;
 	std::vector<std::shared_ptr<Entity>> getAllEntities() const;
 };
-
-extern EntityManager* entityManager;

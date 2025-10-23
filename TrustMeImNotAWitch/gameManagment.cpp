@@ -1,11 +1,18 @@
 #include "gameManagment.h"
+#include "test.h"
 
 gameManagment::gameManagment(sf::RenderWindow* _window, float _updateDeltaTime) 
-	: window(_window), updateClock(sf::Clock()), updateDeltaTime(_updateDeltaTime), isGameRunning(true), isPaused(false)
+	: window(_window), _updateClock(sf::Clock()), _updateDeltaTime(_updateDeltaTime), _isGameRunning(true), _isPaused(false)
 {
-	while (isGameRunning)
+	EntityManager* ent = EntityManager::getInstance();
+	Collisions* coll = Collisions::getInstance();
+
+	//std::thread t(test::trythis);
+	//tCollisions.join();
+
+	while (_isGameRunning)
 	{
-		while (!isPaused)
+		while (!_isPaused)
 		{
 
 		}

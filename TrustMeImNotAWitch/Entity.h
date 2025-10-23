@@ -11,7 +11,7 @@ public:
 	const char tag;
 	Entity(const char& _tag, const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size);
 
-	virtual void Update(bool colliding, Entity& other);
+	//virtual void Update(bool colliding, Entity& other);
 	void Draw(sf::RenderWindow& window);
-	//bool isColliding(Entity& other);
+	bool isColliding(Entity* other);
 };

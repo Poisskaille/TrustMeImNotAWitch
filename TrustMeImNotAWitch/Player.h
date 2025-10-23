@@ -14,7 +14,7 @@ public:
 	void HandleInput();
 	void Jump();
 
-	void Update(float dT) override;
+	//void Update(float dT) override;
 
 	//void Collision(Entity* other);
 

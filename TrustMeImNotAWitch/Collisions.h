@@ -1,12 +1,21 @@
 #pragma once
+#include <iostream>
+
 class Collisions
 {
 private:
-	static Collisions* instance;
-	Collisions(){};
+	Collisions() {}
+
+	bool isPaused;
+	bool isGameRunning;
+
 public:
+	static Collisions* instance;
 	static Collisions* getInstance();
 	~Collisions();
-};
 
-extern Collisions* collisions;
+	void checkCollisions();
+
+	void setGameRunning(bool _isGameRunning);
+	void setPaused(bool _isPaused);
+};

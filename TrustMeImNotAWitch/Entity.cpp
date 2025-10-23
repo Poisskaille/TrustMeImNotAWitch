@@ -12,7 +12,7 @@ void Entity::Draw(sf::RenderWindow& window)
 	window.draw(sprite);
 }
 
-bool Entity::isColliding(Entity& other)
+bool Entity::isColliding(Entity* other)
 {
-	return collider.getGlobalBounds().findIntersection(other.collider.getGlobalBounds()) ? true : false;
+	return collider.getGlobalBounds().findIntersection(other->collider.getGlobalBounds()) ? true : false;
 }
