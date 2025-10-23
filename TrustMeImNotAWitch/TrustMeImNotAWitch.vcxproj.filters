@@ -19,6 +19,9 @@
     <Filter Include="Fichiers d%27en-tête\Animation &amp; Texture">
       <UniqueIdentifier>{60b103bd-16b7-4a1f-9756-0c8600c55d7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\UI">
+      <UniqueIdentifier>{8f4c326e-4c6b-4e58-bc0c-a2ea65653465}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TrustMeImNotAWitch.cpp">
@@ -33,6 +36,21 @@
     <ClCompile Include="textureManager.cpp">
       <Filter>Fichiers sources\Animation &amp; Texture</Filter>
     </ClCompile>
+    <ClCompile Include="CameraUI.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElements.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManagers.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -43,6 +61,21 @@
     </ClInclude>
     <ClInclude Include="textureManager.h">
       <Filter>Fichiers d%27en-tête\Animation &amp; Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraUI.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElements.h">
+      <Filter>Fichiers d%27en-tête\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>Fichiers d%27en-tête\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManagers.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

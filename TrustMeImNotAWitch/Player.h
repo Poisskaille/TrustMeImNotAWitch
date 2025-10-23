@@ -1,10 +1,9 @@
 #pragma once
-#include <iostream>
-#include "SFML/Graphics.hpp"
+#include "CameraUI.h"
 #include "textureManager.h"
 #include "map.h"
 
-enum class State { GROUNDED, JUMPING };
+enum class PlayerState { GROUNDED, JUMPING };
 
 class Player {
 public:
@@ -18,9 +17,11 @@ public:
 
 	void Collision(const std::vector<Tile>& tile);
 
+
+
 private:
 	sf::Sprite playerSprite;
-    State playerState;
+    PlayerState playerState;
     float speed;
     float deltaTime;
 
@@ -34,5 +35,7 @@ private:
 
 	// A supprimer plus tard, juste pour test
 	sf::RectangleShape ground;
+
+	CameraUI cam;
 	
 };
