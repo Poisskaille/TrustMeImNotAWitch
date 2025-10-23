@@ -27,6 +27,7 @@ void textureManager::loadAll() {
     }
     run.frameCount = 18;
     run.frameSize = { 32, 32 };
+    run.frameTime = 0.1f;
 
     if (!walk.texture.loadFromFile("assets/character/notta_Walk.png")) {
         throw std::runtime_error("Failed to load texture: assets/character/notta_Walk.png");
@@ -40,6 +41,7 @@ void textureManager::loadAll() {
     }
     jump.frameCount = 8;
     jump.frameSize = { 32, 32 };
+    jump.frameTime = 0.10f;
 
     if (!fall.texture.loadFromFile("assets/character/notta_Fall.png")) {
         throw std::runtime_error("Failed to load texture : assets/character/notta_Fall.png");
@@ -82,19 +84,9 @@ void textureManager::setplayerAnimation(playerAnimation anim, sf::Sprite& player
 
 }
 
-void textureManager::update(float deltaTime, sf::Sprite& player) {
-    auto& animData = playerAnimations[currentAnim];
-    animData.timer += deltaTime;
-
+void textureManager::update(float deltaTime, sf::Sprite& player) { 
+    auto& animData = playerAnimations[currentAnim]; animData.timer += deltaTime;
     if (animData.timer >= animData.frameTime) {
-        animData.timer -= animData.frameTime;
-        animData.currentFrame = (animData.currentFrame + 1) % animData.frameCount;
-
-        player.setTextureRect(sf::IntRect(
-            { animData.currentFrame * animData.frameSize.x, 0 },
-            { animData.frameSize.x, animData.frameSize.y }
-        ));
-
-
-    }
-}
+        animData.timer -= animData.frameTime; animData.currentFrame = (animData.currentFrame + 1) % animData.frameCount; 
+        player.setTextureRect(sf::IntRect({ animData.currentFrame * animData.frameSize.x, 0 }, { animData.frameSize.x, animData.frameSize.y }));
+    } }

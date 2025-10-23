@@ -41,7 +41,7 @@ void Game::run()
 
         float deltaTime = clock.getElapsedTime().asSeconds();
         clock.restart();
-
+        window.setFramerateLimit(60);
         window.clear();
         player->Update(deltaTime, map.getSolidTiles());
         window.draw(background);

@@ -66,22 +66,24 @@ void Player::Update(float dT, const std::vector<Tile>& tile)
 #pragma region ANIMATION_PLAYER_STATE
 	playerAnimation newAnim = playerAnimation::Idle;
 
-	if (playerState == State::GROUNDED) {
+	// ✅ prioritize SLIDE above all else
+	if (playerState == State::SLIDING) {
+		newAnim = playerAnimation::Slide;
+	}
+	else if (playerState == State::JUMPING) {
+		newAnim = playerAnimation::Jump;
+	}
+	else if (velocity.y > 350) {
+		playerState = State::FALLING;
+		newAnim = playerAnimation::Fall;
+	}
+	else if (playerState == State::GROUNDED) {
 		if (isWalking)
 			newAnim = playerAnimation::Walk;
 		else
 			newAnim = playerAnimation::Run;
 	}
-	else if (playerState == State::JUMPING) {
-		newAnim = playerAnimation::Jump;
-	}
-	if (velocity.y > 350) {
-		playerState = State::FALLING;
-			newAnim = playerAnimation::Fall;
-	}
-	else if (playerState == State::SLIDING) {
-		newAnim = playerAnimation::Slide;
-	}
+
 
 	// Change animation only if it�fs different
 	if (newAnim != currentAnimation) {
@@ -109,7 +111,7 @@ void Player::HandleInput()
 	playerCollider.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
 	velocity.y += gravity * deltaTime;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED) { Jump(); }
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED && !isWalking) { Jump(); }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
 		speed = walkingSpeed;
 		isWalking = true;
@@ -124,6 +126,8 @@ void Player::HandleInput()
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState == State::GROUNDED && !isSliding)
 	{
 		Slide(); // start the slide
+		playerCollider.move(sf::Vector2f(0.f, -0.5f));
+
 	}
 
 
@@ -162,11 +166,19 @@ void Player::Slide() {
 	slideTimer = 0.0f;
 	playerState = State::SLIDING;
 
+	// Store the current bottom position before resizing
+	float bottomY = playerCollider.getPosition().y + (playerCollider.getSize().y / 2.f);
+
 	// Shrink collider for slide posture
 	playerCollider.setSize(sf::Vector2f(64.f, 64.f));
 	playerCollider.setOrigin(sf::Vector2f(32.f, 32.f));
+
+	// Reposition collider so that the bottom stays at the same Y
+	playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, bottomY - (playerCollider.getSize().y / 2.f)));
+
 	velocity.x = speed * 1.2f;
 }
+
 
 
 void Player::Collision(const std::vector<Tile>& tiles)
@@ -175,16 +187,22 @@ void Player::Collision(const std::vector<Tile>& tiles)
 
 	for (auto& tile : tiles)
 	{
+		float overlapY = (playerCollider.getPosition().y + playerCollider.getSize().y) - tile.sprite.getPosition().y;
+
 		sf::FloatRect tileBounds = tile.sprite.getGlobalBounds();
 
 		if (playerBounds.findIntersection(tileBounds))
 		{
 			switch (tile.type) {
 			case '#':
-				playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f));
-				velocity.y = 0.f;
-				if (!isSliding) {
-					playerState = State::GROUNDED;
+
+				if (velocity.y > 0 && overlapY > 0) {
+					playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f));
+					velocity.y = 0.f;
+
+					if (!isSliding) {
+						playerState = State::GROUNDED;
+					}
 				}
 				break;
 			default:
