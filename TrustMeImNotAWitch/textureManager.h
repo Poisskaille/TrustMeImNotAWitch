@@ -8,7 +8,8 @@ enum class playerAnimation {
     Jump,
     Fall,
     WallCling,
-    Slide
+    Slide,
+    Walk
 };
 
 struct AnimationData {

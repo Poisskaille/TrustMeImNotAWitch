@@ -46,7 +46,7 @@ void Game::run()
         player->Update(deltaTime, map.getSolidTiles());
         window.draw(background);
         player->Draw(window);
-        map.draw(window, texManager.grassTile, 32);
+        map.draw(window, texManager.grassTile, 48);
 		
         window.display();
     }

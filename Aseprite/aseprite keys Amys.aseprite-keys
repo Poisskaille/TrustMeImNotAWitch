@@ -1,16 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <keyboard version="1">
-    <commands/>
+    <commands>
+        <key command="ExportSpriteSheet" shortcut="Ctrl+E" removed="true" />
+        <key command="MaskContent" shortcut="Ctrl+T" />
+        <key command="SwitchColors" shortcut="X" removed="true" />
+        <key command="MergeDownLayer" shortcut="Ctrl+E" />
+    </commands>
     <tools>
-        <key tool="lasso" shortcut="Q" removed="true"/>
-        <key tool="magic_wand" shortcut="W" removed="true"/>
-        <key tool="pencil" shortcut="B" removed="true"/>
-        <key tool="pencil" shortcut="Q"/>
-        <key tool="eraser" shortcut="E" removed="true"/>
-        <key tool="eraser" shortcut="W"/>
+        <key tool="lasso" shortcut="Q" removed="true" />
+        <key tool="magic_wand" shortcut="W" removed="true" />
+        <key tool="pencil" shortcut="B" removed="true" />
+        <key tool="pencil" shortcut="Q" />
+        <key tool="eraser" shortcut="E" removed="true" />
+        <key tool="eraser" shortcut="W" />
+        <key tool="eyedropper" shortcut="I" removed="true" />
+        <key tool="hand" shortcut="H" removed="true" />
+        <key tool="move" shortcut="V" removed="true" />
+        <key tool="move" shortcut="Ctrl+T" removed="true" />
     </tools>
-    <quicktools/>
-    <actions/>
-    <wheel/>
-    <drag/>
+    <quicktools>
+        <key tool="move" shortcut="Ctrl" />
+        <key tool="lasso" shortcut="Shift+Space" removed="true" />
+        <key tool="lasso" shortcut="X" removed="true" />
+        <key tool="lasso" shortcut="Alt+X" />
+        <key tool="pencil" shortcut="Q" removed="true" />
+    </quicktools>
+    <actions />
+    <wheel />
+    <drag>
+        <key action="Zoom" vector="8,0" shortcut="Ctrl+Space" />
+    </drag>
 </keyboard>

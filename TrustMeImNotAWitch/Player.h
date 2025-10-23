@@ -3,7 +3,7 @@
 #include "textureManager.h"
 #include "map.h"
 
-enum class PlayerState { GROUNDED, JUMPING };
+enum class State { GROUNDED, JUMPING, SLIDING, FALLING};
 
 class Player {
 public:
@@ -14,12 +14,22 @@ public:
 	void Draw(sf::RenderWindow& window);
 	void HandleInput();
 	void Jump();
+	void Slide();
 
 	void Collision(const std::vector<Tile>& tile);
 
 
 
 private:
+	playerAnimation currentAnimation = playerAnimation::Idle; // default
+
+	int walkingSpeed = 100; //Permet d'ajuster la vitesse plus facilement
+	int runningSpeed = 200;
+	bool isWalking = false;
+	float slideDuration = 2.0f; //en secondes
+	float slideTimer = 0.0f;
+	bool isSliding = false;
+
 	sf::Sprite playerSprite;
     PlayerState playerState;
     float speed;
