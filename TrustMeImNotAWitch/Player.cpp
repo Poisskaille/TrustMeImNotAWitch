@@ -14,7 +14,7 @@ Player::Player(const sf::Texture& texture, textureManager& texManager)
 
 	playerSprite.setPosition(sf::Vector2(0.f,400.f));
 
-	speed = 200.f;
+	speed = defaultSpeed;
 	deltaTime = 0.f;
 	jumpForce = -600.f;
 	gravity = 1500.f;
@@ -43,6 +43,7 @@ void Player::Update(float dT, const std::vector<Tile>& tile)
 	if (playerState == State::SLIDING) {
 		playerCollider.move(sf::Vector2f(speed * 2.f * deltaTime, 0.f)); // push forward
 		slideTimer += dT;
+		playerSprite.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y-32));
 
 		//SLIDE CANCELLING
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
@@ -50,6 +51,7 @@ void Player::Update(float dT, const std::vector<Tile>& tile)
 			isSliding = false;
 			playerCollider.setSize(sf::Vector2f(64.f, 96.f)); // revert collider
 			return;
+			speed = defaultSpeed;
 		}
 
 		// End slide after duration
@@ -58,6 +60,16 @@ void Player::Update(float dT, const std::vector<Tile>& tile)
 			playerState = State::GROUNDED;
 			playerCollider.setSize(sf::Vector2f(64.f, 96.f));
 			playerCollider.setOrigin(sf::Vector2f(32.f, 32.f));
+			playerCollider.move(sf::Vector2f(0.0f, -34.f));
+			playerSprite.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y));
+			speed = defaultSpeed;
+		}
+
+		if (velocity.y > 350) {
+			isSliding = false;
+			playerCollider.setSize(sf::Vector2f(64.f, 96.f)); // revert collider
+			playerState = State::FALLING;
+			speed = defaultSpeed;
 		}
 	}
 
@@ -67,19 +79,20 @@ void Player::Update(float dT, const std::vector<Tile>& tile)
 	playerAnimation newAnim = playerAnimation::Idle;
 
 	// ✅ prioritize SLIDE above all else
-	if (playerState == State::SLIDING) {
+	if (playerState == State::SLIDING) { 
 		newAnim = playerAnimation::Slide;
 	}
 	else if (playerState == State::JUMPING) {
 		newAnim = playerAnimation::Jump;
 	}
-	else if (velocity.y > 350) {
+	if (velocity.y > 350 || playerState == State::FALLING) {
 		playerState = State::FALLING;
 		newAnim = playerAnimation::Fall;
 	}
 	else if (playerState == State::GROUNDED) {
 		if (isWalking)
 			newAnim = playerAnimation::Walk;
+			//newAnim = playerAnimation::Idle;
 		else
 			newAnim = playerAnimation::Run;
 	}
@@ -121,12 +134,12 @@ void Player::HandleInput()
 		isWalking = false;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState != State::GROUNDED)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState != State::GROUNDED && playerState == State::FALLING)
 		velocity.y = 1000.f;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState == State::GROUNDED && !isSliding)
 	{
 		Slide(); // start the slide
-		playerCollider.move(sf::Vector2f(0.f, -0.5f));
+		//playerCollider.move(sf::Vector2f(0.f, -0.5f));
 
 	}
 
@@ -166,50 +179,114 @@ void Player::Slide() {
 	slideTimer = 0.0f;
 	playerState = State::SLIDING;
 
-	// Store the current bottom position before resizing
-	float bottomY = playerCollider.getPosition().y + (playerCollider.getSize().y / 2.f);
+	// Capture the collider’s bottom before resizing
+	float bottomY = playerCollider.getGlobalBounds().position.y + playerCollider.getGlobalBounds().size.y;
 
-	// Shrink collider for slide posture
+	// Shrink collider
 	playerCollider.setSize(sf::Vector2f(64.f, 64.f));
 	playerCollider.setOrigin(sf::Vector2f(32.f, 32.f));
 
-	// Reposition collider so that the bottom stays at the same Y
-	playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, bottomY - (playerCollider.getSize().y / 2.f)));
+	// Adjust Y so bottom remains at the same place
+	float newBottomY = playerCollider.getGlobalBounds().position.y + playerCollider.getGlobalBounds().size.y;
+	float offset = bottomY - newBottomY;
+	playerCollider.move(sf::Vector2f(0.f, offset));
 
-	velocity.x = speed * 1.2f;
+	speed = boostSpeed;
 }
 
 
+
+
+
+
+//void Player::Collision(const std::vector<Tile>& tiles)
+//{
+//	sf::FloatRect playerBounds = playerCollider.getGlobalBounds();
+//
+//	for (auto& tile : tiles)
+//	{
+//		float overlapY = (playerCollider.getPosition().y + playerCollider.getSize().y) - tile.sprite.getPosition().y;
+//
+//		sf::FloatRect tileBounds = tile.sprite.getGlobalBounds();
+//
+//		if (playerBounds.findIntersection(tileBounds))
+//		{
+//			switch (tile.type) {
+//			case '#':
+//
+//				if (velocity.y > 0 && overlapY > 0) {
+//					playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f));
+//					velocity.y = 0.f;
+//
+//					if (!isSliding) {
+//						playerState = State::GROUNDED;
+//					}
+//				}
+//				break;
+//			default:
+//				break;
+//
+//			}
+//		}
+//		
+//	}
+//}
 
 void Player::Collision(const std::vector<Tile>& tiles)
 {
-	sf::FloatRect playerBounds = playerCollider.getGlobalBounds();
-
 	for (auto& tile : tiles)
 	{
-		float overlapY = (playerCollider.getPosition().y + playerCollider.getSize().y) - tile.sprite.getPosition().y;
-
+		sf::FloatRect playerBounds = playerCollider.getGlobalBounds();
 		sf::FloatRect tileBounds = tile.sprite.getGlobalBounds();
 
-		if (playerBounds.findIntersection(tileBounds))
+		auto intersectionOpt = playerBounds.findIntersection(tileBounds);
+
+		if (intersectionOpt.has_value())
 		{
-			switch (tile.type) {
+			sf::FloatRect intersection = intersectionOpt.value();
+
+			switch (tile.type)
+			{
 			case '#':
+			{
+				// Determine the axis with the smallest overlap
+				if (intersection.size.x < intersection.size.y)
+				{
+					// Horizontal collision: block movement in X
+					if (playerCollider.getPosition().x < tileBounds.position.x)
+						playerCollider.move(sf::Vector2f( - intersection.size.x, 0.f)); // hit tile from left
+					//else
+					//	playerCollider.move(intersection.width, 0.f); // hit tile from right
 
-				if (velocity.y > 0 && overlapY > 0) {
-					playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f));
-					velocity.y = 0.f;
-
-					if (!isSliding) {
-						playerState = State::GROUNDED;
+					// Stop horizontal velocity
+					velocity.x = 0.f;
+				}
+				else
+				{
+					// Vertical collision: block movement in Y
+					if (playerCollider.getPosition().y < tileBounds.position.y)
+					{
+						// Land on top of tile
+						playerCollider.move(sf::Vector2f(0.f, -intersection.size.y));
+						velocity.y = 0.f;
+						if (!isSliding)
+							playerState = State::GROUNDED;
+					}
+					else
+					{
+						// Hit the bottom of tile (e.g., head bump)
+						playerCollider.move(sf::Vector2f(0.f, intersection.size.y));
+						velocity.y = 0.f;
 					}
 				}
 				break;
+			}
 			default:
 				break;
-
 			}
 		}
-		
 	}
 }
+
+
+

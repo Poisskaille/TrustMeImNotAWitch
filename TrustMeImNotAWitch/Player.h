@@ -26,13 +26,15 @@ private:
 	int walkingSpeed = 100; //Permet d'ajuster la vitesse plus facilement
 	int runningSpeed = 200;
 	bool isWalking = false;
-	float slideDuration = 2.0f; //en secondes
+	float slideDuration = 0.5f; //en secondes
 	float slideTimer = 0.0f;
 	bool isSliding = false;
 
 	sf::Sprite playerSprite;
     State playerState;
+	float defaultSpeed = 200;
     float speed;
+	float boostSpeed = 250;
     float deltaTime;
 
 	sf::RectangleShape playerCollider;
