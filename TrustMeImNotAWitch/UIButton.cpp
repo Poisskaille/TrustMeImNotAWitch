@@ -1,15 +1,6 @@
 #include "UIButton.h"
 
-UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color) : OFFSET(offset), text(font)
-{
-	if (!font.openFromFile("assets/font/SpecialGothic-VariableFont_wdth,wght.ttf"))
-		std::cout << "Error loading font" << '\n';
-	shape.setSize(size);
-	shape.setFillColor(color);
-	shape.setOrigin(sf::Vector2f(size.x / 2, size.y / 2));
-}
-
-UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color, const std::string&) : OFFSET(offset), text(font), str(str)
+UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color, const std::string&, const char& c) : OFFSET(offset), text(font), str(str), index(c)
 {
 	if (!font.openFromFile("assets/font/SpecialGothic-VariableFont_wdth,wght.ttf"))
 		std::cout << "Error loading font" << '\n';
@@ -35,6 +26,15 @@ void UIButton::UpdatePosition(sf::Vector2f camPos)
 {
 	shape.setPosition(sf::Vector2f(camPos.x - OFFSET.x, camPos.y - OFFSET.y));
 	//text.setPosition(shape.getPosition());
+}
+
+char UIButton::getIndex()
+{
+	return index;
+}
+
+void UIButton::UpdateText(const std::string&)
+{
 }
 
 void UIButton::CheckMouse(sf::RenderWindow& window)

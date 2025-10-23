@@ -13,7 +13,12 @@ public:
 	virtual void Draw(sf::RenderWindow& window) = 0;
 	virtual void UpdatePosition(sf::Vector2f camPos) = 0;
 
+	virtual char getIndex() = 0;
+
+	virtual void UpdateText(const std::string&) = 0;
+
 protected:
 	sf::Vector2f position;
+	char index;
 };
 

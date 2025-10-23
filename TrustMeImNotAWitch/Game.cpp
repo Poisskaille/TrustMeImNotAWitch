@@ -27,7 +27,7 @@ void Game::run()
     std::shared_ptr<Player> player = std::make_shared<Player>(texManager.test, texManager);
 	init(window, texManager);
 	
-
+    Score score;
     sf::Clock clock;
     map.loadAllSections();
     map.generate();
@@ -42,6 +42,7 @@ void Game::run()
         float deltaTime = clock.getElapsedTime().asSeconds();
         clock.restart();
 
+        score.AddScore(deltaTime);
         window.clear();
         player->Update(deltaTime, map.getSolidTiles());
         window.draw(background);

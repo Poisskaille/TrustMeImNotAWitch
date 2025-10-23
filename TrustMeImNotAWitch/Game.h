@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "textureManager.h"
+#include "Score.h"
 
 class Game {
 

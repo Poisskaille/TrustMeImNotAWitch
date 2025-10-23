@@ -36,8 +36,8 @@ void CameraUI::DrawUI(sf::RenderWindow& window)
 
 void CameraUI::InitUI()
 {
-	UIManagers::getInstance().CreateUI(UI_TYPE::IMAGE,UI_LIST::CAMERA,sf::Vector2f(cam.getCenter().x, (cam.getSize().y / 2) - 50), sf::Vector2f(100, 50), sf::Color::Blue, "Test");
-	UIManagers::getInstance().CreateUI(UI_TYPE::BUTTON, UI_LIST::CAMERA, sf::Vector2f(cam.getCenter().x + 500, cam.getCenter().y - 600), sf::Vector2f(50, 50), sf::Color::Magenta, "B");
+	UIManagers::getInstance().CreateUI(UI_TYPE::IMAGE,UI_LIST::CAMERA,sf::Vector2f(cam.getCenter().x, (cam.getSize().y / 2) - 50), sf::Vector2f(100, 50), sf::Color::Blue, "Test",'s');
+	//UIManagers::getInstance().CreateUI(UI_TYPE::BUTTON, UI_LIST::CAMERA, sf::Vector2f(cam.getCenter().x + 500, cam.getCenter().y - 600), sf::Vector2f(50, 50), sf::Color::Magenta, "B",'');
 }
 
 sf::View CameraUI::getCam()
