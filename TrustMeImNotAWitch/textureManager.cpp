@@ -48,6 +48,12 @@ void textureManager::loadAll() {
     fall.frameSize = { 32,32 };
     fall.frameTime = 0.20f;
 
+    if (!slide.texture.loadFromFile("assets/character/notta_Slide.png")) {
+        throw std::runtime_error("Failed to load texture : assets/character/notta_Slide.png");
+    }
+    slide.frameCount = 4;
+    slide.frameSize = { 32,32 };
+    slide.frameTime = 0.10f;
 
 
     playerAnimations[playerAnimation::Idle] = idle;
