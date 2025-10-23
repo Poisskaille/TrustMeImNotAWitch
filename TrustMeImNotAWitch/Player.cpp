@@ -20,7 +20,7 @@ Player::Player(const sf::Texture& texture, textureManager& texManager)
 	gravity = 1500.f;
 	velocity = sf::Vector2f(0.f,0.f);
 
-	playerState = PlayerState::GROUNDED;
+	playerState = State::GROUNDED;
 
 	//
 
@@ -37,6 +37,7 @@ void Player::Update(float dT, const std::vector<Tile>& tile)
 	deltaTime = dT;
 	HandleInput();
 	Collision(tile);
+	cam.Update(playerCollider.getPosition());
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
@@ -153,7 +154,7 @@ void Player::HandleInput()
 void Player::Jump()
 {
 	velocity.y = jumpForce;
-	playerState = PlayerState::JUMPING;
+	playerState = State::JUMPING;
 }
 
 void Player::Slide() {
