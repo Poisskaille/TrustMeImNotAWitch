@@ -1,7 +1,8 @@
 #include "Player.h"
+#include "UIElements.h"
 
 Player::Player(const sf::Texture& texture, textureManager& texManager)
-	: playerSprite(texture), texManager(texManager)
+	: playerSprite(texture), texManager(texManager), cam(playerCollider.getPosition())
 {
 
 	playerSprite.setOrigin(sf::Vector2f(16,11));
@@ -19,7 +20,7 @@ Player::Player(const sf::Texture& texture, textureManager& texManager)
 	gravity = 1500.f;
 	velocity = sf::Vector2f(0.f,0.f);
 
-	playerState = State::GROUNDED;
+	playerState = PlayerState::GROUNDED;
 
 	//
 
@@ -81,7 +82,7 @@ void Player::Update(float dT, const std::vector<Tile>& tile)
 		newAnim = playerAnimation::Slide;
 	}
 
-	// Change animation only if itÅfs different
+	// Change animation only if itÔøΩfs different
 	if (newAnim != currentAnimation) {
 		currentAnimation = newAnim;
 		texManager.setplayerAnimation(currentAnimation, playerSprite);
@@ -97,6 +98,9 @@ void Player::Draw(sf::RenderWindow& window)
 	window.draw(ground);
 	window.draw(playerCollider);
 	window.draw(playerSprite);
+	window.setView(cam.getCam());
+
+	cam.DrawUI(window);
 }
 
 void Player::HandleInput()
@@ -149,7 +153,7 @@ void Player::HandleInput()
 void Player::Jump()
 {
 	velocity.y = jumpForce;
-	playerState = State::JUMPING;
+	playerState = PlayerState::JUMPING;
 }
 
 void Player::Slide() {

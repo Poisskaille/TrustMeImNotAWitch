@@ -138,17 +138,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CameraUI.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="TrustMeImNotAWitch.cpp" />
+    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="UIElements.cpp" />
+    <ClCompile Include="UIImage.cpp" />
+    <ClCompile Include="UIManagers.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CameraUI.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="textureManager.h" />
+    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="UIElements.h" />
+    <ClInclude Include="UIImage.h" />
+    <ClInclude Include="UIManagers.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\assets\maps\section1.txt" />
