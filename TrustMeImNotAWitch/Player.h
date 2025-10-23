@@ -31,7 +31,7 @@ private:
 	bool isSliding = false;
 
 	sf::Sprite playerSprite;
-    PlayerState playerState;
+    State playerState;
     float speed;
     float deltaTime;
 

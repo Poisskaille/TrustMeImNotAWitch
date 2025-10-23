@@ -20,7 +20,7 @@ Player::Player(const sf::Texture& texture, textureManager& texManager)
 	gravity = 1500.f;
 	velocity = sf::Vector2f(0.f,0.f);
 
-	playerState = PlayerState::GROUNDED;
+	playerState = State::GROUNDED;
 
 	//
 
@@ -153,7 +153,7 @@ void Player::HandleInput()
 void Player::Jump()
 {
 	velocity.y = jumpForce;
-	playerState = PlayerState::JUMPING;
+	playerState = State::JUMPING;
 }
 
 void Player::Slide() {
