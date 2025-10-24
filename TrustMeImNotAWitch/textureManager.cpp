@@ -8,8 +8,12 @@ void textureManager::loadAll() {
     if (!backgroundTexture.loadFromFile("../assets/background.png")) {
         throw std::runtime_error("Failed to load texture: assets/background.png");
     }
+    if (!grassTile.loadFromFile("assets/tiles/ground.png")) {
+        throw std::runtime_error("Failed to load texture: assets/tiles/ground.png");
+    }
 
-    AnimationData idle, run, jump;
+
+    AnimationData idle, run, jump, walk, fall, slide;
 
     // Example: all spritesheets are horizontal strips
     if (!idle.texture.loadFromFile("../assets/character/notta_Idle.png")) {
@@ -18,27 +22,48 @@ void textureManager::loadAll() {
     idle.frameCount = 8;
     idle.frameSize = { 32, 32 };
 
-    // Uncomment and handle other animations similarly if needed
-    /*
-    if (!run.texture.loadFromFile("assets/player/run.png")) {
-        throw std::runtime_error("Failed to load texture: assets/player/run.png");
+    if (!run.texture.loadFromFile("assets/character/notta_Run.png")) {
+        throw std::runtime_error("Failed to load texture: assets/character/notta_Run.png");
     }
-    run.frameCount = 6;
-    run.frameSize = { 64, 64 };
+    run.frameCount = 18;
+    run.frameSize = { 32, 32 };
 
-    if (!jump.texture.loadFromFile("assets/player/jump.png")) {
-        throw std::runtime_error("Failed to load texture: assets/player/jump.png");
+    if (!walk.texture.loadFromFile("assets/character/notta_Walk.png")) {
+        throw std::runtime_error("Failed to load texture: assets/character/notta_Walk.png");
     }
-    jump.frameCount = 3;
-    jump.frameSize = { 64, 64 };
+    walk.frameCount = 6;
+    walk.frameSize = { 32, 32 };
+	walk.frameTime = 0.15f; //Ajuste la vitesse de l'animation de marche
+
+    if (!jump.texture.loadFromFile("assets/character/notta_Jump.png")) {
+        throw std::runtime_error("Failed to load texture: assets/character/notta_Jump.png");
+    }
+    jump.frameCount = 8;
+    jump.frameSize = { 32, 32 };
+
+    if (!fall.texture.loadFromFile("assets/character/notta_Fall.png")) {
+        throw std::runtime_error("Failed to load texture : assets/character/notta_Fall.png");
+    }
+    fall.frameCount = 2;
+    fall.frameSize = { 32,32 };
+    fall.frameTime = 0.20f;
+
+    if (!slide.texture.loadFromFile("assets/character/notta_Slide.png")) {
+        throw std::runtime_error("Failed to load texture : assets/character/notta_Slide.png");
+    }
+    slide.frameCount = 4;
+    slide.frameSize = { 32,32 };
+    slide.frameTime = 0.10f;
+
 
     playerAnimations[playerAnimation::Idle] = idle;
     playerAnimations[playerAnimation::Run] = run;
     playerAnimations[playerAnimation::Jump] = jump;
+	playerAnimations[playerAnimation::Walk] = walk;
+    playerAnimations[playerAnimation::Fall] = fall;
+    playerAnimations[playerAnimation::Slide] = slide;
 
-    // Default animation
-    setplayerAnimation(playerAnimation::Idle);
-    */
+    
 }
 
 void textureManager::setplayerAnimation(playerAnimation anim, sf::Sprite& player) {
