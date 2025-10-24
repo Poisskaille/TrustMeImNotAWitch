@@ -19,6 +19,9 @@ struct Tile {
 
 class Map {
 private:
+    static Map* instance;
+
+    Map();
     textureManager& texManager;
     std::vector<std::vector<std::string>> sections;
     std::vector<std::string> combinedMap;
@@ -30,7 +33,8 @@ private:
     std::vector<std::string> loadSection(const std::string& path);
 
 public:
-    Map(textureManager& texManager);
+    static Map* getInstance();
+    void init(textureManager& _texManager);
     void loadAllSections();
     void generate();
     void draw(sf::RenderWindow& window, const sf::Texture& groundTex, int tileSize) const;
@@ -38,3 +42,6 @@ public:
     // This will be used by Player for collisions
     const std::vector<Tile>& getSolidTiles() const { return solidTiles; }
 };
+
+
+extern Map* managerMap;

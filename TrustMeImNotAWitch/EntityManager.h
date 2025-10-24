@@ -28,6 +28,8 @@ public:
 
 	void deleteEntity(std::shared_ptr<Entity>& entity);
 
+	std::shared_ptr<Player> getPlayer() const;
+
 	std::vector<std::shared_ptr<Entity>> getAllPlayers() const;
 	std::vector<std::shared_ptr<Entity>> getAllProjectiles() const;
 	std::vector<std::shared_ptr<Entity>> getAllEnnemies() const;

@@ -11,8 +11,11 @@ enum class State { GROUNDED, JUMPING, SLIDING, FALLING};
 class Player : public Entity
 {
 public:
-    Player(const sf::Texture& _texture, textureManager& _texManager);
-	~Player() override {};
+	Player(const sf::Texture& texture, textureManager& texManager);
+	~Player() {};
+
+	void Update(const std::vector<Tile>& tile);
+	void Draw(sf::RenderWindow& window);
 	void HandleInput();
 	void Jump();
 	void Slide();
@@ -20,31 +23,31 @@ public:
 	void Collision(const std::vector<Tile>& tile);
 
 
-	//void Update(float dT) override;
+
 private:
 	playerAnimation currentAnimation = playerAnimation::Idle; // default
 
 	int walkingSpeed = 100; //Permet d'ajuster la vitesse plus facilement
 	int runningSpeed = 200;
 	bool isWalking = false;
-	float slideDuration = 2.0f; //en secondes
+	float slideDuration = 0.5f; //en secondes
 	float slideTimer = 0.0f;
 	bool isSliding = false;
 
-	sf::Sprite playerSprite;
-    State playerState;
-    float speed;
-    float deltaTime;
+	State playerState;
+	float defaultSpeed = 200;
+	float speed;
+	float boostSpeed = 250;
 
 	sf::Vector2f velocity;
 	float jumpForce;
 	float gravity;
 
-	textureManager& texManager;	
+	textureManager& texManager;
 
 	// A supprimer plus tard, juste pour test
 	sf::RectangleShape ground;
 
 	CameraUI cam;
-	
+
 };

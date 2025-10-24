@@ -23,9 +23,6 @@ struct AnimationData {
 
 class textureManager {
 private:
-
-
-    
     std::unordered_map<playerAnimation, AnimationData> playerAnimations;
     playerAnimation currentAnim = playerAnimation::Idle;
 

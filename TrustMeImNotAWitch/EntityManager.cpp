@@ -69,6 +69,8 @@ void entityManager::deleteEntity(std::shared_ptr<Entity>& _entity)
 	}
 }
 
+std::shared_ptr<Player> entityManager::getPlayer() const { return std::dynamic_pointer_cast<Player>(managerEntity->getAllPlayers()[0]); }
+
 std::vector<std::shared_ptr<Entity>> entityManager::getAllEntities() const { return allEntities; }
 
 std::vector<std::shared_ptr<Entity>> entityManager::getAllPlayers() const { return allPlayers; }

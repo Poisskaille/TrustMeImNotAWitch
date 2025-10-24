@@ -17,6 +17,7 @@ void gameManagment::init(textureManager& texManager)
 
 void gameManagment::update(sf::RenderWindow* _window)
 {
+	managerEntity->getPlayer()->Update(managerMap->getSolidTiles());
 	managerCollisions->garbageClear();
 	_window->clear();
 	_window->draw(background);

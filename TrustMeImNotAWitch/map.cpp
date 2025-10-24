@@ -4,11 +4,19 @@
 #include <iostream>
 #include <algorithm>
 
-Map::Map(textureManager& texManager)
-    : texManager(texManager) // initialize the reference here
+Map::Map() : texManager(*(new textureManager)) {};
+
+Map* Map::getInstance()
 {
-    std::random_device rd;
-    rng.seed(rd());
+    if (instance == nullptr) { instance = new Map; }
+    return instance;
+}
+
+void Map::init(textureManager& _texManager)
+{
+    texManager = _texManager;
+	std::random_device rd;
+	rng.seed(rd());
 }
 
 std::vector<std::string> Map::loadSection(const std::string& path) {
@@ -114,3 +122,6 @@ void Map::draw(sf::RenderWindow& window, const sf::Texture& groundTex, int tileS
         window.draw(tile.sprite);
     }
 }
+
+Map* Map::instance = nullptr;
+Map* managerMap = Map::getInstance();

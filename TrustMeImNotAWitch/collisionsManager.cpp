@@ -52,6 +52,7 @@ void collisionsManager::checkCollisions()
 					}
 				}
 			}
+			managerEntity->getPlayer()->Update(managerMap->getSolidTiles());
 			if (lagClock.getElapsedTime().asMilliseconds() >= 1000.f)
 			{
 				std::cout << iterations << " TPS" << std::endl;

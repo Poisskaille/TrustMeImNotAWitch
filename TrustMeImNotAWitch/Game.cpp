@@ -9,24 +9,23 @@ Game::Game()
 }
 Game::~Game(){}
 
-
-void Game::init(sf::RenderWindow& window, textureManager& texManager) {
-
-    background.setTexture(&texManager.backgroundTexture);
-	background.setSize(sf::Vector2f(1920.f, 1080.f));
-
-}
-
 void Game::run()
 {
  
     textureManager texManager;
-    Map map(texManager);
+    
     texManager.loadAll();
+    managerMap->init(texManager);
 
     sf::Clock clock;
-    map.loadAllSections();
-    map.generate();
+    managerMap->loadAllSections();
+    managerMap->generate();
+
+    managerGame->init(texManager);
+
+    //Threads
+    std::thread tCollisions(&collisionsManager::checkCollisions, managerCollisions);
+
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -39,14 +38,6 @@ void Game::run()
                 window.close();
             }
         }
-
-        float deltaTime = clock.getElapsedTime().asSeconds();
-        clock.restart();
-
-        window.clear();
-        window.draw(background);
-        map.draw(window, texManager.grassTile, 48);
-		
-        window.display();
+        managerGame->update(&window);
     }
 }

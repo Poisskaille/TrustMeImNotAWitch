@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "entityManager.h"
 #include "collisionsManager.h"
+#include "map.h"
 
 class gameManagment
 {
