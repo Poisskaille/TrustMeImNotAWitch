@@ -12,6 +12,18 @@ void collisionsManager::setGameRunning(bool _isGameRunning) { isGameRunning = _i
 
 void collisionsManager::setPaused(bool _isPaused) { isPaused = _isPaused; };
 
+void collisionsManager::garbageAdd(std::shared_ptr<Entity> _entityToAdd)
+{
+	for (auto& EntityGarbage : garbage)
+	{
+		if (EntityGarbage == _entityToAdd)
+		{
+			return;
+		}
+	}
+	garbage.push_back(_entityToAdd);
+}
+
 void collisionsManager::checkCollisions()
 {
 	unsigned long long iterations = 0;
@@ -26,17 +38,17 @@ void collisionsManager::checkCollisions()
 				{
 					if (Entity->tag != EntityCheaked->tag && Entity->isColliding(EntityCheaked.get()))
 					{
-						/*if (EntityCheaked->tag == 'E')
+						if (EntityCheaked->tag == 'E')
 						{
-							if (!std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->tagSpecial == 'P')
+							if (!std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'P')
 							{
-								garbage.push_back(EntityCheaked);
+								garbageAdd(EntityCheaked);
 							}
 						}
 						else
 						{
-							garbage.push_back(EntityCheaked);
-						}*/
+							garbageAdd(EntityCheaked);
+						}
 					}
 				}
 			}

@@ -18,10 +18,6 @@ Player::Player(const sf::Texture& _texture, textureManager& _texManager) : texMa
 	playerState = State::GROUNDED;
 }
 
-Player::~Player()
-{
-}
-
 //void Player::Update(float dT, Entity* other)
 //{
 //	deltaTime = dT;

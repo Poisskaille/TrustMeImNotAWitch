@@ -13,6 +13,8 @@ private:
 
 	std::vector<std::shared_ptr<Entity>> garbage;
 
+	void garbageAdd(std::shared_ptr<Entity> _entityToAdd);
+
 	sf::Clock lagClock;
 
 public:

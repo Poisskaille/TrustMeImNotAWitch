@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
 #include "Player.h"
+#include "Ennemy.h"
 #include "Projectiles.h"
 
 class entityManager

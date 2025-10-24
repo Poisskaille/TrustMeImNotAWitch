@@ -10,7 +10,7 @@ class Player : public Entity
 {
 public:
     Player(const sf::Texture& _texture, textureManager& _texManager);
-    ~Player();
+	~Player() override {};
 	void HandleInput();
 	void Jump();
 

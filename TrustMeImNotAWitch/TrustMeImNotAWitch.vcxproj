@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="collisionsManager.cpp" />
+    <ClCompile Include="Ennemy.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="entityManager.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -153,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="collisionsManager.h" />
+    <ClInclude Include="Ennemy.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="entityManager.h" />
     <ClInclude Include="Game.h" />
