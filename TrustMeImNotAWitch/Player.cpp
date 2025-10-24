@@ -1,18 +1,13 @@
 #include "Player.h"
-#include "UIElements.h"
 
-Player::Player(const sf::Texture& texture, textureManager& texManager)
-	: playerSprite(texture), texManager(texManager), cam(playerCollider.getPosition())
+Player::Player(const sf::Texture& _texture, textureManager& _texManager) : texManager(_texManager), Entity('P', _texture, sf::Vector2f(0.f, 400.f), sf::Vector2f(32.f, 32.f))
 {
 
-	playerSprite.setOrigin(sf::Vector2f(16,11));
-	playerSprite.setScale(sf::Vector2f(3.0f, 3.0f));
-	playerCollider.setPosition(sf::Vector2(0.f, 350.0f));
-	playerCollider.setSize(sf::Vector2(64.f, 96.f));
-	playerCollider.setOrigin(sf::Vector2f(32.f,32.f));
-	playerCollider.setFillColor(sf::Color::Red);
+	sprite.setOrigin(sf::Vector2f(16,16));
+	collider.setOrigin(sprite.getOrigin());
+	collider.setFillColor(sf::Color::Red);
 
-	playerSprite.setPosition(sf::Vector2(0.f,400.f));
+	sprite.setPosition(sf::Vector2(0.f,400.f));
 
 	speed = 200.f;
 	deltaTime = 0.f;
@@ -21,17 +16,14 @@ Player::Player(const sf::Texture& texture, textureManager& texManager)
 	velocity = sf::Vector2f(0.f,0.f);
 
 	playerState = State::GROUNDED;
-
-	//
-
-	ground.setPosition(sf::Vector2(0.f,600.f));
-	ground.setSize(sf::Vector2(1920.f, 100.f));
 }
 
-Player::~Player()
-{
-}
-
+//void Player::Update(float dT, Entity* other)
+//{
+//	deltaTime = dT;
+//	HandleInput();
+//	Collision(other);
+//}
 void Player::Update(float dT, const std::vector<Tile>& tile)
 {
 	deltaTime = dT;
@@ -106,7 +98,7 @@ void Player::Draw(sf::RenderWindow& window)
 
 void Player::HandleInput()
 {
-	playerCollider.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
+	collider.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
 	velocity.y += gravity * deltaTime;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED) { Jump(); }
@@ -148,7 +140,7 @@ void Player::HandleInput()
 		}
 	}
 
-	playerSprite.setPosition(playerCollider.getPosition());
+	sprite.setPosition(collider.getPosition());
 }
 
 void Player::Jump()

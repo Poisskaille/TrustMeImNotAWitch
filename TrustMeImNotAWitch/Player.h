@@ -1,17 +1,18 @@
 #pragma once
+#include <iostream>
+#include "SFML/Graphics.hpp"
+#include "Entity.h"
 #include "CameraUI.h"
 #include "textureManager.h"
 #include "map.h"
 
 enum class State { GROUNDED, JUMPING, SLIDING, FALLING};
 
-class Player {
+class Player : public Entity
+{
 public:
-    Player(const sf::Texture& texture, textureManager& texManager);
-    ~Player();
-
-	void Update(float dT, const std::vector<Tile>& tile);
-	void Draw(sf::RenderWindow& window);
+    Player(const sf::Texture& _texture, textureManager& _texManager);
+	~Player() override {};
 	void HandleInput();
 	void Jump();
 	void Slide();
@@ -19,7 +20,7 @@ public:
 	void Collision(const std::vector<Tile>& tile);
 
 
-
+	//void Update(float dT) override;
 private:
 	playerAnimation currentAnimation = playerAnimation::Idle; // default
 
@@ -35,13 +36,11 @@ private:
     float speed;
     float deltaTime;
 
-	sf::RectangleShape playerCollider;
-
 	sf::Vector2f velocity;
 	float jumpForce;
 	float gravity;
 
-	textureManager& texManager;
+	textureManager& texManager;	
 
 	// A supprimer plus tard, juste pour test
 	sf::RectangleShape ground;

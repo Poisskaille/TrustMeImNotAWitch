@@ -5,7 +5,6 @@
 
 Game::Game()
 	:window(sf::VideoMode({ 1920, 1080 }), "Trust Me, I'm Not A Witch!")
-
 {
 }
 Game::~Game(){}
@@ -24,9 +23,6 @@ void Game::run()
     textureManager texManager;
     Map map(texManager);
     texManager.loadAll();
-    std::shared_ptr<Player> player = std::make_shared<Player>(texManager.test, texManager);
-	init(window, texManager);
-	
 
     sf::Clock clock;
     map.loadAllSections();
@@ -36,16 +32,19 @@ void Game::run()
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
+            {
+                managerCollisions->setGameRunning(false);
+				tCollisions.join();
+                managerEntity->~entityManager();
                 window.close();
+            }
         }
 
         float deltaTime = clock.getElapsedTime().asSeconds();
         clock.restart();
 
         window.clear();
-        player->Update(deltaTime, map.getSolidTiles());
         window.draw(background);
-        player->Draw(window);
         map.draw(window, texManager.grassTile, 48);
 		
         window.display();

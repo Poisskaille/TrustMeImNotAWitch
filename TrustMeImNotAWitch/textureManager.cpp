@@ -2,10 +2,10 @@
 #include <stdexcept>
 
 void textureManager::loadAll() {
-    if (!test.loadFromFile("assets/test.png")) {
+    if (!test.loadFromFile("../assets/test.png")) {
         throw std::runtime_error("Failed to load texture: assets/test.png");
     }
-    if (!backgroundTexture.loadFromFile("assets/background.png")) {
+    if (!backgroundTexture.loadFromFile("../assets/background.png")) {
         throw std::runtime_error("Failed to load texture: assets/background.png");
     }
     if (!grassTile.loadFromFile("assets/tiles/ground.png")) {
@@ -16,7 +16,7 @@ void textureManager::loadAll() {
     AnimationData idle, run, jump, walk, fall, slide;
 
     // Example: all spritesheets are horizontal strips
-    if (!idle.texture.loadFromFile("assets/character/notta_Idle.png")) {
+    if (!idle.texture.loadFromFile("../assets/character/notta_Idle.png")) {
         throw std::runtime_error("Failed to load texture: assets/character/notta_Idle.png");
     }
     idle.frameCount = 8;
