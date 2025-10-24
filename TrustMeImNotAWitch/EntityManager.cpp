@@ -14,9 +14,9 @@ entityManager::~entityManager()
 	allEntities.clear();
 }
 
-void entityManager::createPlayer(sf::Texture& _textPlayer, textureManager& _texManager)
+void entityManager::createPlayer(sf::Texture& _textPlayer)
 {
-	std::shared_ptr<Player> p = std::make_shared<Player>(_textPlayer, _texManager);
+	std::shared_ptr<Player> p = std::make_shared<Player>(_textPlayer);
 	allPlayers.push_back(p);
 	allEntities.push_back(p);
 }

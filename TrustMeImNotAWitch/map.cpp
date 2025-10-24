@@ -4,7 +4,7 @@
 #include <iostream>
 #include <algorithm>
 
-Map::Map() : texManager(*(new textureManager)) {};
+Map::Map() {};
 
 Map* Map::getInstance()
 {
@@ -12,9 +12,8 @@ Map* Map::getInstance()
     return instance;
 }
 
-void Map::init(textureManager& _texManager)
+void Map::init()
 {
-    texManager = _texManager;
 	std::random_device rd;
 	rng.seed(rd());
 }
@@ -43,8 +42,8 @@ std::vector<std::string> Map::loadSection(const std::string& path) {
 void Map::loadAllSections() {
     // Add as many section files as you have
     sections.clear();
-    sections.push_back(loadSection("assets/maps/section1.txt"));
-    sections.push_back(loadSection("assets/maps/section2.txt"));
+    sections.push_back(loadSection("../assets/maps/section1.txt"));
+    sections.push_back(loadSection("../assets/maps/section2.txt"));
     //sections.push_back(loadSection("assets/maps/section_3.txt"));
     //sections.push_back(loadSection("assets/maps/section_4.txt"));
 
@@ -104,7 +103,7 @@ void Map::generate() {
         for (size_t x = 0; x < combinedMap[y].size(); ++x) {
             if (combinedMap[y][x] == '#') {
                 solidTiles.emplace_back(
-                    texManager.grassTile, // texture
+                    managerText->grassTile, // texture
                     '#',                  // type
                     sf::Vector2f(static_cast<float>(x * tileSize),
                         static_cast<float>(y * tileSize)) // position

@@ -2,7 +2,7 @@
 
 UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color) : OFFSET(offset), text(font)
 {
-	if (!font.openFromFile("assets/font/SpecialGothic-VariableFont_wdth,wght.ttf"))
+	if (!font.openFromFile("../assets/font/SpecialGothic-VariableFont_wdth,wght.ttf"))
 		std::cout << "Error loading font" << '\n';
 	shape.setSize(size);
 	shape.setFillColor(color);
@@ -11,7 +11,7 @@ UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const s
 
 UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color, const std::string&) : OFFSET(offset), text(font), str(str)
 {
-	if (!font.openFromFile("assets/font/SpecialGothic-VariableFont_wdth,wght.ttf"))
+	if (!font.openFromFile("../assets/font/SpecialGothic-VariableFont_wdth,wght.ttf"))
 		std::cout << "Error loading font" << '\n';
 	shape.setSize(size);
 	shape.setFillColor(color);

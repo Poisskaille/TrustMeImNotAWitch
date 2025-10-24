@@ -19,7 +19,7 @@ public:
 
 	static gameManagment* getInstance();
 
-	void init(textureManager& texManager);
+	void init();
 
 	void update(sf::RenderWindow* _window);
 };

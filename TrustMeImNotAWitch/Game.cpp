@@ -11,17 +11,7 @@ Game::~Game(){}
 
 void Game::run()
 {
- 
-    textureManager texManager;
-    
-    texManager.loadAll();
-    managerMap->init(texManager);
-
-    sf::Clock clock;
-    managerMap->loadAllSections();
-    managerMap->generate();
-
-    managerGame->init(texManager);
+    managerGame->init();
 
     //Threads
     std::thread tCollisions(&collisionsManager::checkCollisions, managerCollisions);

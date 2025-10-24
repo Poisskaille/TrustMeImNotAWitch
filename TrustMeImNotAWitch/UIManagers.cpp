@@ -41,7 +41,6 @@ void UIManagers::CreateUI(UI_TYPE type, UI_LIST list, const sf::Vector2f& pos, c
 	case UI_TYPE::BUTTON:
 		if(list == UI_LIST::CAMERA)
 		{ 
-			std::cout << "Caca" << '\n';
 			uiCamera.push_back(std::make_shared<UIButton>(pos, size, color, str)); }
 
 		else

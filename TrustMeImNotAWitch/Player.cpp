@@ -1,21 +1,18 @@
 #include "Player.h"
 
-Player::Player(const sf::Texture& _texture, textureManager& _texManager) : texManager(_texManager), Entity('P', _texture, sf::Vector2f(0.f, 400.f), sf::Vector2f(32.f, 32.f), cam(collider.getPosition()))
+Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f(0.f, 350.f), sf::Vector2f(3.f, 3.f)), cam(collider.getPosition())
 {
-	sprite.setOrigin(sf::Vector2f(16,11));
-	sprite.setScale(sf::Vector2f(3.f, 3.f));
-	collider.setOrigin(sprite.getOrigin());
-	collider.setFillColor(sf::Color::Red);
-	sprite.setPosition(sf::Vector2(0.f,400.f));
+	//sprite.setOrigin(sf::Vector2f(16,11));
+	//collider.setOrigin(sprite.getOrigin());
+	collider.setFillColor(sf::Color::Blue);
+	//sprite.setPosition(sf::Vector2(0.f,400.f));
 
 	speed = 200.f;
-	deltaTime = 0.f;
 	jumpForce = -600.f;
 	gravity = 1500.f;
 	velocity = sf::Vector2f(0.f,0.f);
 
 	speed = defaultSpeed;
-	deltaTime = 0.f;
 	jumpForce = -600.f;
 	gravity = 1500.f;
 	velocity = sf::Vector2f(0.f, 0.f);
@@ -30,15 +27,15 @@ Player::Player(const sf::Texture& _texture, textureManager& _texManager) : texMa
 
 void Player::Update(const std::vector<Tile>& tile)
 {
-	clock.getElapsedTime().asMilliseconds()
+	deltaTime = _updateClock.restart();
 	HandleInput();
 	Collision(tile);
 	cam.Update(collider.getPosition());
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
-		collider.move(sf::Vector2f(speed * 2.f * deltaTime, 0.f)); // push forward
-		slideTimer += deltaTime;
+		collider.move(sf::Vector2f(speed * 2.f * deltaTime.asSeconds(), 0.f)); // push forward
+		slideTimer += deltaTime.asSeconds();
 		sprite.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y - 32));
 
 		//SLIDE CANCELLING
@@ -97,11 +94,11 @@ void Player::Update(const std::vector<Tile>& tile)
 	// Change animation only if it�fs different
 	if (newAnim != currentAnimation) {
 		currentAnimation = newAnim;
-		texManager.setplayerAnimation(currentAnimation, sprite);
+		managerText->setplayerAnimation(currentAnimation, sprite);
 	}
 
 	// Always update the current animation
-	texManager.update(deltaTime, sprite);
+	managerText->update(deltaTime.asSeconds(), sprite);
 #pragma endregion
 }
 
@@ -117,8 +114,8 @@ void Player::Draw(sf::RenderWindow& window)
 
 void Player::HandleInput()
 {
-	collider.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
-	velocity.y += gravity * deltaTime;
+	collider.move(sf::Vector2(speed * deltaTime.asSeconds(), velocity.y * deltaTime.asSeconds()));
+	velocity.y += gravity * deltaTime.asSeconds();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED && !isWalking) { Jump(); }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {

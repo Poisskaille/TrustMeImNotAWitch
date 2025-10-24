@@ -24,7 +24,7 @@ public:
 	static entityManager* getInstance();
 	~entityManager();
 	void createProjectiles(sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _direction);
-	void createPlayer(sf::Texture& _textPlayer, textureManager& _texManager);
+	void createPlayer(sf::Texture& _textPlayer);
 
 	void deleteEntity(std::shared_ptr<Entity>& entity);
 

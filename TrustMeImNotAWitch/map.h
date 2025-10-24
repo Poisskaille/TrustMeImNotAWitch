@@ -22,7 +22,6 @@ private:
     static Map* instance;
 
     Map();
-    textureManager& texManager;
     std::vector<std::vector<std::string>> sections;
     std::vector<std::string> combinedMap;
     std::vector<Tile> solidTiles; // persistent list of solid tiles
@@ -34,7 +33,7 @@ private:
 
 public:
     static Map* getInstance();
-    void init(textureManager& _texManager);
+    void init();
     void loadAllSections();
     void generate();
     void draw(sf::RenderWindow& window, const sf::Texture& groundTex, int tileSize) const;
