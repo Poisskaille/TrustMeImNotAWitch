@@ -28,6 +28,7 @@ void Game::run()
 	init(window, texManager);
 	
     Score score;
+    score.highScore();
     sf::Clock clock;
     map.loadAllSections();
     map.generate();
@@ -42,7 +43,7 @@ void Game::run()
         float deltaTime = clock.getElapsedTime().asSeconds();
         clock.restart();
 
-        score.AddScore(deltaTime);
+        score.addScore(10);
         window.clear();
         player->Update(deltaTime, map.getSolidTiles());
         window.draw(background);
@@ -51,4 +52,6 @@ void Game::run()
 		
         window.display();
     }
+
+    score.newScore();
 }

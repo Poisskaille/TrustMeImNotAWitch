@@ -35,8 +35,8 @@ std::vector<std::string> Map::loadSection(const std::string& path) {
 void Map::loadAllSections() {
     // Add as many section files as you have
     sections.clear();
-    sections.push_back(loadSection("assets/maps/section1.txt"));
-    sections.push_back(loadSection("assets/maps/section2.txt"));
+    sections.push_back(loadSection("../assets/maps/section1.txt"));
+    sections.push_back(loadSection("../assets/maps/section2.txt"));
     //sections.push_back(loadSection("assets/maps/section_3.txt"));
     //sections.push_back(loadSection("assets/maps/section_4.txt"));
 
