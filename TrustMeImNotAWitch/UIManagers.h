@@ -12,12 +12,14 @@ class UIManagers
 public:
 	static UIManagers& getInstance();
 
-	void UpdateCam(const sf::Vector2f& pos);
-	void DrawCam(sf::RenderWindow& window);
+	void updateCam(const sf::Vector2f& pos);
+	void drawCam(sf::RenderWindow& window);
+	void drawMenu(sf::RenderWindow& window);
 
-	void CreateUI(UI_TYPE type, UI_LIST, const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color, const std::string&, const char);
+	void createUI(UI_TYPE type, UI_LIST, const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color, const std::string&, const char);
 	
-	std::shared_ptr<UIElements> getUI(const char i);
+	std::shared_ptr<UIElements> getCamUI(const char i);
+	std::shared_ptr<UIElements> getMenuUI(const char i);
 
 private:
 

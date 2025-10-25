@@ -6,29 +6,40 @@ UIManagers& UIManagers::getInstance()
 	return instance;
 }
 
-void UIManagers::UpdateCam(const sf::Vector2f& pos)
+void UIManagers::updateCam(const sf::Vector2f& pos)
 {
 	if (uiCamera.size() != 0)
 	{
 		for (auto& _ui : uiCamera)
 		{
-			_ui->UpdatePosition(pos);
+			_ui->updatePosition(pos);
 		}
 	}
 }
 
-void UIManagers::DrawCam(sf::RenderWindow& window)
+void UIManagers::drawCam(sf::RenderWindow& window)
 {
 	if (uiCamera.size() != 0)
 	{
 		for (auto& _ui : uiCamera)
 		{
-			_ui->Draw(window);
+			_ui->draw(window);
 		}
 	}
 }
 
-void UIManagers::CreateUI(UI_TYPE type, UI_LIST list, const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color, const std::string& str, const char c)
+void UIManagers::drawMenu(sf::RenderWindow& window)
+{
+	if (uiMenu.size() != 0)
+	{
+		for (auto& _ui : uiMenu)
+		{
+			_ui->draw(window);
+		}
+	}
+}
+
+void UIManagers::createUI(UI_TYPE type, UI_LIST list, const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color, const std::string& str, const char c)
 {
 	switch(type)
 	{
@@ -50,13 +61,29 @@ void UIManagers::CreateUI(UI_TYPE type, UI_LIST list, const sf::Vector2f& pos, c
 	}
 }
 
-std::shared_ptr<UIElements> UIManagers::getUI(const char i)
+std::shared_ptr<UIElements> UIManagers::getCamUI(const char i)
 {
 	if (uiCamera.size() != 0)
 	{
 		for (auto& _ui : uiCamera)
 		{
 			if(_ui->getIndex() == i)
+			{
+				return _ui;
+			}
+		}
+		return nullptr;
+	}
+	return nullptr;
+}
+
+std::shared_ptr<UIElements> UIManagers::getMenuUI(const char i)
+{
+	if (uiMenu.size() != 0)
+	{
+		for (auto& _ui : uiMenu)
+		{
+			if (_ui->getIndex() == i)
 			{
 				return _ui;
 			}

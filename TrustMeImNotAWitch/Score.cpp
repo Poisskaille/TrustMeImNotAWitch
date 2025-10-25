@@ -50,5 +50,5 @@ void Score::addScore(int value)
 {
 	score += value;
 	std::string newValue = std::to_string(score);
-	UIManagers::getInstance().getUI('s')->UpdateText(newValue);
+	UIManagers::getInstance().getCamUI('s')->updateText(newValue);
 }

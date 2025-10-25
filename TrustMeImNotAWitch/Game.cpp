@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "memory.h"
 #include "map.h"
+#include "Menu.h"
 
 Game::Game()
 	:window(sf::VideoMode({ 1920, 1080 }), "Trust Me, I'm Not A Witch!")
@@ -20,7 +21,11 @@ void Game::init(sf::RenderWindow& window, textureManager& texManager) {
 
 void Game::run()
 {
- 
+    std::unique_ptr<Menu> menu = std::make_unique<Menu>();
+    if (!menu->runMain(window))
+        return;
+
+
     textureManager texManager;
     Map map(texManager);
     texManager.loadAll();

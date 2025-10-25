@@ -10,12 +10,12 @@ public:
 
 	virtual ~UIElements() = default;
 
-	virtual void Draw(sf::RenderWindow& window) = 0;
-	virtual void UpdatePosition(sf::Vector2f camPos) = 0;
+	virtual void draw(sf::RenderWindow& window) = 0;
+	virtual void updatePosition(sf::Vector2f camPos) = 0;
 
 	virtual char getIndex() = 0;
 
-	virtual void UpdateText(const std::string&) = 0;
+	virtual void updateText(const std::string&) = 0;
 
 protected:
 	sf::Vector2f position;

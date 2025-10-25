@@ -37,7 +37,7 @@ void Player::Update(float dT, const std::vector<Tile>& tile)
 	deltaTime = dT;
 	HandleInput();
 	Collision(tile);
-	cam.Update(playerCollider.getPosition());
+	cam.update(playerCollider.getPosition());
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
@@ -101,7 +101,7 @@ void Player::Draw(sf::RenderWindow& window)
 	window.draw(playerSprite);
 	window.setView(cam.getCam());
 
-	cam.DrawUI(window);
+	cam.drawUI(window);
 }
 
 void Player::HandleInput()

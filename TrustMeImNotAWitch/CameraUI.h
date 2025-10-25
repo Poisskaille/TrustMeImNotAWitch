@@ -9,10 +9,10 @@ public:
 
 	CameraUI(sf::Vector2f pos);
 
-	void Update(sf::Vector2f playerPos);
-	void DrawUI(sf::RenderWindow& window);
+	void update(sf::Vector2f playerPos);
+	void drawUI(sf::RenderWindow& window);
 
-	void InitUI();
+	void initUI();
 
 	sf::View getCam();
 
