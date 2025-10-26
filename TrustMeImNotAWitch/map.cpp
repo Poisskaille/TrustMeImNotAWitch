@@ -1,116 +1,133 @@
 #include "map.h"
-#include <fstream>
-#include <stdexcept>
-#include <iostream>
-#include <algorithm>
 
-Map::Map(textureManager& texManager)
-    : texManager(texManager) // initialize the reference here
+Map& Map::getInstance()
 {
-    std::random_device rd;
-    rng.seed(rd());
+    static Map instance;
+    return instance;
 }
 
-std::vector<std::string> Map::loadSection(const std::string& path) {
-    std::ifstream file(path);
-    if (!file.is_open()) {
-        throw std::runtime_error("Failed to open map section: " + path);
-    }
-
-    std::vector<std::string> section;
-    std::string line;
-    while (std::getline(file, line)) {
-        // remove possible carriage return for Windows formatted files
-        if (!line.empty() && line.back() == '\r') line.pop_back();
-        section.push_back(line);
-    }
-
-    if (section.empty()) {
-        throw std::runtime_error("Map section is empty: " + path);
-    }
-
-    return section;
-}
-
-void Map::loadAllSections() {
-    // Add as many section files as you have
-    sections.clear();
-    sections.push_back(loadSection("../assets/maps/section1.txt"));
-    sections.push_back(loadSection("../assets/maps/section2.txt"));
-    //sections.push_back(loadSection("assets/maps/section_3.txt"));
-    //sections.push_back(loadSection("assets/maps/section_4.txt"));
-
-    // sanity: ensure all sections have the same height (rows)
-    std::size_t height = sections.front().size();
-    for (const auto& s : sections) {
-        if (s.size() != height) {
-            std::cerr << "Warning: not all sections share the same row count.\n";
-            break;
-        }
+void Map::initMap()
+{
+    loadIndex = 0;
+    currentEndX = 0;
+    loadAllMap();
+    for (int i = 0; i < 3; i++)
+    {
+        loadSection(i);
     }
 }
 
-void Map::appendSection(const std::vector<std::string>& section) {
-    if (combinedMap.empty()) {
-        combinedMap = section;
-        return;
-    }
+void Map::loadAllMap()
+{
+    for(int i = 0; i < 10; i++)
+    {
+        std::string currentPath = "../assets/maps/map_" + std::to_string(i) + ".txt";
+        std::fstream file(currentPath);
 
-    size_t currentH = combinedMap.size();
-    size_t newH = section.size();
-    size_t maxH = std::max(currentH, newH);
-    combinedMap.resize(maxH, std::string()); // pad with empty strings
+        char currentChar;
+        std::vector<sf::RectangleShape> newMap;
 
-    for (size_t y = 0; y < maxH; ++y) {
-        std::string& combinedRow = combinedMap[y];
-        const std::string& sectionRow = (y < newH) ? section[y] : std::string(section[0].size(), '.');
+        const float tileSize = 100.f;
 
-        // pad combinedRow with dots if needed
-        if (combinedRow.size() < sectionRow.size())
-            combinedRow.resize(combinedRow.size(), '.');
+        int x = 0;
+        int y = 0;
 
-        combinedRow += sectionRow; // now append safely
-    }
-}
-
-
-void Map::randomizeNextSection() {
-    if (sections.empty()) {
-        throw std::runtime_error("No sections loaded to randomize.");
-    }
-    std::uniform_int_distribution<std::size_t> dist(0, sections.size() - 1);
-    std::size_t idx = dist(rng);
-    appendSection(sections[idx]);
-}
-
-void Map::generate() {
-    combinedMap.clear();
-    solidTiles.clear();
-
-    for (int i = 0; i < 5; ++i)
-        randomizeNextSection();
-
-    const int tileSize = 32;
-
-    for (size_t y = 0; y < combinedMap.size(); ++y) {
-        for (size_t x = 0; x < combinedMap[y].size(); ++x) {
-            if (combinedMap[y][x] == '#') {
-                solidTiles.emplace_back(
-                    texManager.grassTile, // texture
-                    '#',                  // type
-                    sf::Vector2f(static_cast<float>(x * tileSize),
-                        static_cast<float>(y * tileSize)) // position
-                );
+        while (file.get(currentChar))
+        {
+            if (currentChar == '\n')
+            {
+                y++;
+                x = 0;
+                continue;
             }
+
+            if (currentChar == '#')
+            {
+                sf::RectangleShape shape;
+                shape.setSize({ tileSize, tileSize });
+                shape.setPosition({ x * tileSize, y * tileSize });
+                int x = (rand() % 3);
+                switch(x)
+                {
+                case 0:
+                    shape.setFillColor(sf::Color::Blue);
+                    break;
+                case 1:
+                    shape.setFillColor(sf::Color::Red);
+                    break;
+                case 2:
+                    shape.setFillColor(sf::Color::Green);
+                    break;
+                }
+                newMap.push_back(shape);
+            }
+
+            x++;
         }
+
+        loaded_map.push_back(newMap);
     }
 }
 
+void Map::loadSection(int index)
+{
+    current_map.push_back(placeTile(loaded_map[index]));
+    loadIndex++;
+    std::cout << "Map ajoutée : " << " Nombres d'itérations : " << loadIndex << '\n';
+}
 
+std::vector<sf::RectangleShape> Map::placeTile(std::vector<sf::RectangleShape>& map)
+{
+    std::vector<sf::RectangleShape> newChunk;
 
-
-void Map::draw(sf::RenderWindow& window, const sf::Texture& groundTex, int tileSize) const {
-    for (const auto& tile : solidTiles) {
-        window.draw(tile.sprite);
+    float offsetX = currentEndX;
+    for (auto& tile : map)
+    {
+        sf::RectangleShape newTile = tile;
+        newTile.move({ offsetX, 0 });
+        newChunk.push_back(newTile);
     }
+
+    float maxX = 0;
+    for (auto& tile : newChunk)
+        maxX = std::max(maxX, tile.getPosition().x + tile.getSize().x);
+
+    currentEndX = maxX;
+
+    return newChunk;
+}
+
+void Map::unloadMap(sf::Vector2f playerPos)
+{
+    float lastTileX = current_map[0].back().getPosition().x;
+        if (lastTileX < playerPos.x - 300.f)
+        {
+            current_map.erase(current_map.begin());
+            loadSection(0);
+        }
+}
+
+
+void Map::draw(sf::RenderWindow& window)
+{
+	for(auto& chunk : current_map)
+	{
+		for(auto& tile : chunk)
+		{
+			window.draw(tile);
+		}
+	}
+}
+
+bool Map::checkCollision(sf::FloatRect bounds)
+{
+    for (auto& chunk : current_map)
+    {
+        for (auto& tile : chunk)
+        {
+            if (tile.getGlobalBounds().findIntersection(bounds)) 
+                return true;
+        }
+    }
+    return false;
 }

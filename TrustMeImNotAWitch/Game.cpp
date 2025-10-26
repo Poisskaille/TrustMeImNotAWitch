@@ -27,7 +27,7 @@ void Game::run()
 
 
     textureManager texManager;
-    Map map(texManager);
+    Map::getInstance().initMap();
     texManager.loadAll();
     std::shared_ptr<Player> player = std::make_shared<Player>(texManager.test, texManager);
 	init(window, texManager);
@@ -35,8 +35,6 @@ void Game::run()
     Score score;
     score.highScore();
     sf::Clock clock;
-    map.loadAllSections();
-    map.generate();
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -50,10 +48,10 @@ void Game::run()
 
         score.addScore(10);
         window.clear();
-        player->Update(deltaTime, map.getSolidTiles());
+        player->Update(deltaTime);
         window.draw(background);
         player->Draw(window);
-        map.draw(window, texManager.grassTile, 48);
+        Map::getInstance().draw(window);
 		
         window.display();
     }

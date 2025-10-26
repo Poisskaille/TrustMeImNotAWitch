@@ -21,23 +21,19 @@ Player::Player(const sf::Texture& texture, textureManager& texManager)
 	velocity = sf::Vector2f(0.f,0.f);
 
 	playerState = State::GROUNDED;
-
-	//
-
-	ground.setPosition(sf::Vector2(0.f,600.f));
-	ground.setSize(sf::Vector2(1920.f, 100.f));
 }
 
 Player::~Player()
 {
 }
 
-void Player::Update(float dT, const std::vector<Tile>& tile)
+void Player::Update(float dT)
 {
 	deltaTime = dT;
 	HandleInput();
-	Collision(tile);
+	Collision();
 	cam.update(playerCollider.getPosition());
+	Map::getInstance().unloadMap(playerCollider.getPosition());
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
@@ -96,7 +92,6 @@ void Player::Update(float dT, const std::vector<Tile>& tile)
 
 void Player::Draw(sf::RenderWindow& window)
 {
-	window.draw(ground);
 	window.draw(playerCollider);
 	window.draw(playerSprite);
 	window.setView(cam.getCam());
@@ -169,29 +164,12 @@ void Player::Slide() {
 }
 
 
-void Player::Collision(const std::vector<Tile>& tiles)
+void Player::Collision()
 {
-	sf::FloatRect playerBounds = playerCollider.getGlobalBounds();
-
-	for (auto& tile : tiles)
+	if(Map::getInstance().checkCollision(playerCollider.getGlobalBounds()))
 	{
-		sf::FloatRect tileBounds = tile.sprite.getGlobalBounds();
-
-		if (playerBounds.findIntersection(tileBounds))
-		{
-			switch (tile.type) {
-			case '#':
-				playerCollider.setPosition(sf::Vector2f(playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f));
-				velocity.y = 0.f;
-				if (!isSliding) {
-					playerState = State::GROUNDED;
-				}
-				break;
-			default:
-				break;
-
-			}
-		}
-		
+		playerCollider.setPosition({playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f});
+		velocity.y = 0;
+		playerState = State::GROUNDED;
 	}
 }
