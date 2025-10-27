@@ -25,9 +25,20 @@ void Game::run()
 
     //Threads
     std::thread tCollisions(&collisionsManager::checkCollisions, managerCollisions);
+    //managerEntity->createPlayer(managerText->test);
 
     while (window.isOpen())
     {
+        float deltaTime = clock.getElapsedTime().asSeconds();
+        clock.restart();
+
+        score.addScore(10);
+        /*window.clear();
+        managerMap->draw(&window);
+        managerEntity->getPlayer()->Draw(window);
+        window.display();*/
+        managerGame->update(&window);
+
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -37,12 +48,6 @@ void Game::run()
                 window.close();
             }
         }
-
-        float deltaTime = clock.getElapsedTime().asSeconds();
-        clock.restart();
-
-        score.addScore(10);
-        managerGame->update(&window);
     }
 
     managerEntity->~entityManager();

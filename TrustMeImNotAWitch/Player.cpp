@@ -26,8 +26,15 @@ void Player::Update()
 	HandleInput();
 	Collision();
 	cam.update(collider.getPosition());
-	managerMap->unloadMap(collider.getPosition()); //TODO créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
+	managerMap->unloadMap(collider.getPosition()); //TODO voir si continue a créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
 	deltaTime = _updateClock.restart();
+
+
+
+
+	if (!isSliding) {
+		slideRefresh += dT; // time since last slide
+	}
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
@@ -127,7 +134,7 @@ void Player::HandleInput()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState != State::GROUNDED && playerState == State::FALLING)
 		velocity.y = 1000.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState == State::GROUNDED && !isSliding)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState == State::GROUNDED && !isSliding && slideRefresh >= slideCooldown)
 	{
 		Slide(); // start the slide
 		//collider.move(sf::Vector2f(0.f, -0.5f));

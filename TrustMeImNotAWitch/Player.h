@@ -31,6 +31,8 @@ private:
 	bool isWalking = false;
 	float slideDuration = 0.5f; //en secondes
 	float slideTimer = 0.0f;
+	float slideCooldown = 1.0f;
+	float slideRefresh = 1.0f;
 	bool isSliding = false;
 	sf::Time deltaTime;
 	State playerState;
