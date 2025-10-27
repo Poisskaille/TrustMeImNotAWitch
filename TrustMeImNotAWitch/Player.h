@@ -14,14 +14,13 @@ public:
 	Player(const sf::Texture& _texture);
 	~Player() {};
 
-	void Update(float dT);
+	void Update();
 	void Draw(sf::RenderWindow& window);
 	void HandleInput();
 	void Jump();
 	void Slide();
 
 	void Collision();
-
 
 
 private:

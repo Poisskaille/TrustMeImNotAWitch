@@ -107,13 +107,13 @@ void Map::unloadMap(sf::Vector2f playerPos)
 }
 
 
-void Map::draw(sf::RenderWindow& window)
+void Map::draw(sf::RenderWindow * window)
 {
 	for(auto& chunk : current_map)
 	{
 		for(auto& tile : chunk)
 		{
-			window.draw(tile);
+			window->draw(tile);
 		}
 	}
 }
@@ -130,6 +130,3 @@ bool Map::checkCollision(sf::FloatRect bounds)
     }
     return false;
 }
-
-Map* Map::instance = nullptr;
-Map* managerMap = Map::getInstance();

@@ -54,7 +54,7 @@ void collisionsManager::checkCollisions()
 			}
 			if (managerEntity->getAllPlayers().size() != 0)
 			{
-				managerEntity->getPlayer()->Update(managerMap->getSolidTiles());
+				managerEntity->getPlayer()->Update();
 			}
 			if (lagClock.getElapsedTime().asMilliseconds() >= 1000.f)
 			{

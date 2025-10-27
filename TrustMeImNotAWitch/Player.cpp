@@ -22,19 +22,14 @@ Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f
 	//
 }
 
-void Player::Update(const std::vector<Tile>& tile)
+void Player::Update()
 {
-}
-
-void Player::Update(float dT)
-{
-	deltaTime = dT;
 	HandleInput();
 	Collision();
-	cam.update(playerCollider.getPosition());
-	Map::getInstance().unloadMap(playerCollider.getPosition());
+	cam.update(collider.getPosition());
+	Map::getInstance().unloadMap(collider.getPosition());
 	deltaTime = _updateClock.restart();
-	cam.Update(collider.getPosition());
+	cam.update(collider.getPosition());
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
@@ -108,8 +103,8 @@ void Player::Update(float dT)
 
 void Player::Draw(sf::RenderWindow& window)
 {
-	window.draw(playerCollider);
-	window.draw(playerSprite);
+	window.draw(collider);
+	window.draw(sprite);
 	window.setView(cam.getCam());
 	cam.drawUI(window);
 }
@@ -224,9 +219,9 @@ void Player::Slide() {
 
 void Player::Collision()
 {
-	if(Map::getInstance().checkCollision(playerCollider.getGlobalBounds()))
+	if(Map::getInstance().checkCollision(collider.getGlobalBounds()))
 	{
-		playerCollider.setPosition({playerCollider.getPosition().x, playerCollider.getPosition().y - 0.0001f});
+		collider.setPosition({collider.getPosition().x, collider.getPosition().y - 0.0001f});
 		velocity.y = 0;
 		playerState = State::GROUNDED;
 	}

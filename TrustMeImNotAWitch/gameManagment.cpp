@@ -12,11 +12,9 @@ gameManagment::gameManagment() : _updateClock(sf::Clock()) {}
 void gameManagment::init()
 {
 	managerText->loadAll();
-	managerMap->init();
+	Map::getInstance().initMap();
 
 	sf::Clock clock;
-	managerMap->loadAllSections();
-	managerMap->generate();
 
 	background.setTexture(&managerText->backgroundTexture);
 	background.setSize(sf::Vector2f(1920.f, 1080.f));
@@ -26,10 +24,11 @@ void gameManagment::init()
 
 void gameManagment::update(sf::RenderWindow* _window)
 {
-	if (managerEntity->getAllPlayers().size() != 0){ managerEntity->getPlayer()->Update(managerMap->getSolidTiles()); }
+	if (managerEntity->getAllPlayers().size() != 0){ managerEntity->getPlayer()->Update(); }
 	managerCollisions->garbageClear();
 	_window->clear();
 	_window->draw(background);
+	Map::getInstance().draw(_window);
 	managerEntity->getPlayer()->Draw(*_window);
 	_window->display();
 }

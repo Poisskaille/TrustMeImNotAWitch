@@ -49,8 +49,6 @@ void Game::run()
 
         score.addScore(10);
         window.clear();
-        player->Update(deltaTime);
-        window.draw(background);
         player->Draw(window);
         Map::getInstance().draw(window);
 		

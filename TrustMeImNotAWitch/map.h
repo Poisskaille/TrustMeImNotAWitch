@@ -22,7 +22,7 @@ public:
 
 	void unloadMap(sf::Vector2f playerPos);
 
-	void draw(sf::RenderWindow& window);
+	void draw(sf::RenderWindow* window);
 
 	bool checkCollision(sf::FloatRect bounds);
 
@@ -35,6 +35,3 @@ private:
 	float currentEndX;
 
 };
-
-
-extern Map* managerMap;
