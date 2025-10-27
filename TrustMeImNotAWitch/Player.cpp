@@ -3,9 +3,11 @@
 Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f(0.f, 350.f), sf::Vector2f(3.f, 3.f)), cam(collider.getPosition())
 {
 	sprite.setOrigin(sf::Vector2f(16,11));
-	//collider.setOrigin(sprite.getOrigin());
+	collider.setOrigin(sprite.getOrigin());
 	collider.setFillColor(sf::Color::Blue);
-	//sprite.setPosition(sf::Vector2(0.f,400.f));
+	sprite.setPosition(sf::Vector2(0.f,400.f));
+
+	std::cout << "CACA" << '\n';
 
 	speed = 200.f;
 	jumpForce = -600.f;
@@ -33,7 +35,7 @@ void Player::Update()
 
 
 	if (!isSliding) {
-		slideRefresh += dT; // time since last slide
+		slideRefresh += deltaTime.asSeconds(); // time since last slide
 	}
 
 	//SLIDE FEATURE
@@ -117,7 +119,6 @@ void Player::Draw(sf::RenderWindow& window)
 void Player::HandleInput()
 {
 	velocity.x = speed * deltaTime.asSeconds();
-	std::cout << "i'm init" << std::endl;
 	//std::cout << "velocity.x = " << velocity.x  << ", speed = " << speed << ", deltaTime.asSeconds() = " << deltaTime.asSeconds() << '\n';
 	collider.move(sf::Vector2(velocity.x, velocity.y * deltaTime.asSeconds()));
 	velocity.y += gravity * deltaTime.asSeconds();
@@ -164,7 +165,6 @@ void Player::HandleInput()
 	}
 
 	sprite.setPosition(collider.getPosition());
-	std::cout << "i'm ended" << std::endl;
 }
 
 void Player::Jump()

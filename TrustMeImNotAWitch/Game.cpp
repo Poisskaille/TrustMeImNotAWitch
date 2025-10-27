@@ -41,10 +41,11 @@ void Game::run()
             {
                 managerCollisions->setGameRunning(false);
 				tCollisions.join();
-                managerEntity->~entityManager();
                 window.close();
             }
         }
     }
+
+    managerEntity->~entityManager();
     score.newScore();
 }

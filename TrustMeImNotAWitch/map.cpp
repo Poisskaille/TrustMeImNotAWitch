@@ -65,22 +65,22 @@ void Map::loadAllMap()
             x++;
         }
 
-        loaded_map.push_back(newMap);
+        loaded_map.push_back(std::make_shared<std::vector<sf::RectangleShape>>(newMap));
     }
 }
 
 void Map::loadSection(int index)
 {
-    current_map.push_back(placeTile(loaded_map[index]));
+    current_map.push_back(std::make_shared<std::vector<sf::RectangleShape>>(placeTile(loaded_map[index])));
     loadIndex++;
 }
 
-std::vector<sf::RectangleShape> Map::placeTile(std::vector<sf::RectangleShape>& map)
+std::vector<sf::RectangleShape> Map::placeTile(std::shared_ptr<std::vector<sf::RectangleShape>>& map)
 {
     std::vector<sf::RectangleShape> newChunk;
 
     float offsetX = currentEndX;
-    for (auto& tile : map)
+    for (auto& tile : *map)
     {
         sf::RectangleShape newTile = tile;
         newTile.move({ offsetX, 0 });
@@ -98,34 +98,46 @@ std::vector<sf::RectangleShape> Map::placeTile(std::vector<sf::RectangleShape>& 
 
 void Map::unloadMap(sf::Vector2f playerPos)
 {
-    float lastTileX = current_map[0].back().getPosition().x;
-        if (lastTileX < playerPos.x - 300.f)
-        {
-            current_map.erase(current_map.begin());
-            loadSection(0);
-        }
+    float lastTileX = current_map[0]->back().getPosition().x;
+    if (lastTileX < playerPos.x - 300.f)
+    {
+        current_map.erase(current_map.begin());
+        loadSection(0);
+    }
+
+    //current_map.erase(std::remove_if(current_map.begin(), current_map.end(), [&](const auto& section)
+    //    {
+    //       
+    //    }
+    //),
+    //    current_map.end());
 }
 
 void Map::draw(sf::RenderWindow * window)
 {
-	for(auto& chunk : current_map)
-	{
-		for(auto& tile : chunk)
-		{
-			window->draw(tile);
-		}
-	}
+    for (auto& chunk : current_map)
+    {
+        if (chunk) {
+            for (auto& tile : *chunk)
+            {
+                if (&tile != nullptr)
+                {
+                    window->draw(tile);
+                }
+            }
+        }
+    }
 }
 
 bool Map::checkCollision(sf::FloatRect bounds)
 {
     for (auto& chunk : current_map)
     {
-        for (auto& tile : chunk)
-        {
-            if (tile.getGlobalBounds().findIntersection(bounds)) 
-                return true;
-        }
+            for (auto& tile : *chunk)
+            {
+                if (tile.getGlobalBounds().findIntersection(bounds))
+                    return true;
+            }
     }
     return false;
 }
