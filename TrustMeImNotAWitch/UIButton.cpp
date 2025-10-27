@@ -9,7 +9,7 @@ UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const s
 	shape.setOrigin(sf::Vector2f(size.x / 2, size.y / 2));
 
 	text.setString(str);
-	text.setCharacterSize(50.f);
+	text.setCharacterSize(50);
 	shape.setPosition(offset);
 
 	sf::FloatRect bounds = text.getLocalBounds();

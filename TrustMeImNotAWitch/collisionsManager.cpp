@@ -40,7 +40,7 @@ void collisionsManager::checkCollisions()
 					{
 						if (EntityCheaked->tag == 'E')
 						{
-							if (!std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'P')
+							if (!(std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'P'))
 							{
 								garbageAdd(EntityCheaked);
 							}

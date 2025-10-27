@@ -11,7 +11,7 @@ public:
 
 private:
 
-	int score = 0.f;
+	int score = 0;
 	std::vector<int> scoreList;
 };
 

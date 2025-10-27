@@ -4,7 +4,7 @@
 
 int main()
 {
-	std::srand(time(nullptr));
+	std::srand(int(time(nullptr)));
 	Game* game = new Game;
 	game->run();
 	delete game;

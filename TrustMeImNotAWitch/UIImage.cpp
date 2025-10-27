@@ -9,7 +9,7 @@ UIImage::UIImage(const sf::Vector2f& offset, const sf::Vector2f& size, const sf:
 	shape.setOrigin(sf::Vector2f(size.x / 2, size.y / 2));
 
 	text.setString(str);
-	text.setCharacterSize(50.f);
+	text.setCharacterSize(50);
 
 	sf::FloatRect bounds = text.getLocalBounds();
 	text.setOrigin(sf::Vector2f(bounds.size.x / 2, bounds.size.y / 2 + 15));

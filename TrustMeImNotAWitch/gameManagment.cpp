@@ -30,7 +30,6 @@ void gameManagment::update(sf::RenderWindow* _window)
 	managerMap->draw(_window);
 	managerEntity->getPlayer()->Draw(*_window);
 	_window->display();
-	managerMap->showVecSize();
 }
 
 
