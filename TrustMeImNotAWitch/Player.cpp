@@ -2,7 +2,7 @@
 
 Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f(0.f, 350.f), sf::Vector2f(3.f, 3.f)), cam(collider.getPosition())
 {
-	//sprite.setOrigin(sf::Vector2f(16,11));
+	sprite.setOrigin(sf::Vector2f(16,11));
 	//collider.setOrigin(sprite.getOrigin());
 	collider.setFillColor(sf::Color::Blue);
 	//sprite.setPosition(sf::Vector2(0.f,400.f));
@@ -26,7 +26,7 @@ void Player::Update()
 	HandleInput();
 	Collision();
 	cam.update(collider.getPosition());
-	managerMap->unloadMap(collider.getPosition()); //TODO créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
+	managerMap->unloadMap(collider.getPosition()); //TODO voir si continue a créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
 	deltaTime = _updateClock.restart();
 
 	//SLIDE FEATURE
