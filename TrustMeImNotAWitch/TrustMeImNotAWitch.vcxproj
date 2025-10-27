@@ -149,7 +149,9 @@
     <ClCompile Include="CameraUI.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Projectiles.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="TrustMeImNotAWitch.cpp" />
@@ -168,7 +170,9 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="CameraUI.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="Projectiles.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="UIButton.h" />

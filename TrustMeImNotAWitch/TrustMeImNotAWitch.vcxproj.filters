@@ -22,6 +22,18 @@
     <Filter Include="Fichiers de ressources\Fichiers d%27en-tête\Maps">
       <UniqueIdentifier>{2ab567be-85ea-40c8-98dd-a5aadd843bf6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers de ressources\Fichiers d%27en-tête\UI">
+      <UniqueIdentifier>{2faabf17-8845-431d-a476-d89b0f0a0628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\UI">
+      <UniqueIdentifier>{a7532061-6eaa-4169-8784-6c9574be3fcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers de ressources\Fichiers d%27en-tête\Menu">
+      <UniqueIdentifier>{a8cb194b-c7c5-42af-82e0-f06f01df5cff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Menu">
+      <UniqueIdentifier>{1f038d0c-d95c-4b98-919b-75db5a92c534}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TrustMeImNotAWitch.cpp">
@@ -58,6 +70,27 @@
     <ClCompile Include="map.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="CameraUI.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManagers.cpp">
+      <Filter>Fichiers sources\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>Fichiers sources\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElements.cpp">
+      <Filter>Fichiers sources\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Fichiers sources\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Fichiers sources\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Fichiers sources\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -92,6 +125,27 @@
     </ClInclude>
     <ClInclude Include="map.h">
       <Filter>Fichiers de ressources\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraUI.h">
+      <Filter>Fichiers de ressources\Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Fichiers de ressources\Fichiers d%27en-tête\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElements.h">
+      <Filter>Fichiers de ressources\Fichiers d%27en-tête\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>Fichiers de ressources\Fichiers d%27en-tête\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManagers.h">
+      <Filter>Fichiers de ressources\Fichiers d%27en-tête\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Fichiers de ressources\Fichiers d%27en-tête\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Fichiers de ressources\Fichiers d%27en-tête\Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,42 +4,36 @@
 #include <string>
 #include <random>
 #include "textureManager.h"
-
-struct Tile {
-    sf::Sprite sprite;
-    char type;
-
-    Tile(const sf::Texture& tex, char t, sf::Vector2f pos)
-        : sprite(tex), type(t) // directly initialize the sprite with the texture
-    {
-        sprite.setPosition(pos);
-    }
-};
-
+#include <fstream>
+#include <stdexcept>
+#include <iostream>
+#include <algorithm>
 
 class Map {
-private:
-    static Map* instance;
-
-    Map();
-    std::vector<std::vector<std::string>> sections;
-    std::vector<std::string> combinedMap;
-    std::vector<Tile> solidTiles; // persistent list of solid tiles
-
-    std::mt19937 rng{ std::random_device{}() };
-    void appendSection(const std::vector<std::string>& section);
-    void randomizeNextSection();
-    std::vector<std::string> loadSection(const std::string& path);
-
 public:
-    static Map* getInstance();
-    void init();
-    void loadAllSections();
-    void generate();
-    void draw(sf::RenderWindow& window, const sf::Texture& groundTex, int tileSize) const;
 
-    // This will be used by Player for collisions
-    const std::vector<Tile>& getSolidTiles() const { return solidTiles; }
+	static Map& getInstance();
+
+	void initMap();
+
+	void loadAllMap();
+	void loadSection(int index);
+	std::vector<sf::RectangleShape> placeTile(std::vector<sf::RectangleShape>&);
+
+	void unloadMap(sf::Vector2f playerPos);
+
+	void draw(sf::RenderWindow& window);
+
+	bool checkCollision(sf::FloatRect bounds);
+
+private:
+
+	std::vector<std::vector<sf::RectangleShape>> loaded_map;
+	std::vector<std::vector<sf::RectangleShape>> current_map;
+
+	int loadIndex;
+	float currentEndX;
+
 };
 
 

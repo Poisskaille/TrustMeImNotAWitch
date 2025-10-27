@@ -14,13 +14,13 @@ public:
 	Player(const sf::Texture& _texture);
 	~Player() {};
 
-	void Update(const std::vector<Tile>& tile);
+	void Update(float dT);
 	void Draw(sf::RenderWindow& window);
 	void HandleInput();
 	void Jump();
 	void Slide();
 
-	void Collision(const std::vector<Tile>& tile);
+	void Collision();
 
 
 
@@ -45,9 +45,6 @@ private:
 	float gravity;
 
 	//textureManager& texManager;
-
-	// A supprimer plus tard, juste pour test
-	sf::RectangleShape ground;
 
 	CameraUI cam;
 

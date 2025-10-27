@@ -3,13 +3,13 @@
 CameraUI::CameraUI(sf::Vector2f pos): Y_OFFSET(pos.y + 400)
 {
 	cam.setSize({ 800.f,400.f });
-	cam.zoom(1.5f);
+	cam.zoom(15.5f);
 	cam.setCenter(sf::Vector2f(pos.x, Y_OFFSET));
 
-	InitUI();
+	initUI();
 }
 
-void CameraUI::Update(sf::Vector2f playerPos)
+void CameraUI::update(sf::Vector2f playerPos)
 {
 	sf::Vector2f viewCenter = cam.getCenter();
 	viewCenter.x = playerPos.x + 400.f;
@@ -26,18 +26,17 @@ void CameraUI::Update(sf::Vector2f playerPos)
 
 	cam.setCenter(sf::Vector2(viewCenter));
 
-	UIManagers::getInstance().UpdateCam(cam.getCenter());
+	UIManagers::getInstance().updateCam(cam.getCenter());
 }
 
-void CameraUI::DrawUI(sf::RenderWindow& window)
+void CameraUI::drawUI(sf::RenderWindow& window)
 {
-	UIManagers::getInstance().DrawCam(window);
+	UIManagers::getInstance().drawCam(window);
 }
 
-void CameraUI::InitUI()
+void CameraUI::initUI()
 {
-	UIManagers::getInstance().CreateUI(UI_TYPE::IMAGE,UI_LIST::CAMERA,sf::Vector2f(cam.getCenter().x, (cam.getSize().y / 2) - 50), sf::Vector2f(100, 50), sf::Color::Blue, "Test");
-	UIManagers::getInstance().CreateUI(UI_TYPE::BUTTON, UI_LIST::CAMERA, sf::Vector2f(cam.getCenter().x + 500, cam.getCenter().y - 600), sf::Vector2f(50, 50), sf::Color::Magenta, "B");
+	UIManagers::getInstance().createUI(UI_TYPE::IMAGE,UI_LIST::CAMERA,sf::Vector2f(cam.getCenter().x, (cam.getSize().y / 2) - 50), sf::Vector2f(256, 128), sf::Color::Blue, "Test",'s');
 }
 
 sf::View CameraUI::getCam()
