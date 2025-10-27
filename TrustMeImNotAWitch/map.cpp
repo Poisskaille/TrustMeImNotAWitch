@@ -99,11 +99,18 @@ std::vector<sf::RectangleShape> Map::placeTile(std::shared_ptr<std::vector<sf::R
 void Map::unloadMap(sf::Vector2f playerPos)
 {
     float lastTileX = current_map[0]->back().getPosition().x;
-        if (lastTileX < playerPos.x - 300.f)
-        {
-            current_map.erase(current_map.begin());
-            loadSection(0);
-        }
+    if (lastTileX < playerPos.x - 300.f)
+    {
+        current_map.erase(current_map.begin());
+        loadSection(0);
+    }
+
+    //current_map.erase(std::remove_if(current_map.begin(), current_map.end(), [&](const auto& section)
+    //    {
+    //       
+    //    }
+    //),
+    //    current_map.end());
 }
 
 void Map::showVecSize() {
@@ -117,7 +124,10 @@ void Map::draw(sf::RenderWindow * window)
         if (chunk) {
             for (auto& tile : *chunk)
             {
-                window->draw(tile);
+                if (&tile != nullptr)
+                {
+                    window->draw(tile);
+                }
             }
         }
     }
@@ -127,13 +137,11 @@ bool Map::checkCollision(sf::FloatRect bounds)
 {
     for (auto& chunk : current_map)
     {
-        if (chunk) {
             for (auto& tile : *chunk)
             {
                 if (tile.getGlobalBounds().findIntersection(bounds))
                     return true;
             }
-        }
     }
     return false;
 }
