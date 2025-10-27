@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -83,7 +83,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -98,7 +97,6 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,49 +138,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="collisionsManager.cpp" />
-    <ClCompile Include="Ennemy.cpp" />
     <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="entityManager.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameManagment.cpp" />
     <ClCompile Include="Ground.cpp" />
-    <ClCompile Include="CameraUI.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="map.cpp" />
-    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Projectiles.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="TrustMeImNotAWitch.cpp" />
-    <ClCompile Include="UIButton.cpp" />
-    <ClCompile Include="UIElements.cpp" />
-    <ClCompile Include="UIImage.cpp" />
-    <ClCompile Include="UIManagers.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="collisionsManager.h" />
-    <ClInclude Include="Ennemy.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="entityManager.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameManagment.h" />
     <ClInclude Include="Ground.h" />
-    <ClInclude Include="CameraUI.h" />
-    <ClInclude Include="map.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Score.h" />
     <ClInclude Include="Projectiles.h" />
     <ClInclude Include="textureManager.h" />
-    <ClInclude Include="UIButton.h" />
-    <ClInclude Include="UIElements.h" />
-    <ClInclude Include="UIImage.h" />
-    <ClInclude Include="UIManagers.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\assets\maps\section1.txt" />
-    <Text Include="..\assets\maps\section2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -130,3 +130,6 @@ bool Map::checkCollision(sf::FloatRect bounds)
     }
     return false;
 }
+
+Map* Map::instance = nullptr;
+Map* managerMap = Map::getInstance();

@@ -35,3 +35,6 @@ private:
 	float currentEndX;
 
 };
+
+
+extern Map* managerMap;

@@ -7,6 +7,15 @@ UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const s
 	shape.setSize(size);
 	shape.setFillColor(color);
 	shape.setOrigin(sf::Vector2f(size.x / 2, size.y / 2));
+}
+
+UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color, const std::string&) : OFFSET(offset), text(font), str(str)
+{
+	if (!font.openFromFile("../assets/font/SpecialGothic-VariableFont_wdth,wght.ttf"))
+		std::cout << "Error loading font" << '\n';
+	shape.setSize(size);
+	shape.setFillColor(color);
+	shape.setOrigin(sf::Vector2f(size.x / 2, size.y / 2));
 
 	text.setString(str);
 	text.setCharacterSize(50.f);
@@ -24,7 +33,7 @@ void UIButton::draw(sf::RenderWindow& window)
 	onClick(window);
 }
 
-// Pas besoin d'appeler cette méhtode s'il s'agit de l'UI du menu
+// Pas besoin d'appeler cette mï¿½htode s'il s'agit de l'UI du menu
 void UIButton::updatePosition(sf::Vector2f camPos)
 {
 	shape.setPosition(sf::Vector2f(camPos.x - OFFSET.x, camPos.y - OFFSET.y));

@@ -23,13 +23,14 @@ struct AnimationData {
 
 class textureManager {
 private:
+    static textureManager* instance;
+    textureManager() {};
 
-
-    
     std::unordered_map<playerAnimation, AnimationData> playerAnimations;
     playerAnimation currentAnim = playerAnimation::Idle;
 
 public:
+    static textureManager* getInstance();
     sf::Texture grassTile;
     sf::Texture test;
     sf::Texture backgroundTexture;
@@ -37,3 +38,5 @@ public:
     void setplayerAnimation(playerAnimation anim, sf::Sprite& player);
     void update(float deltaTime, sf::Sprite& player);
 };
+
+extern textureManager* managerText;

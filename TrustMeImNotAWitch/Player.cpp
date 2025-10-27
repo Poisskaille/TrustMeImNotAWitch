@@ -1,29 +1,28 @@
 #include "Player.h"
-#include "UIElements.h"
 
-Player::Player(const sf::Texture& texture, textureManager& texManager)
-	: playerSprite(texture), texManager(texManager), cam(playerCollider.getPosition())
+Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f(0.f, 350.f), sf::Vector2f(3.f, 3.f)), cam(collider.getPosition())
 {
-
-	playerSprite.setOrigin(sf::Vector2f(16,11));
-	playerSprite.setScale(sf::Vector2f(3.0f, 3.0f));
-	playerCollider.setPosition(sf::Vector2(0.f, 350.0f));
-	playerCollider.setSize(sf::Vector2(64.f, 96.f));
-	playerCollider.setOrigin(sf::Vector2f(32.f,32.f));
-	playerCollider.setFillColor(sf::Color::Red);
-
-	playerSprite.setPosition(sf::Vector2(0.f,400.f));
+	//sprite.setOrigin(sf::Vector2f(16,11));
+	//collider.setOrigin(sprite.getOrigin());
+	collider.setFillColor(sf::Color::Blue);
+	//sprite.setPosition(sf::Vector2(0.f,400.f));
 
 	speed = 200.f;
-	deltaTime = 0.f;
 	jumpForce = -600.f;
 	gravity = 1500.f;
 	velocity = sf::Vector2f(0.f,0.f);
 
+	speed = defaultSpeed;
+	jumpForce = -600.f;
+	gravity = 1500.f;
+	velocity = sf::Vector2f(0.f, 0.f);
+
 	playerState = State::GROUNDED;
+
+	//
 }
 
-Player::~Player()
+void Player::Update(const std::vector<Tile>& tile)
 {
 }
 
@@ -34,26 +33,40 @@ void Player::Update(float dT)
 	Collision();
 	cam.update(playerCollider.getPosition());
 	Map::getInstance().unloadMap(playerCollider.getPosition());
+	deltaTime = _updateClock.restart();
+	cam.Update(collider.getPosition());
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
-		playerCollider.move(sf::Vector2f(speed * 2.f * deltaTime, 0.f)); // push forward
-		slideTimer += dT;
+		collider.move(sf::Vector2f(speed * 2.f * deltaTime.asSeconds(), 0.f)); // push forward
+		slideTimer += deltaTime.asSeconds();
+		sprite.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y - 32));
 
 		//SLIDE CANCELLING
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
 			Jump();
 			isSliding = false;
-			playerCollider.setSize(sf::Vector2f(64.f, 96.f)); // revert collider
+			collider.setSize(sf::Vector2f(64.f, 96.f)); // revert collider
 			return;
+			speed = defaultSpeed;
 		}
 
 		// End slide after duration
 		if (slideTimer >= slideDuration) {
 			isSliding = false;
 			playerState = State::GROUNDED;
-			playerCollider.setSize(sf::Vector2f(64.f, 96.f));
-			playerCollider.setOrigin(sf::Vector2f(32.f, 32.f));
+			collider.setSize(sf::Vector2f(64.f, 96.f));
+			collider.setOrigin(sf::Vector2f(32.f, 32.f));
+			collider.move(sf::Vector2f(0.0f, -34.f));
+			sprite.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y));
+			speed = defaultSpeed;
+		}
+
+		if (velocity.y > 350) {
+			isSliding = false;
+			collider.setSize(sf::Vector2f(64.f, 96.f)); // revert collider
+			playerState = State::FALLING;
+			speed = defaultSpeed;
 		}
 	}
 
@@ -62,31 +75,34 @@ void Player::Update(float dT)
 #pragma region ANIMATION_PLAYER_STATE
 	playerAnimation newAnim = playerAnimation::Idle;
 
-	if (playerState == State::GROUNDED) {
-		if (isWalking)
-			newAnim = playerAnimation::Walk;
-		else
-			newAnim = playerAnimation::Run;
+	// ✅ prioritize SLIDE above all else
+	if (playerState == State::SLIDING) {
+		newAnim = playerAnimation::Slide;
 	}
 	else if (playerState == State::JUMPING) {
 		newAnim = playerAnimation::Jump;
 	}
-	if (velocity.y > 350) {
+	if (velocity.y > 350 || playerState == State::FALLING) {
 		playerState = State::FALLING;
-			newAnim = playerAnimation::Fall;
+		newAnim = playerAnimation::Fall;
 	}
-	else if (playerState == State::SLIDING) {
-		newAnim = playerAnimation::Slide;
+	else if (playerState == State::GROUNDED) {
+		if (isWalking)
+			newAnim = playerAnimation::Walk;
+		//newAnim = playerAnimation::Idle;
+		else
+			newAnim = playerAnimation::Run;
 	}
+
 
 	// Change animation only if it�fs different
 	if (newAnim != currentAnimation) {
 		currentAnimation = newAnim;
-		texManager.setplayerAnimation(currentAnimation, playerSprite);
+		managerText->setplayerAnimation(currentAnimation, sprite);
 	}
 
 	// Always update the current animation
-	texManager.update(deltaTime, playerSprite);
+	managerText->update(deltaTime.asSeconds(), sprite);
 #pragma endregion
 }
 
@@ -95,16 +111,15 @@ void Player::Draw(sf::RenderWindow& window)
 	window.draw(playerCollider);
 	window.draw(playerSprite);
 	window.setView(cam.getCam());
-
 	cam.drawUI(window);
 }
 
 void Player::HandleInput()
 {
-	playerCollider.move(sf::Vector2(speed * deltaTime, velocity.y * deltaTime));
-	velocity.y += gravity * deltaTime;
+	collider.move(sf::Vector2(speed * deltaTime.asSeconds(), velocity.y * deltaTime.asSeconds()));
+	velocity.y += gravity * deltaTime.asSeconds();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED) { Jump(); }
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED && !isWalking) { Jump(); }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
 		speed = walkingSpeed;
 		isWalking = true;
@@ -114,36 +129,38 @@ void Player::HandleInput()
 		isWalking = false;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState != State::GROUNDED)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState != State::GROUNDED && playerState == State::FALLING)
 		velocity.y = 1000.f;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState == State::GROUNDED && !isSliding)
 	{
 		Slide(); // start the slide
+		//collider.move(sf::Vector2f(0.f, -0.5f));
+
 	}
 
 
 	//Debug
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Backspace)) {
 		switch (playerState) {
-			case State::GROUNDED:
-				std::cout << "GROUNDED" << std::endl;
-				break;
-			case State::JUMPING:
-				std::cout << "JUMPING" << std::endl;
-				break;
-			case State::SLIDING:
-				std::cout << "SLIDING" << std::endl;
-				break;
-			case State::FALLING:
-				std::cout << "JUMPING" << std::endl;
-				break;
-			default:
-				std::cout << "tf is happening" << std::endl;
-				break;
+		case State::GROUNDED:
+			std::cout << "GROUNDED" << std::endl;
+			break;
+		case State::JUMPING:
+			std::cout << "JUMPING" << std::endl;
+			break;
+		case State::SLIDING:
+			std::cout << "SLIDING" << std::endl;
+			break;
+		case State::FALLING:
+			std::cout << "JUMPING" << std::endl;
+			break;
+		default:
+			std::cout << "tf is happening" << std::endl;
+			break;
 		}
 	}
 
-	playerSprite.setPosition(playerCollider.getPosition());
+	sprite.setPosition(collider.getPosition());
 }
 
 void Player::Jump()
@@ -157,12 +174,53 @@ void Player::Slide() {
 	slideTimer = 0.0f;
 	playerState = State::SLIDING;
 
-	// Shrink collider for slide posture
-	playerCollider.setSize(sf::Vector2f(64.f, 64.f));
-	playerCollider.setOrigin(sf::Vector2f(32.f, 32.f));
-	velocity.x = speed * 1.2f;
+	// Capture the collider’s bottom before resizing
+	float bottomY = collider.getGlobalBounds().position.y + collider.getGlobalBounds().size.y;
+
+	// Shrink collider
+	collider.setSize(sf::Vector2f(64.f, 64.f));
+	collider.setOrigin(sf::Vector2f(32.f, 32.f));
+
+	// Adjust Y so bottom remains at the same place
+	float newBottomY = collider.getGlobalBounds().position.y + collider.getGlobalBounds().size.y;
+	float offset = bottomY - newBottomY;
+	collider.move(sf::Vector2f(0.f, offset));
+
+	speed = boostSpeed;
 }
 
+//void Player::Collision(const std::vector<Tile>& tiles)
+//{
+//	sf::FloatRect playerBounds = collider.getGlobalBounds();
+//
+//	for (auto& tile : tiles)
+//	{
+//		float overlapY = (collider.getPosition().y + collider.getSize().y) - tile.sprite.getPosition().y;
+//
+//		sf::FloatRect tileBounds = tile.sprite.getGlobalBounds();
+//
+//		if (playerBounds.findIntersection(tileBounds))
+//		{
+//			switch (tile.type) {
+//			case '#':
+//
+//				if (velocity.y > 0 && overlapY > 0) {
+//					collider.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y - 0.0001f));
+//					velocity.y = 0.f;
+//
+//					if (!isSliding) {
+//						playerState = State::GROUNDED;
+//					}
+//				}
+//				break;
+//			default:
+//				break;
+//
+//			}
+//		}
+//		
+//	}
+//}
 
 void Player::Collision()
 {

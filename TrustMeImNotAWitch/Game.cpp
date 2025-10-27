@@ -6,18 +6,9 @@
 
 Game::Game()
 	:window(sf::VideoMode({ 1920, 1080 }), "Trust Me, I'm Not A Witch!")
-
 {
 }
 Game::~Game(){}
-
-
-void Game::init(sf::RenderWindow& window, textureManager& texManager) {
-
-    background.setTexture(&texManager.backgroundTexture);
-	background.setSize(sf::Vector2f(1920.f, 1080.f));
-
-}
 
 void Game::run()
 {
@@ -35,12 +26,22 @@ void Game::run()
     Score score;
     score.highScore();
     sf::Clock clock;
+    managerGame->init();
+
+    //Threads
+    std::thread tCollisions(&collisionsManager::checkCollisions, managerCollisions);
+
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
+            {
+                managerCollisions->setGameRunning(false);
+				tCollisions.join();
+                managerEntity->~entityManager();
                 window.close();
+            }
         }
 
         float deltaTime = clock.getElapsedTime().asSeconds();
@@ -54,6 +55,7 @@ void Game::run()
         Map::getInstance().draw(window);
 		
         window.display();
+        managerGame->update(&window);
     }
 
     score.newScore();

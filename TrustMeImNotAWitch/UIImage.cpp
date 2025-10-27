@@ -1,8 +1,17 @@
 #include "UIImage.h"
-UIImage::UIImage(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color, const std::string& str, const char& c)
-	: OFFSET(offset), text(font), str(str), index(c)
+
+UIImage::UIImage(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color) : OFFSET(offset), text(font)
 {
-	if (!font.openFromFile("assets/font/Enchanted Land.otf"))
+	if (!font.openFromFile("../assets/font/SpecialGothic-VariableFont_wdth,wght.ttf"))
+		std::cout << "Error loading font" << '\n';
+	shape.setSize(size);
+	shape.setFillColor(color);
+	shape.setOrigin(sf::Vector2f(size.x / 2, size.y / 2));
+}
+
+UIImage::UIImage(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color, const std::string& str) : OFFSET(offset), text(font), str(str)
+{
+	if (!font.openFromFile("../assets/font/SpecialGothic-VariableFont_wdth,wght.ttf"))
 		std::cout << "Error loading font" << '\n';
 	shape.setSize(size);
 	//shape.setFillColor(color);
