@@ -12,7 +12,7 @@ gameManagment::gameManagment() : _updateClock(sf::Clock()) {}
 void gameManagment::init()
 {
 	managerText->loadAll();
-	Map::getInstance().initMap();
+	managerMap->initMap();
 
 	sf::Clock clock;
 
@@ -28,7 +28,7 @@ void gameManagment::update(sf::RenderWindow* _window)
 	managerCollisions->garbageClear();
 	_window->clear();
 	_window->draw(background);
-	Map::getInstance().draw(_window);
+	managerMap->draw(_window);
 	managerEntity->getPlayer()->Draw(*_window);
 	_window->display();
 }

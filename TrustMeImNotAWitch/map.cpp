@@ -1,8 +1,8 @@
 #include "map.h"
 
-Map& Map::getInstance()
+Map* Map::getInstance()
 {
-    static Map instance;
+    if (instance == nullptr) { instance = new Map(); }
     return instance;
 }
 
@@ -21,7 +21,7 @@ void Map::loadAllMap()
 {
     for(int i = 0; i < 10; i++)
     {
-        std::string currentPath = "assets/maps/map_" + std::to_string(i) + ".txt";
+        std::string currentPath = "../assets/maps/map_" + std::to_string(i) + ".txt";
         std::fstream file(currentPath);
 
         char currentChar;
@@ -130,3 +130,6 @@ bool Map::checkCollision(sf::FloatRect bounds)
     }
     return false;
 }
+
+Map* Map::instance = nullptr;
+Map* managerMap = Map::getInstance();

@@ -27,7 +27,7 @@ void Player::Update()
 	HandleInput();
 	Collision();
 	cam.update(collider.getPosition());
-	Map::getInstance().unloadMap(collider.getPosition());
+	managerMap->unloadMap(collider.getPosition());
 	deltaTime = _updateClock.restart();
 	cam.update(collider.getPosition());
 
@@ -219,7 +219,7 @@ void Player::Slide() {
 
 void Player::Collision()
 {
-	if(Map::getInstance().checkCollision(collider.getGlobalBounds()))
+	if(managerMap->checkCollision(collider.getGlobalBounds()))
 	{
 		collider.setPosition({collider.getPosition().x, collider.getPosition().y - 0.0001f});
 		velocity.y = 0;

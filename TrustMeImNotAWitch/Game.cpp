@@ -16,12 +16,10 @@ void Game::run()
     if (!menu->runMain(window))
         return;
 
-
-    textureManager texManager;
-    Map::getInstance().initMap();
-    texManager.loadAll();
-    std::shared_ptr<Player> player = std::make_shared<Player>(texManager.test, texManager);
-	init(window, texManager);
+    managerMap->initMap();
+    managerText->loadAll();
+    managerGame->init();
+	managerEntity->createPlayer(managerText->test);
 	
     Score score;
     score.highScore();
@@ -48,13 +46,7 @@ void Game::run()
         clock.restart();
 
         score.addScore(10);
-        window.clear();
-        player->Draw(window);
-        Map::getInstance().draw(window);
-		
-        window.display();
         managerGame->update(&window);
     }
-
     score.newScore();
 }

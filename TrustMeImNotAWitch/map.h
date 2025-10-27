@@ -12,7 +12,7 @@
 class Map {
 public:
 
-	static Map& getInstance();
+	static Map* getInstance();
 
 	void initMap();
 
@@ -31,7 +31,10 @@ private:
 	std::vector<std::vector<sf::RectangleShape>> loaded_map;
 	std::vector<std::vector<sf::RectangleShape>> current_map;
 
+	static Map* instance;
+
 	int loadIndex;
 	float currentEndX;
-
 };
+
+extern Map* managerMap;

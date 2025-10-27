@@ -2,7 +2,7 @@
 
 void Score::highScore()
 {
-	std::fstream file("assets/Score/high_score.txt");
+	std::fstream file("../assets/Score/high_score.txt");
 	if(!file.is_open())
 	{
 		std::cout << "Generating score file " << '\n';
@@ -32,7 +32,7 @@ void Score::highScore()
 
 void Score::newScore()
 {
-	std::fstream nFile("assets/Score/high_score.txt", std::ofstream::out | std::ofstream::trunc);
+	std::fstream nFile("../assets/Score/high_score.txt", std::ofstream::out | std::ofstream::trunc);
 
 	scoreList.push_back(score);
 	std::sort(scoreList.begin(), scoreList.end(), std::greater<int>());	
