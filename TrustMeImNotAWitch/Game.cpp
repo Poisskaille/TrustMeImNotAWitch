@@ -33,10 +33,6 @@ void Game::run()
         clock.restart();
 
         score.addScore(10);
-        /*window.clear();
-        managerMap->draw(&window);
-        managerEntity->getPlayer()->Draw(window);
-        window.display();*/
         managerGame->update(&window);
 
         while (const std::optional event = window.pollEvent())

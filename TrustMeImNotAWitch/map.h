@@ -22,8 +22,6 @@ public:
 
 	void unloadMap(sf::Vector2f playerPos);
 
-	void showVecSize();
-
 	void draw(sf::RenderWindow* window);
 
 	bool checkCollision(sf::FloatRect bounds);

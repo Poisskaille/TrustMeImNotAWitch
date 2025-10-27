@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ainemikitap.cpp" />
     <ClCompile Include="collisionsManager.cpp" />
     <ClCompile Include="Ennemy.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="UIManagers.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ainemikitap.h" />
     <ClInclude Include="collisionsManager.h" />
     <ClInclude Include="Ennemy.h" />
     <ClInclude Include="Entity.h" />
