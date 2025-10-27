@@ -2,7 +2,7 @@
 UIImage::UIImage(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color, const std::string& str, const char& c)
 	: OFFSET(offset), text(font), str(str), index(c)
 {
-	if (!font.openFromFile("../assets/font/Enchanted Land.otf"))
+	if (!font.openFromFile("assets/font/Enchanted Land.otf"))
 		std::cout << "Error loading font" << '\n';
 	shape.setSize(size);
 	//shape.setFillColor(color);
@@ -17,7 +17,7 @@ UIImage::UIImage(const sf::Vector2f& offset, const sf::Vector2f& size, const sf:
 	// Temp
 
 		// Temp
-	if (!texture.loadFromFile("../assets/Score/score_sign.png"))
+	if (!texture.loadFromFile("assets/Score/score_sign.png"))
 		std::cout << "Erreur" << '\n';
 
 	shape.setTexture(&texture);

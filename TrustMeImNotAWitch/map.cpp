@@ -21,7 +21,7 @@ void Map::loadAllMap()
 {
     for(int i = 0; i < 10; i++)
     {
-        std::string currentPath = "../assets/maps/map_" + std::to_string(i) + ".txt";
+        std::string currentPath = "assets/maps/map_" + std::to_string(i) + ".txt";
         std::fstream file(currentPath);
 
         char currentChar;
@@ -73,7 +73,6 @@ void Map::loadSection(int index)
 {
     current_map.push_back(placeTile(loaded_map[index]));
     loadIndex++;
-    std::cout << "Map ajoutée : " << " Nombres d'itérations : " << loadIndex << '\n';
 }
 
 std::vector<sf::RectangleShape> Map::placeTile(std::vector<sf::RectangleShape>& map)

@@ -2,7 +2,7 @@
 
 UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color, const std::string&, const char& c) : OFFSET(offset), text(font), str(str), index(c)
 {
-	if (!font.openFromFile("../assets/font/Enchanted Land.otf"))
+	if (!font.openFromFile("assets/font/Enchanted Land.otf"))
 		std::cout << "Error loading font" << '\n';
 	shape.setSize(size);
 	shape.setFillColor(color);
