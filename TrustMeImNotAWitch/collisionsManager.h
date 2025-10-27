@@ -1,6 +1,5 @@
 #pragma once
 #include "entityManager.h"
-#include <iostream>
 
 class collisionsManager
 {

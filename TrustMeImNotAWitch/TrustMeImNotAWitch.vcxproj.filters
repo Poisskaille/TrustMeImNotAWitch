@@ -20,7 +20,9 @@
     <ClCompile Include="UIElements.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UIManagers.cpp" />
-    <ClCompile Include="ainemikitap.cpp" />
+    <ClCompile Include="fourches.cpp" />
+    <ClCompile Include="torches.cpp" />
+    <ClCompile Include="panneau.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="collisionsManager.h" />
@@ -41,6 +43,8 @@
     <ClInclude Include="UIElements.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="UIManagers.h" />
-    <ClInclude Include="ainemikitap.h" />
+    <ClInclude Include="fourches.h" />
+    <ClInclude Include="torches.h" />
+    <ClInclude Include="panneau.h" />
   </ItemGroup>
 </Project>

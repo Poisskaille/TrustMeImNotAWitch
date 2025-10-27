@@ -1,7 +1,5 @@
 #pragma once
 #include <iostream>
-#include "SFML/Graphics.hpp"
-#include "Entity.h"
 #include "CameraUI.h"
 #include "textureManager.h"
 #include "map.h"

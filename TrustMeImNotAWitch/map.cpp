@@ -34,20 +34,19 @@ void Map::loadAllMap()
 
         while (file.get(currentChar))
         {
-            if (currentChar == '\n')
+            switch (currentChar)
             {
+            case '\n':
                 y++;
                 x = 0;
-                continue;
-            }
-
-            if (currentChar == '#')
+                break;
+            case '#':
             {
                 sf::RectangleShape shape;
                 shape.setSize({ tileSize, tileSize });
                 shape.setPosition({ x * tileSize, y * tileSize });
-                int x = (rand() % 3);
-                switch(x)
+                int randC = (rand() % 3);
+                switch (randC)
                 {
                 case 0:
                     shape.setFillColor(sf::Color::Blue);
@@ -60,8 +59,16 @@ void Map::loadAllMap()
                     break;
                 }
                 newMap.push_back(shape);
+                break;
             }
-
+            case 'F':
+			case 'T':
+			case 'B':
+                managerEntity->createEnnemies(currentChar, managerText->test, { x * tileSize, y * tileSize }, { tileSize, tileSize });
+                break;
+            default:
+                break;
+            }
             x++;
         }
 
@@ -104,13 +111,6 @@ void Map::unloadMap(sf::Vector2f playerPos)
         current_map.erase(current_map.begin());
         loadSection(0);
     }
-
-    //current_map.erase(std::remove_if(current_map.begin(), current_map.end(), [&](const auto& section)
-    //    {
-    //       
-    //    }
-    //),
-    //    current_map.end());
 }
 
 void Map::draw(sf::RenderWindow * window)

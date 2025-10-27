@@ -1,5 +1,6 @@
 #pragma once
 #include <thread>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "entityManager.h"
 #include "collisionsManager.h"

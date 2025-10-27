@@ -7,8 +7,6 @@ Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f
 	collider.setFillColor(sf::Color::Blue);
 	sprite.setPosition(sf::Vector2(0.f,400.f));
 
-	std::cout << "CACA" << '\n';
-
 	speed = 200.f;
 	jumpForce = -600.f;
 	gravity = 1500.f;
@@ -20,7 +18,6 @@ Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f
 	velocity = sf::Vector2f(0.f, 0.f);
 
 	playerState = State::GROUNDED;
-	//
 }
 
 void Player::Update()

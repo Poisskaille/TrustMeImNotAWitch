@@ -1,5 +1,4 @@
 #include "textureManager.h"
-#include <stdexcept>
 
 
 textureManager* textureManager::getInstance()
