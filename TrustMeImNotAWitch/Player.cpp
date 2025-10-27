@@ -3,9 +3,9 @@
 Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f(0.f, 350.f), sf::Vector2f(3.f, 3.f)), cam(collider.getPosition())
 {
 	sprite.setOrigin(sf::Vector2f(16,11));
-	//collider.setOrigin(sprite.getOrigin());
+	collider.setOrigin(sprite.getOrigin());
 	collider.setFillColor(sf::Color::Blue);
-	//sprite.setPosition(sf::Vector2(0.f,400.f));
+	sprite.setPosition(sf::Vector2(0.f,400.f));
 
 	speed = 200.f;
 	jumpForce = -600.f;
