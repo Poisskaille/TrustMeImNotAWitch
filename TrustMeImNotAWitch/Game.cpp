@@ -16,15 +16,12 @@ void Game::run()
     if (!menu->runMain(window))
         return;
 
-    managerMap->initMap();
     managerText->loadAll();
     managerGame->init();
-	managerEntity->createPlayer(managerText->test);
 	
     Score score;
     score.highScore();
     sf::Clock clock;
-    managerGame->init();
 
     //Threads
     std::thread tCollisions(&collisionsManager::checkCollisions, managerCollisions);

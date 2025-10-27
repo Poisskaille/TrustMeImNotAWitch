@@ -18,7 +18,6 @@ Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f
 	velocity = sf::Vector2f(0.f, 0.f);
 
 	playerState = State::GROUNDED;
-
 	//
 }
 
@@ -27,9 +26,8 @@ void Player::Update()
 	HandleInput();
 	Collision();
 	cam.update(collider.getPosition());
-	managerMap->unloadMap(collider.getPosition());
+	managerMap->unloadMap(collider.getPosition()); //TODO créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
 	deltaTime = _updateClock.restart();
-	cam.update(collider.getPosition());
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
@@ -111,7 +109,10 @@ void Player::Draw(sf::RenderWindow& window)
 
 void Player::HandleInput()
 {
-	collider.move(sf::Vector2(speed * deltaTime.asSeconds(), velocity.y * deltaTime.asSeconds()));
+	velocity.x = speed * deltaTime.asSeconds();
+	std::cout << "i'm init" << std::endl;
+	//std::cout << "velocity.x = " << velocity.x  << ", speed = " << speed << ", deltaTime.asSeconds() = " << deltaTime.asSeconds() << '\n';
+	collider.move(sf::Vector2(velocity.x, velocity.y * deltaTime.asSeconds()));
 	velocity.y += gravity * deltaTime.asSeconds();
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED && !isWalking) { Jump(); }
@@ -156,6 +157,7 @@ void Player::HandleInput()
 	}
 
 	sprite.setPosition(collider.getPosition());
+	std::cout << "i'm ended" << std::endl;
 }
 
 void Player::Jump()
@@ -183,39 +185,6 @@ void Player::Slide() {
 
 	speed = boostSpeed;
 }
-
-//void Player::Collision(const std::vector<Tile>& tiles)
-//{
-//	sf::FloatRect playerBounds = collider.getGlobalBounds();
-//
-//	for (auto& tile : tiles)
-//	{
-//		float overlapY = (collider.getPosition().y + collider.getSize().y) - tile.sprite.getPosition().y;
-//
-//		sf::FloatRect tileBounds = tile.sprite.getGlobalBounds();
-//
-//		if (playerBounds.findIntersection(tileBounds))
-//		{
-//			switch (tile.type) {
-//			case '#':
-//
-//				if (velocity.y > 0 && overlapY > 0) {
-//					collider.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y - 0.0001f));
-//					velocity.y = 0.f;
-//
-//					if (!isSliding) {
-//						playerState = State::GROUNDED;
-//					}
-//				}
-//				break;
-//			default:
-//				break;
-//
-//			}
-//		}
-//		
-//	}
-//}
 
 void Player::Collision()
 {

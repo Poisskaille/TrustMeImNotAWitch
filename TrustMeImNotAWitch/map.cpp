@@ -106,6 +106,9 @@ void Map::unloadMap(sf::Vector2f playerPos)
         }
 }
 
+void Map::showVecSize() {
+	//std::cout << "newMap.size() = " << loaded_map.size() << ", current_map.size() = " << current_map.size() << ", current_map.begin()->size() = " << current_map.begin()->size() << '\n';
+}
 
 void Map::draw(sf::RenderWindow * window)
 {

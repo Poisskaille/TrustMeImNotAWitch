@@ -24,13 +24,13 @@ void gameManagment::init()
 
 void gameManagment::update(sf::RenderWindow* _window)
 {
-	if (managerEntity->getAllPlayers().size() != 0){ managerEntity->getPlayer()->Update(); }
 	managerCollisions->garbageClear();
 	_window->clear();
 	_window->draw(background);
 	managerMap->draw(_window);
 	managerEntity->getPlayer()->Draw(*_window);
 	_window->display();
+	managerMap->showVecSize();
 }
 
 
