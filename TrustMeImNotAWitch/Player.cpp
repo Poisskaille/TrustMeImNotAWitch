@@ -7,8 +7,6 @@ Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f
 	collider.setFillColor(sf::Color::Blue);
 	sprite.setPosition(sf::Vector2(0.f,400.f));
 
-	std::cout << "CACA" << '\n';
-
 	speed = 200.f;
 	jumpForce = -600.f;
 	gravity = 1500.f;
@@ -23,7 +21,7 @@ Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f
 	//
 }
 
-void Player::Update()
+void Player::update()
 {
 	HandleInput();
 	Collision();
@@ -31,7 +29,7 @@ void Player::Update()
 	managerMap->unloadMap(collider.getPosition()); //TODO voir si continue a créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
 	deltaTime = _updateClock.restart();
 
-
+	std::cout << deltaTime.asSeconds() << '\n';
 
 
 	if (!isSliding) {
@@ -40,7 +38,7 @@ void Player::Update()
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
-		collider.move(sf::Vector2f(speed * 2.f * deltaTime.asSeconds(), 0.f)); // push forward
+		collider.move(sf::Vector2f(speed * deltaTime.asSeconds(), 0.f)); // push forward
 		slideTimer += deltaTime.asSeconds();
 		sprite.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y - 32));
 
@@ -142,6 +140,8 @@ void Player::HandleInput()
 
 	}
 
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+		shoot();
 
 	//Debug
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Backspace)) {
@@ -201,4 +201,17 @@ void Player::Collision()
 		velocity.y = 0;
 		playerState = State::GROUNDED;
 	}
+}
+
+void Player::shoot()
+{
+	sf::Vector2f mousePositionFloat;
+	mousePositionFloat.x = sf::Mouse::getPosition().x;
+	mousePositionFloat.y = sf::Mouse::getPosition().y;
+	
+	sf::Vector2f direction = mousePositionFloat - collider.getPosition();
+	direction.normalized();
+
+	//Creer le projectile ici (probleme peut pas inclure le manager d'entity ici (inclusion circulaire))
+	//managerEntity->createProjectiles();
 }

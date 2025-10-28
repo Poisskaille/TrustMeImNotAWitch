@@ -13,6 +13,7 @@ public:
 	virtual ~Entity() = default;
 
 	//virtual void Update(bool colliding, Entity& other);
+	virtual void update() =0;
 	void Draw(sf::RenderWindow& window);
 	bool isColliding(Entity* other);
 

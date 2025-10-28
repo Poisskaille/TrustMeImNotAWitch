@@ -113,7 +113,7 @@ void Map::unloadMap(sf::Vector2f playerPos)
     //    current_map.end());
 }
 
-void Map::draw(sf::RenderWindow * window)
+void Map::draw(sf::RenderWindow * window)         
 {
     for (auto& chunk : current_map)
     {

@@ -3,7 +3,7 @@
 CameraUI::CameraUI(sf::Vector2f pos) : Y_OFFSET(pos.y + 75)
 {
 	cam.setSize({ 800.f,400.f });
-	cam.zoom(1.5f);
+	cam.zoom(15.5f);
 	cam.setCenter(sf::Vector2f(pos.x, Y_OFFSET));
 
 	initUI();
