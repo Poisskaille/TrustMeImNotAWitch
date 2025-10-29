@@ -20,23 +20,30 @@ Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f
 	playerState = State::GROUNDED;
 }
 
-void Player::update()
+void Player::update(float dT)
 {
+
+	deltaTime = dT;
+
 	HandleInput();
 	cam.update(collider.getPosition());
 	managerMap->unloadMap(collider.getPosition()); //TODO voir si continue a créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
-	deltaTime = _updateClock.restart();
+	
+	totalTime += deltaTime;
+
+	if (totalTime > 10.f)
+		addSpeed();
 
 	//std::cout << deltaTime.asSeconds() << '\n';
 
 
 	if (!isSliding) {
-		slideRefresh += deltaTime.asSeconds(); // time since last slide
+		slideRefresh += deltaTime; // time since last slide
 	}
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
-		slideTimer += deltaTime.asSeconds();
+		slideTimer += deltaTime;
 		sprite.setPosition(sf::Vector2f(collider.getPosition().x+16, collider.getPosition().y-24));
 		speed = boostSpeed;
 
@@ -105,7 +112,7 @@ void Player::update()
 	}
 
 	// Always update the current animation
-	managerText->update(deltaTime.asSeconds(), sprite);
+	managerText->update(deltaTime, sprite);
 #pragma endregion
 }
 
@@ -119,10 +126,10 @@ void Player::Draw(sf::RenderWindow& window)
 
 void Player::HandleInput()
 {
-	velocity.x = speed * deltaTime.asSeconds();
+	velocity.x = speed * deltaTime;
 	//std::cout << "velocity.x = " << velocity.x  << ", speed = " << speed << ", deltaTime.asSeconds() = " << deltaTime.asSeconds() << '\n';
-	collider.move(sf::Vector2(velocity.x, velocity.y * deltaTime.asSeconds()));
-	velocity.y += gravity * deltaTime.asSeconds();
+	collider.move(sf::Vector2(velocity.x, velocity.y * deltaTime));
+	velocity.y += gravity * deltaTime;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED && !isWalking) { Jump(); }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
@@ -219,4 +226,12 @@ void Player::shoot()
 
 	//Creer le projectile ici (probleme peut pas inclure le manager d'entity ici (inclusion circulaire))
 	//managerEntity->createProjectiles();
+}
+
+void Player::addSpeed()
+{
+	speed = defaultSpeed + 5.f;
+	walkingSpeed = speed;
+	defaultSpeed = speed;
+	totalTime = 0.f;
 }

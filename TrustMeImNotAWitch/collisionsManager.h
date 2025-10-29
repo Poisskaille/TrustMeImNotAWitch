@@ -16,6 +16,9 @@ private:
 
 	sf::Clock lagClock;
 
+	sf::Clock clock;
+	sf::Time deltaTime;
+
 public:
 	static collisionsManager* getInstance();
 

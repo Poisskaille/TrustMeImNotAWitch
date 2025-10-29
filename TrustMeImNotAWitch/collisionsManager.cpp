@@ -26,12 +26,17 @@ void collisionsManager::garbageAdd(std::shared_ptr<Entity> _entityToAdd)
 
 void collisionsManager::checkCollisions()
 {
+	clock.restart();
 	unsigned long long iterations = 0;
 	lagClock.restart();
 	while (isGameRunning)
 	{
 		if (!isPaused)
 		{
+			
+			deltaTime = clock.getElapsedTime();
+			clock.restart();
+
 			for (auto& Entity : managerEntity->getAllEntities())
 			{
 				for (auto& EntityCheaked : managerEntity->getAllEntities())
@@ -54,7 +59,7 @@ void collisionsManager::checkCollisions()
 			}
 			if (managerEntity->getAllPlayers().size() != 0)
 			{
-				managerEntity->getPlayer()->update();
+				managerEntity->getPlayer()->update(deltaTime.asSeconds());
 			}
 			if (lagClock.getElapsedTime().asMilliseconds() >= 1000.f)
 			{
