@@ -140,7 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="fourches.cpp" />
+    <ClCompile Include="fork.cpp" />
     <ClCompile Include="collisionsManager.cpp" />
     <ClCompile Include="Ennemy.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -151,12 +151,12 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="panneau.cpp" />
+    <ClCompile Include="sign.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Projectiles.cpp" />
     <ClCompile Include="textureManager.cpp" />
-    <ClCompile Include="torches.cpp" />
+    <ClCompile Include="torch.cpp" />
     <ClCompile Include="TrustMeImNotAWitch.cpp" />
     <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIElements.cpp" />
@@ -164,7 +164,7 @@
     <ClCompile Include="UIManagers.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="fourches.h" />
+    <ClInclude Include="fork.h" />
     <ClInclude Include="collisionsManager.h" />
     <ClInclude Include="Ennemy.h" />
     <ClInclude Include="Entity.h" />
@@ -175,12 +175,12 @@
     <ClInclude Include="CameraUI.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="panneau.h" />
+    <ClInclude Include="sign.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Projectiles.h" />
     <ClInclude Include="textureManager.h" />
-    <ClInclude Include="torches.h" />
+    <ClInclude Include="torch.h" />
     <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIElements.h" />
     <ClInclude Include="UIImage.h" />

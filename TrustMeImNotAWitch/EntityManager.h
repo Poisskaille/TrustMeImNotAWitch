@@ -4,9 +4,9 @@
 #include <SFML/Graphics.hpp>
 #include "Entity.h"
 #include "Player.h"
-#include "fourches.h"
-#include "torches.h"
-#include "panneau.h"
+#include "fork.h"
+#include "torch.h"
+#include "sign.h"
 #include "Projectiles.h"
 
 class Player;
@@ -41,7 +41,7 @@ public:
 	std::vector<std::shared_ptr<Entity>> getAllProjectiles() const;
 	std::vector<std::shared_ptr<Entity>> getAllEnnemies() const;
 
-	//Tags: P = player, E = ennemy(Ennemy special tags: F = fourches, T = torches, P = Panneau, 3 = 3D), B = projectile(Projectile special tags: P = player, E = ennemy)
+	//Tags: P = player, E = ennemy(Ennemy special tags: F = fork, T = torch, P = Panneau, 3 = 3D), B = projectile(Projectile special tags: P = player, E = ennemy)
 	std::vector<std::shared_ptr<Entity>> getAllEntities() const;
 };
 
