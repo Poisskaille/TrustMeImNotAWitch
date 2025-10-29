@@ -142,5 +142,16 @@ bool Map::checkCollision(sf::FloatRect bounds)
     return false;
 }
 
+sf::RectangleShape Map::getCollidingTile(sf::FloatRect bounds) {
+    for (auto& chunk : current_map)
+    {
+        for (auto& tile : *chunk)
+        {
+            if (tile.getGlobalBounds().findIntersection(bounds))
+                return tile;
+        }
+    }
+}
+
 Map* Map::instance = nullptr;
 Map* managerMap = Map::getInstance();

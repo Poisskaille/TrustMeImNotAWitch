@@ -155,5 +155,40 @@
     <Filter Include="Map &amp; Tiles\.cpp">
       <UniqueIdentifier>{ee313923-daa5-4437-83b5-c44164c9c84c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map &amp; Tiles\Map Files">
+      <UniqueIdentifier>{83805aca-757f-4dbb-99b4-bf0714a8a38f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\assets\maps\map_0.txt">
+      <Filter>Map &amp; Tiles\Map Files</Filter>
+    </Text>
+    <Text Include="..\assets\maps\map_1.txt">
+      <Filter>Map &amp; Tiles\Map Files</Filter>
+    </Text>
+    <Text Include="..\assets\maps\map_2.txt">
+      <Filter>Map &amp; Tiles\Map Files</Filter>
+    </Text>
+    <Text Include="..\assets\maps\map_3.txt">
+      <Filter>Map &amp; Tiles\Map Files</Filter>
+    </Text>
+    <Text Include="..\assets\maps\map_4.txt">
+      <Filter>Map &amp; Tiles\Map Files</Filter>
+    </Text>
+    <Text Include="..\assets\maps\map_5.txt">
+      <Filter>Map &amp; Tiles\Map Files</Filter>
+    </Text>
+    <Text Include="..\assets\maps\map_6.txt">
+      <Filter>Map &amp; Tiles\Map Files</Filter>
+    </Text>
+    <Text Include="..\assets\maps\map_7.txt">
+      <Filter>Map &amp; Tiles\Map Files</Filter>
+    </Text>
+    <Text Include="..\assets\maps\map_8.txt">
+      <Filter>Map &amp; Tiles\Map Files</Filter>
+    </Text>
+    <Text Include="..\assets\maps\map_9.txt">
+      <Filter>Map &amp; Tiles\Map Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

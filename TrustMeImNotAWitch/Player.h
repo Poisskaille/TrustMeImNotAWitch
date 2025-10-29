@@ -43,6 +43,12 @@ private:
 	float slideCooldown = 0.5f;
 	float slideRefresh = 0.5f;
 	bool isSliding = false;
+<<<<<<< Updated upstream
+=======
+	bool isAgainstWall = false;
+
+	sf::Time deltaTime;
+>>>>>>> Stashed changes
 	State playerState;
 	float defaultSpeed = 200;
 	float speed;

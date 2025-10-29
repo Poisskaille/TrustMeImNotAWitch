@@ -128,8 +128,14 @@ void Player::HandleInput()
 {
 	velocity.x = speed * deltaTime;
 	//std::cout << "velocity.x = " << velocity.x  << ", speed = " << speed << ", deltaTime.asSeconds() = " << deltaTime.asSeconds() << '\n';
+<<<<<<< Updated upstream
 	collider.move(sf::Vector2(velocity.x, velocity.y * deltaTime));
 	velocity.y += gravity * deltaTime;
+=======
+	if(!isAgainstWall)
+	collider.move(sf::Vector2(velocity.x, velocity.y * deltaTime.asSeconds()));
+	velocity.y += gravity * deltaTime.asSeconds();
+>>>>>>> Stashed changes
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED && !isWalking) { Jump(); }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
@@ -206,13 +212,40 @@ void Player::Slide() {
 
 void Player::Collision()
 {
+	auto collidedTile = managerMap->getCollidingTile(collider.getGlobalBounds());
+	sf::FloatRect playerBounds = collider.getGlobalBounds();
+	std::optional<sf::FloatRect> interOpt = playerBounds.findIntersection(collidedTile.getGlobalBounds());
+	if (!interOpt.has_value()) {
+		isAgainstWall = false;
+		return;
+	}
+	sf::FloatRect intersection = interOpt.value();
+
 	if(managerMap->checkCollision(collider.getGlobalBounds()))
 	{
-		collider.setPosition({collider.getPosition().x, collider.getPosition().y - 0.0001f});
-		velocity.y = 0;
-		if (playerState != State::SLIDING)
-			playerState = State::GROUNDED;
+		if (intersection.size.x < intersection.size.y)
+		{
+			if (playerBounds.position.x < collidedTile.getPosition().x) {
+				collider.move(sf::Vector2f(-intersection.size.x, 0.f)); // hit from left
+			}
+			else {
+				collider.move(sf::Vector2f(intersection.size.x, 0.f));  // hit from right
+				
+			}
+			isAgainstWall = true;
+			speed = 0.f;
+		}
+		else{  //VERTICALITY
+			collider.setPosition({ collider.getPosition().x, collider.getPosition().y - 0.0001f });
+			velocity.y = 0;
+			if (playerState != State::SLIDING)
+				playerState = State::GROUNDED;
+		}
 	}
+	// Reset wall flag when not colliding horizontally anymore
+	sf::FloatRect newBounds = collider.getGlobalBounds();
+	if (!newBounds.findIntersection(collidedTile.getGlobalBounds()).has_value())
+		isAgainstWall = false;
 }
 
 void Player::shoot()

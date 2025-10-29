@@ -29,6 +29,8 @@ public:
 
 	bool checkCollision(sf::FloatRect bounds);
 
+	sf::RectangleShape getCollidingTile(sf::FloatRect bounds);
+
 private:
 
 	std::vector<std::shared_ptr<std::vector<sf::RectangleShape>>> loaded_map;

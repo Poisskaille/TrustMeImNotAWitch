@@ -186,6 +186,18 @@
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="UIManagers.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\assets\maps\map_0.txt" />
+    <Text Include="..\assets\maps\map_1.txt" />
+    <Text Include="..\assets\maps\map_2.txt" />
+    <Text Include="..\assets\maps\map_3.txt" />
+    <Text Include="..\assets\maps\map_4.txt" />
+    <Text Include="..\assets\maps\map_5.txt" />
+    <Text Include="..\assets\maps\map_6.txt" />
+    <Text Include="..\assets\maps\map_7.txt" />
+    <Text Include="..\assets\maps\map_8.txt" />
+    <Text Include="..\assets\maps\map_9.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
