@@ -175,7 +175,6 @@
     <ClInclude Include="CameraUI.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="Outils.h" />
     <ClInclude Include="panneau.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Score.h" />

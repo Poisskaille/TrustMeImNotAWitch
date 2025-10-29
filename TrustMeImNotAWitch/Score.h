@@ -1,5 +1,6 @@
 #pragma once
-#include "Outils.h"
+#include "UIManagers.h"
+#include <fstream>
 
 class Score
 {

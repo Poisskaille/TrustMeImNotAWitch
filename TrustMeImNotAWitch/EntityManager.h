@@ -1,5 +1,13 @@
 #pragma once
-#include "Outils.h"
+#include <iostream>
+#include <vector>
+#include <SFML/Graphics.hpp>
+#include "Entity.h"
+#include "Player.h"
+#include "fourches.h"
+#include "torches.h"
+#include "panneau.h"
+#include "Projectiles.h"
 
 class entityManager
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "Outils.h"
+#include "entityManager.h"
 
 class collisionsManager
 {

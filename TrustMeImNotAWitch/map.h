@@ -1,5 +1,14 @@
 #pragma once
-#include "Outils.h"
+#include <SFML/Graphics.hpp>
+#include <vector>
+#include <string>
+#include <random>
+#include "textureManager.h"
+//#include "entityManager.h"
+#include <fstream>
+#include <stdexcept>
+#include <iostream>
+#include <algorithm>
 
 class Map {
 public:

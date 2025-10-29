@@ -1,5 +1,8 @@
 #pragma once
-#include "Outils.h"
+#include "UIImage.h"
+#include <memory>
+#include <vector>
+#include "UIButton.h"
 
 enum class UI_TYPE{IMAGE, BUTTON};
 enum class UI_LIST{CAMERA, MENU};

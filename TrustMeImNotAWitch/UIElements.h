@@ -1,5 +1,7 @@
 #pragma once
-#include "Outils.h"
+#include <iostream>
+#include "SFML/Graphics.hpp"
+#include <string>
 
 class UIElements
 {

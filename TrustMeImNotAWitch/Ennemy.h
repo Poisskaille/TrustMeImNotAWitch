@@ -1,5 +1,6 @@
 #pragma once
-#include "Outils.h"
+#include "Entity.h"
+
 
 class Ennemy : public Entity
 {
