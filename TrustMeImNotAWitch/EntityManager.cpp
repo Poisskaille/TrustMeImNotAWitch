@@ -21,9 +21,9 @@ void entityManager::createPlayer(sf::Texture& _textPlayer)
 	allEntities.push_back(p);
 }
 
-void entityManager::createProjectiles(sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _direction)
+void entityManager::createProjectiles(sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _direction, char c)
 {
-	std::shared_ptr<Projectiles> pr = std::make_shared<Projectiles>(_text, _pos, _direction);
+	std::shared_ptr<Projectiles> pr = std::make_shared<Projectiles>(_text, _pos, _direction,c);
 	allprojectiles.push_back(pr);
 	allEntities.push_back(pr);
 }

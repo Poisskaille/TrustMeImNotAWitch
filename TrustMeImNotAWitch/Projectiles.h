@@ -17,6 +17,6 @@ public:
 	void switchOwner();
 	void changeDirection();
 	void moveProjectile();
-	
+
 	bool lifeSpan();
 };
