@@ -36,7 +36,9 @@ void CameraUI::drawUI(sf::RenderWindow& window)
 
 void CameraUI::initUI()
 {
-	UIManagers::getInstance().createUI(UI_TYPE::IMAGE, UI_LIST::CAMERA, sf::Vector2f(cam.getCenter().x, (cam.getSize().y / 2) - 50), sf::Vector2f(256, 128), sf::Color::Blue, "Test", 's');
+	// s -> UI Score, v -> UI vitesse
+	UIManagers::getInstance().createUI(UI_TYPE::IMAGE, UI_LIST::CAMERA, sf::Vector2f(cam.getCenter().x, (cam.getSize().y / 2) - 50), sf::Vector2f(256, 128), sf::Color::Blue, "0", 's');
+	UIManagers::getInstance().createUI(UI_TYPE::IMAGE, UI_LIST::CAMERA, sf::Vector2f(cam.getCenter().x + 500, (cam.getSize().y / 2) - 50), sf::Vector2f(256, 128), sf::Color::Blue, "0", 'v');
 }
 
 sf::View CameraUI::getCam()

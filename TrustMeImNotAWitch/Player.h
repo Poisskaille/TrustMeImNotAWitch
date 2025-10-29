@@ -5,6 +5,7 @@
 #include "map.h"
 #include "Entity.h"
 #include "entityManager.h"
+#include "Score.h"
 
 class entityManager;
 
@@ -26,6 +27,8 @@ public:
 	void shoot();
 
 	void addSpeed();
+
+	sf::Vector2f getPos();
 
 private:
 	playerAnimation currentAnimation = playerAnimation::Idle; // default
@@ -55,9 +58,9 @@ private:
 
 	float deltaTime;
 	float totalTime;
+	float scoreTime;
 
 	//textureManager& texManager;
 
 	CameraUI cam;
-
 };

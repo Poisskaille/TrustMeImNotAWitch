@@ -26,6 +26,7 @@ public:
 	void unloadMap(sf::Vector2f playerPos);
 
 	void draw(sf::RenderWindow* window);
+	void nextChunk();
 
 	bool checkCollision(sf::FloatRect bounds);
 
@@ -40,6 +41,7 @@ private:
 
 	int loadIndex;
 	float currentEndX;
+	int lastChunk;
 };
 
 extern Map* managerMap;

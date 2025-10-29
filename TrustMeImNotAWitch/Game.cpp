@@ -15,8 +15,7 @@ void Game::run()
     managerText->loadAll();
     managerGame->init();
 	
-    Score score;
-    score.highScore();
+    managerScore->highScore();
     sf::Clock clock;
 
     //Threads
@@ -28,7 +27,6 @@ void Game::run()
         float deltaTime = clock.getElapsedTime().asSeconds();
         clock.restart();
 
-        score.addScore(10);
         managerGame->update(&window);
 
         while (const std::optional event = window.pollEvent())
@@ -42,5 +40,5 @@ void Game::run()
         }
     }
     managerEntity->~entityManager();
-    score.newScore();
+    managerScore->newScore();
 }

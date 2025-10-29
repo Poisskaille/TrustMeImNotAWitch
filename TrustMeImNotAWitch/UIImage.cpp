@@ -5,7 +5,6 @@ UIImage::UIImage(const sf::Vector2f& offset, const sf::Vector2f& size, const sf:
 	if (!font.openFromFile("../assets/font/Enchanted Land.otf"))
 		std::cout << "Error loading font" << '\n';
 	shape.setSize(size);
-	//shape.setFillColor(color);
 	shape.setOrigin(sf::Vector2f(size.x / 2, size.y / 2));
 
 	text.setString(str);
@@ -14,9 +13,6 @@ UIImage::UIImage(const sf::Vector2f& offset, const sf::Vector2f& size, const sf:
 	sf::FloatRect bounds = text.getLocalBounds();
 	text.setOrigin(sf::Vector2f(bounds.size.x / 2, bounds.size.y / 2 + 15));
 
-	// Temp
-
-		// Temp
 	if (!texture.loadFromFile("../assets/Score/score_sign.png"))
 		std::cout << "Erreur" << '\n';
 
