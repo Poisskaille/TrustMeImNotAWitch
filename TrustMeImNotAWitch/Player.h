@@ -8,7 +8,7 @@
 
 class entityManager;
 
-enum class State { GROUNDED, JUMPING, SLIDING, FALLING};
+enum class State { GROUNDED, JUMPING, SLIDING, FALLING };
 
 class Player : public Entity
 {
@@ -43,16 +43,10 @@ private:
 	float slideCooldown = 0.5f;
 	float slideRefresh = 0.5f;
 	bool isSliding = false;
-<<<<<<< Updated upstream
-=======
-	bool isAgainstWall = false;
-
-	sf::Time deltaTime;
->>>>>>> Stashed changes
 	State playerState;
 	float defaultSpeed = 200;
 	float speed;
-	float boostSpeed = 350 ;
+	float boostSpeed = 350;
 	sf::Clock _updateClock;
 
 	sf::Vector2f velocity;

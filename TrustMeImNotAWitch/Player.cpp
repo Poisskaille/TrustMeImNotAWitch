@@ -2,15 +2,15 @@
 
 Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f(0.f, 350.f), sf::Vector2f(3.f, 3.f)), cam(collider.getPosition())
 {
-	sprite.setOrigin(sf::Vector2f(16,11));
+	sprite.setOrigin(sf::Vector2f(16, 11));
 	collider.setOrigin(sprite.getOrigin());
 	collider.setFillColor(sf::Color::Blue);
-	sprite.setPosition(sf::Vector2(0.f,400.f));
+	sprite.setPosition(sf::Vector2(0.f, 400.f));
 
 	speed = 200.f;
 	jumpForce = -600.f;
 	gravity = 1500.f;
-	velocity = sf::Vector2f(0.f,0.f);
+	velocity = sf::Vector2f(0.f, 0.f);
 
 	speed = defaultSpeed;
 	jumpForce = -600.f;
@@ -28,10 +28,10 @@ void Player::update(float dT)
 	HandleInput();
 	cam.update(collider.getPosition());
 	managerMap->unloadMap(collider.getPosition()); //TODO voir si continue a créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
-	
+
 	totalTime += deltaTime;
 
-	if (totalTime > 10.f)
+	if (totalTime > 1.f)
 		addSpeed();
 
 	//std::cout << deltaTime.asSeconds() << '\n';
@@ -44,7 +44,7 @@ void Player::update(float dT)
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
 		slideTimer += deltaTime;
-		sprite.setPosition(sf::Vector2f(collider.getPosition().x+16, collider.getPosition().y-24));
+		sprite.setPosition(sf::Vector2f(collider.getPosition().x + 16, collider.getPosition().y - 24));
 		speed = boostSpeed;
 
 		//SLIDE CANCELLING
@@ -128,22 +128,14 @@ void Player::HandleInput()
 {
 	velocity.x = speed * deltaTime;
 	//std::cout << "velocity.x = " << velocity.x  << ", speed = " << speed << ", deltaTime.asSeconds() = " << deltaTime.asSeconds() << '\n';
-<<<<<<< Updated upstream
 	collider.move(sf::Vector2(velocity.x, velocity.y * deltaTime));
 	velocity.y += gravity * deltaTime;
-=======
-	if(!isAgainstWall)
-	collider.move(sf::Vector2(velocity.x, velocity.y * deltaTime.asSeconds()));
-	velocity.y += gravity * deltaTime.asSeconds();
->>>>>>> Stashed changes
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED && !isWalking) { Jump(); }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q)) {
-		speed = walkingSpeed;
 		isWalking = true;
 	}
 	else {
-		speed = runningSpeed;
 		isWalking = false;
 	}
 
@@ -180,7 +172,7 @@ void Player::HandleInput()
 		}
 	}
 
-	sprite.setPosition(sf::Vector2f(collider.getPosition().x+8, collider.getPosition().y+8));
+	sprite.setPosition(sf::Vector2f(collider.getPosition().x + 8, collider.getPosition().y + 8));
 }
 
 void Player::Jump()
@@ -212,40 +204,13 @@ void Player::Slide() {
 
 void Player::Collision()
 {
-	auto collidedTile = managerMap->getCollidingTile(collider.getGlobalBounds());
-	sf::FloatRect playerBounds = collider.getGlobalBounds();
-	std::optional<sf::FloatRect> interOpt = playerBounds.findIntersection(collidedTile.getGlobalBounds());
-	if (!interOpt.has_value()) {
-		isAgainstWall = false;
-		return;
-	}
-	sf::FloatRect intersection = interOpt.value();
-
-	if(managerMap->checkCollision(collider.getGlobalBounds()))
+	if (managerMap->checkCollision(collider.getGlobalBounds()))
 	{
-		if (intersection.size.x < intersection.size.y)
-		{
-			if (playerBounds.position.x < collidedTile.getPosition().x) {
-				collider.move(sf::Vector2f(-intersection.size.x, 0.f)); // hit from left
-			}
-			else {
-				collider.move(sf::Vector2f(intersection.size.x, 0.f));  // hit from right
-				
-			}
-			isAgainstWall = true;
-			speed = 0.f;
-		}
-		else{  //VERTICALITY
-			collider.setPosition({ collider.getPosition().x, collider.getPosition().y - 0.0001f });
-			velocity.y = 0;
-			if (playerState != State::SLIDING)
-				playerState = State::GROUNDED;
-		}
+		collider.setPosition({ collider.getPosition().x, collider.getPosition().y - 0.0001f });
+		velocity.y = 0;
+		if (playerState != State::SLIDING)
+			playerState = State::GROUNDED;
 	}
-	// Reset wall flag when not colliding horizontally anymore
-	sf::FloatRect newBounds = collider.getGlobalBounds();
-	if (!newBounds.findIntersection(collidedTile.getGlobalBounds()).has_value())
-		isAgainstWall = false;
 }
 
 void Player::shoot()
@@ -253,7 +218,7 @@ void Player::shoot()
 	sf::Vector2f mousePositionFloat;
 	mousePositionFloat.x = sf::Mouse::getPosition().x;
 	mousePositionFloat.y = sf::Mouse::getPosition().y;
-	
+
 	sf::Vector2f direction = mousePositionFloat - collider.getPosition();
 	direction.normalized();
 
@@ -263,7 +228,7 @@ void Player::shoot()
 
 void Player::addSpeed()
 {
-	speed = defaultSpeed + 5.f;
+	speed = defaultSpeed + 500.f;
 	walkingSpeed = speed;
 	defaultSpeed = speed;
 	totalTime = 0.f;
