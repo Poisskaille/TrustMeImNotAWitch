@@ -29,19 +29,24 @@ public:
 private:
 	playerAnimation currentAnimation = playerAnimation::Idle; // default
 
+	sf::Vector2f defaultColliderSize = { 48.f, 80.f };
+	sf::Vector2f slideColliderSize = { 72, 48 };
+
+
+
 	float walkingSpeed = 100.f; //Permet d'ajuster la vitesse plus facilement
 	int runningSpeed = 200;
 	bool isWalking = false;
 	float slideDuration = 0.5f; //en secondes
 	float slideTimer = 0.0f;
-	float slideCooldown = 1.0f;
-	float slideRefresh = 1.0f;
+	float slideCooldown = 0.5f;
+	float slideRefresh = 0.5f;
 	bool isSliding = false;
 	sf::Time deltaTime;
 	State playerState;
 	float defaultSpeed = 200;
 	float speed;
-	float boostSpeed = 250;
+	float boostSpeed = 350 ;
 	sf::Clock _updateClock;
 
 	sf::Vector2f velocity;

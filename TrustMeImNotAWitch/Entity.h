@@ -3,6 +3,11 @@
 
 class Entity
 {
+private:
+	//c pour moi ca
+	sf::Vector2f ColliderSize = { 48.f,80.f };
+
+
 protected:
 	sf::Sprite sprite;
 	sf::RectangleShape collider;

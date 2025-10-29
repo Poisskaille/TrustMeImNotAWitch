@@ -23,7 +23,6 @@ Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f
 void Player::update()
 {
 	HandleInput();
-	Collision();
 	cam.update(collider.getPosition());
 	managerMap->unloadMap(collider.getPosition()); //TODO voir si continue a créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
 	deltaTime = _updateClock.restart();
@@ -37,15 +36,15 @@ void Player::update()
 
 	//SLIDE FEATURE
 	if (playerState == State::SLIDING) {
-		collider.move(sf::Vector2f(speed * deltaTime.asSeconds(), 0.f)); // push forward
 		slideTimer += deltaTime.asSeconds();
-		sprite.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y - 32));
+		sprite.setPosition(sf::Vector2f(collider.getPosition().x+16, collider.getPosition().y-24));
+		speed = boostSpeed;
 
 		//SLIDE CANCELLING
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space)) {
 			Jump();
 			isSliding = false;
-			collider.setSize(sf::Vector2f(64.f, 96.f)); // revert collider
+			collider.setSize(defaultColliderSize); // revert collider
 			return;
 			speed = defaultSpeed;
 		}
@@ -54,8 +53,7 @@ void Player::update()
 		if (slideTimer >= slideDuration) {
 			isSliding = false;
 			playerState = State::GROUNDED;
-			collider.setSize(sf::Vector2f(64.f, 96.f));
-			collider.setOrigin(sf::Vector2f(32.f, 32.f));
+			collider.setSize(defaultColliderSize);
 			collider.move(sf::Vector2f(0.0f, -34.f));
 			sprite.setPosition(sf::Vector2f(collider.getPosition().x, collider.getPosition().y));
 			speed = defaultSpeed;
@@ -63,11 +61,17 @@ void Player::update()
 
 		if (velocity.y > 350) {
 			isSliding = false;
-			collider.setSize(sf::Vector2f(64.f, 96.f)); // revert collider
+			collider.setSize(defaultColliderSize); // revert collider
 			playerState = State::FALLING;
 			speed = defaultSpeed;
 		}
 	}
+
+
+
+
+	Collision();
+
 
 
 	//ANIMATIONS & CHECK STATES
@@ -163,7 +167,7 @@ void Player::HandleInput()
 		}
 	}
 
-	sprite.setPosition(collider.getPosition());
+	sprite.setPosition(sf::Vector2f(collider.getPosition().x+8, collider.getPosition().y+8));
 }
 
 void Player::Jump()
@@ -175,16 +179,17 @@ void Player::Jump()
 void Player::Slide() {
 	isSliding = true;
 	slideTimer = 0.0f;
+	slideRefresh = 0.0f;
 	playerState = State::SLIDING;
 
 	// Capture the collider’s bottom before resizing
 	float bottomY = collider.getGlobalBounds().position.y + collider.getGlobalBounds().size.y;
 
 	// Shrink collider
-	collider.setSize(sf::Vector2f(64.f, 64.f));
-	collider.setOrigin(sf::Vector2f(32.f, 32.f));
+	collider.setSize(slideColliderSize);
+	collider.setOrigin(sprite.getOrigin());
 
-	// Adjust Y so bottom remains at the same place
+	//// Adjust Y so bottom remains at the same place
 	float newBottomY = collider.getGlobalBounds().position.y + collider.getGlobalBounds().size.y;
 	float offset = bottomY - newBottomY;
 	collider.move(sf::Vector2f(0.f, offset));
@@ -198,7 +203,8 @@ void Player::Collision()
 	{
 		collider.setPosition({collider.getPosition().x, collider.getPosition().y - 0.0001f});
 		velocity.y = 0;
-		playerState = State::GROUNDED;
+		if (playerState != State::SLIDING)
+			playerState = State::GROUNDED;
 	}
 }
 
