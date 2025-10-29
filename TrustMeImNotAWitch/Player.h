@@ -16,7 +16,7 @@ public:
 	Player(const sf::Texture& _texture);
 	~Player() {};
 
-	void update() override;
+	void update(float dT) override;
 	void Draw(sf::RenderWindow& window);
 	void HandleInput();
 	void Jump();
@@ -24,6 +24,8 @@ public:
 
 	void Collision();
 	void shoot();
+
+	void addSpeed();
 
 
 private:
@@ -37,7 +39,6 @@ private:
 	float slideCooldown = 1.0f;
 	float slideRefresh = 1.0f;
 	bool isSliding = false;
-	sf::Time deltaTime;
 	State playerState;
 	float defaultSpeed = 200;
 	float speed;
@@ -47,6 +48,9 @@ private:
 	sf::Vector2f velocity;
 	float jumpForce;
 	float gravity;
+
+	float deltaTime;
+	float totalTime;
 
 	//textureManager& texManager;
 

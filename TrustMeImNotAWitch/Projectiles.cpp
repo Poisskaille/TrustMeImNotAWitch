@@ -6,7 +6,7 @@ Projectiles::Projectiles(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vec
 	projectileSpeed = 10.f;
 };
 
-void Projectiles::update()
+void Projectiles::update(float dT)
 {
 	// augmenter le time avec le deltaTime ici (mettre dT en argument d'un update globale)
 	moveProjectile();

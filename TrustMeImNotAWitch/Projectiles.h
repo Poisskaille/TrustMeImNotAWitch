@@ -13,7 +13,7 @@ public:
 	Projectiles(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _direction, char _owner);
 	~Projectiles() override {};
 
-	void update()override;
+	void update(float dT)override;
 	void switchOwner();
 	void changeDirection();
 	void moveProjectile();

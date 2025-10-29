@@ -15,6 +15,8 @@ private:
 	void garbageAdd(std::shared_ptr<Entity> _entityToAdd);
 
 	sf::Clock lagClock;
+	sf::Clock clock;
+	sf::Time deltaTime;
 
 public:
 	static collisionsManager* getInstance();
