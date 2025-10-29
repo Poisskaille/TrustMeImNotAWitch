@@ -38,16 +38,39 @@ void collisionsManager::checkCollisions()
 				{
 					if (Entity->tag != EntityCheaked->tag && Entity->isColliding(EntityCheaked.get()))
 					{
-						if (EntityCheaked->tag == 'E')
+						switch (EntityCheaked->tag)
 						{
-							if (!(std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'P'))
+						case 'E':
+							if (!(std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'P' && Entity->tag == 'B'))
+							{
+								garbageAdd(EntityCheaked);
+								std::cout << managerEntity->getAllEnnemies().size() << '\n';
+							}
+							else
+							{
+								//TODO : Panneau renvoie la balle vers le joueur
+							}
+							break;
+						case 'P':
+							//garbageAdd(EntityCheaked);
+							std::cout << "Player hitted" << '\n';
+							break;
+						case 'B':
+							if (Entity->tag == 'E')
+							{
+								if (!(std::dynamic_pointer_cast<Ennemy>(Entity)->getTagEnnemie() == 'P'))
+								{
+									garbageAdd(EntityCheaked);
+								}
+							}
+							else
 							{
 								garbageAdd(EntityCheaked);
 							}
-						}
-						else
-						{
+							break;
+						default:
 							garbageAdd(EntityCheaked);
+							break;
 						}
 					}
 				}

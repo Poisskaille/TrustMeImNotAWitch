@@ -32,7 +32,7 @@ public:
 	void createProjectiles(sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _direction,char);
 	void createEnnemies(char _tagEnnemie, sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _size);
 	void createPlayer(sf::Texture& _textPlayer);
-
+	void Draw(sf::RenderWindow& window);
 	void deleteEntity(std::shared_ptr<Entity>& entity);
 
 	std::shared_ptr<Player> getPlayer() const;

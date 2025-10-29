@@ -107,8 +107,8 @@ void Player::update()
 
 void Player::Draw(sf::RenderWindow& window)
 {
-	window.draw(collider);
-	window.draw(sprite);
+	//window.draw(collider);
+	//Draw(window);
 	window.setView(cam.getCam());
 	cam.drawUI(window);
 }

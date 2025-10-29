@@ -95,6 +95,14 @@ void entityManager::deleteEntity(std::shared_ptr<Entity>& _entity)
 	}
 }
 
+void entityManager::Draw(sf::RenderWindow& window)
+{
+	for (auto& _entity : allEntities)
+	{
+		_entity->Draw(window);
+	}
+}
+
 std::shared_ptr<Player> entityManager::getPlayer() const { return getAllPlayers().size() > 0 ? std::dynamic_pointer_cast<Player>(managerEntity->getAllPlayers()[0]) : nullptr; }
 std::vector<std::shared_ptr<Entity>> entityManager::getAllEntities() const { return allEntities; }
 

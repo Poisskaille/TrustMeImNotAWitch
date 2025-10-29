@@ -27,6 +27,7 @@ void gameManagment::update(sf::RenderWindow* _window)
 	_window->clear();
 	_window->draw(background);
 	managerMap->draw(_window);
+	managerEntity->Draw(*_window);
 	managerEntity->getPlayer()->Draw(*_window);
 	_window->display();
 }
