@@ -28,7 +28,7 @@ void Player::update()
 	managerMap->unloadMap(collider.getPosition()); //TODO voir si continue a créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
 	deltaTime = _updateClock.restart();
 
-	std::cout << deltaTime.asSeconds() << '\n';
+	//std::cout << deltaTime.asSeconds() << '\n';
 
 
 	if (!isSliding) {
