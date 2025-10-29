@@ -1,7 +1,5 @@
 #pragma once
-#include <iostream>
-#include "SFML/Graphics.hpp"
-#include "UIManagers.h"
+#include "Outils.h"
 
 class CameraUI
 {

@@ -18,7 +18,7 @@ void gameManagment::init()
 	background.setTexture(&managerText->backgroundTexture);
 	background.setSize(sf::Vector2f(1920.f, 1080.f));
 
-	//managerEntity->createPlayer(managerText->test);
+	managerEntity->createPlayer(managerText->test);
 }
 
 void gameManagment::update(sf::RenderWindow* _window)

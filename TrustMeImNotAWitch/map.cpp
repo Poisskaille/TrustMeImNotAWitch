@@ -64,7 +64,7 @@ void Map::loadAllMap()
             case 'F':
 			case 'T':
 			case 'B':
-                managerEntity->createEnnemies(currentChar, managerText->test, { x * tileSize, y * tileSize }, { tileSize, tileSize });
+                //managerEntity->createEnnemies(currentChar, managerText->test, { x * tileSize, y * tileSize }, { tileSize, tileSize });
                 break;
             default:
                 break;

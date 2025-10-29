@@ -1,6 +1,5 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "Entity.h"
+#include "Outils.h"
 
 class Ground : public Entity
 {

@@ -1,10 +1,5 @@
 #pragma once
-#include <thread>
-#include <iostream>
-#include <SFML/Graphics.hpp>
-#include "entityManager.h"
-#include "collisionsManager.h"
-#include "map.h"
+#include "Outils.h"
 
 class gameManagment
 {

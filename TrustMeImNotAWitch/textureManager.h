@@ -1,7 +1,5 @@
 #pragma once
-#include "SFML/Graphics.hpp"
-#include <unordered_map>
-#include <stdexcept>
+#include "Outils.h"
 
 enum class playerAnimation {
     Idle,

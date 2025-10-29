@@ -1,5 +1,5 @@
 #pragma once
-#include "Ennemy.h"
+#include "Outils.h"
 
 class fourches : public Ennemy
 {

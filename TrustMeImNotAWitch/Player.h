@@ -1,8 +1,5 @@
 #pragma once
-#include <iostream>
-#include "CameraUI.h"
-#include "textureManager.h"
-#include "map.h"
+#include "Outils.h"
 
 enum class State { GROUNDED, JUMPING, SLIDING, FALLING};
 
