@@ -23,10 +23,11 @@ void gameManagment::init()
 
 void gameManagment::update(sf::RenderWindow* _window)
 {
-	//managerCollisions->garbageClear();
+	managerCollisions->garbageClear();
 	_window->clear();
 	_window->draw(background);
 	managerMap->draw(_window);
+	for (auto& Ennemy : managerEntity->getAllEntities()) { Ennemy->Draw(*_window); }
 	managerEntity->getPlayer()->Draw(*_window);
 	_window->display();
 }

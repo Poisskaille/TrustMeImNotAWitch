@@ -41,19 +41,47 @@ void collisionsManager::checkCollisions()
 			{
 				for (auto& EntityCheaked : managerEntity->getAllEntities())
 				{
-					if (Entity->tag != EntityCheaked->tag && Entity->isColliding(EntityCheaked.get()))
+					try
 					{
-						if (EntityCheaked->tag == 'E')
+						if (Entity->tag != EntityCheaked->tag && Entity->isColliding(EntityCheaked.get()))
 						{
-							if (!(std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'P'))
+							switch (EntityCheaked->tag)
 							{
-								garbageAdd(EntityCheaked);
+							case 'P':
+								std::cout << "Player hitted" << '\n';
+								//garbageAdd(EntityCheaked);
+								break;
+							case 'E':
+								if (!(std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'P' && Entity->tag == 'B'))
+								{
+									garbageAdd(EntityCheaked);
+								}
+								else
+								{
+									//TODO ennemie panneau, logic renvoie de balle
+								}
+								break;
+							case 'B':
+								if (Entity->tag == 'E')
+								{
+									if (!(std::dynamic_pointer_cast<Ennemy>(Entity)->getTagEnnemie() == 'P'))
+									{
+										garbageAdd(EntityCheaked);
+									}
+								}
+								else
+								{
+									garbageAdd(EntityCheaked);
+								}
+							default:
+								throw std::runtime_error("WTF did i just hitted ?\nEntity tag: " + std::string(1, Entity->tag) + "\nEntityCheaked tag: " + std::string(1, EntityCheaked->tag));
+								break;
 							}
 						}
-						else
-						{
-							garbageAdd(EntityCheaked);
-						}
+					}
+					catch (const std::exception &e)
+					{
+						std::cout << e.what() << '\n';
 					}
 				}
 			}
