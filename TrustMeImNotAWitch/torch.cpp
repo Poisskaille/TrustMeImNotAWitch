@@ -1,7 +1,7 @@
-#include "torches.h"
+#include "torch.h"
 
-torches::torches(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size) : Ennemy('T', _texture, _pos, _size) {}
+torch::torch(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size) : Ennemy('T', _texture, _pos, _size) {}
 
-void torches::update()
+void torch::update()
 {
 }

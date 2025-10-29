@@ -1,12 +1,12 @@
 #pragma once
 #include "Ennemy.h"
 
-class torches : public Ennemy
+class torch : public Ennemy
 {
 private:
 
 public:
-	torches(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size);
+	torch(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size);
 	void update()override;
 };
 

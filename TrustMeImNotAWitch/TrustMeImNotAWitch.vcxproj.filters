@@ -1,50 +1,159 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="collisionsManager.cpp" />
-    <ClCompile Include="Ennemy.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="entityManager.cpp" />
     <ClCompile Include="gameManagment.cpp" />
-    <ClCompile Include="Ground.cpp" />
-    <ClCompile Include="CameraUI.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="map.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Projectiles.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="TrustMeImNotAWitch.cpp" />
-    <ClCompile Include="UIButton.cpp" />
-    <ClCompile Include="UIElements.cpp" />
-    <ClCompile Include="UIImage.cpp" />
-    <ClCompile Include="UIManagers.cpp" />
-    <ClCompile Include="fourches.cpp" />
-    <ClCompile Include="torches.cpp" />
-    <ClCompile Include="panneau.cpp" />
+    <ClCompile Include="CameraUI.cpp">
+      <Filter>Camera &amp; UI\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Camera &amp; UI\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElements.cpp">
+      <Filter>Camera &amp; UI\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManagers.cpp">
+      <Filter>Camera &amp; UI\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UIImage.cpp">
+      <Filter>Camera &amp; UI\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Camera &amp; UI\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Camera &amp; UI\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Ennemy.cpp">
+      <Filter>Entities &amp; Collision\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="collisionsManager.cpp">
+      <Filter>Entities &amp; Collision\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Entities &amp; Collision\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Entities &amp; Collision\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="entityManager.cpp">
+      <Filter>Entities &amp; Collision\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="fork.cpp">
+      <Filter>Entities &amp; Collision\Enemy Types\Fork</Filter>
+    </ClCompile>
+    <ClCompile Include="sign.cpp">
+      <Filter>Entities &amp; Collision\Enemy Types\Sign</Filter>
+    </ClCompile>
+    <ClCompile Include="torch.cpp">
+      <Filter>Entities &amp; Collision\Enemy Types\Torch</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Map &amp; Tiles\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="map.cpp">
+      <Filter>Map &amp; Tiles\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="collisionsManager.h" />
-    <ClInclude Include="Ennemy.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="entityManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameManagment.h" />
-    <ClInclude Include="Ground.h" />
-    <ClInclude Include="CameraUI.h" />
-    <ClInclude Include="map.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Score.h" />
     <ClInclude Include="Projectiles.h" />
     <ClInclude Include="textureManager.h" />
-    <ClInclude Include="UIButton.h" />
-    <ClInclude Include="UIElements.h" />
-    <ClInclude Include="UIImage.h" />
-    <ClInclude Include="UIManagers.h" />
-    <ClInclude Include="fourches.h" />
-    <ClInclude Include="torches.h" />
-    <ClInclude Include="panneau.h" />
+    <ClInclude Include="CameraUI.h">
+      <Filter>Camera &amp; UI\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Camera &amp; UI\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Camera &amp; UI\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Camera &amp; UI\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElements.h">
+      <Filter>Camera &amp; UI\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="UIImage.h">
+      <Filter>Camera &amp; UI\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManagers.h">
+      <Filter>Camera &amp; UI\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="fork.h">
+      <Filter>Entities &amp; Collision\Enemy Types\Fork</Filter>
+    </ClInclude>
+    <ClInclude Include="sign.h">
+      <Filter>Entities &amp; Collision\Enemy Types\Sign</Filter>
+    </ClInclude>
+    <ClInclude Include="torch.h">
+      <Filter>Entities &amp; Collision\Enemy Types\Torch</Filter>
+    </ClInclude>
+    <ClInclude Include="collisionsManager.h">
+      <Filter>Entities &amp; Collision\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Ennemy.h">
+      <Filter>Entities &amp; Collision\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Entities &amp; Collision\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="entityManager.h">
+      <Filter>Entities &amp; Collision\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Entities &amp; Collision\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Map &amp; Tiles\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="map.h">
+      <Filter>Map &amp; Tiles\.h</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Camera &amp; UI">
+      <UniqueIdentifier>{4c9b4b53-0e5d-4ec6-a4af-bbae104bbb20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera &amp; UI\.cpp">
+      <UniqueIdentifier>{ab3bd1a6-ba31-4e7d-845a-162de524adce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera &amp; UI\.h">
+      <UniqueIdentifier>{ddb0a769-e44c-4d9a-a5ba-608dc37890ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities &amp; Collision">
+      <UniqueIdentifier>{57f55c91-50b5-4c32-8e03-3928393f7d7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities &amp; Collision\.h">
+      <UniqueIdentifier>{24f000f3-8471-49f5-90c8-967119d007a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities &amp; Collision\.cpp">
+      <UniqueIdentifier>{105a2b68-783c-4e34-b0c9-29610b025ed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities &amp; Collision\Enemy Types">
+      <UniqueIdentifier>{badb7e91-580f-4baa-8bc3-0892e1c847ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities &amp; Collision\Enemy Types\Fork">
+      <UniqueIdentifier>{efc8b27d-b8c4-4ee4-a20f-7b20105f6449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities &amp; Collision\Enemy Types\Sign">
+      <UniqueIdentifier>{a7833a82-a45c-47f1-8583-b580cf869067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities &amp; Collision\Enemy Types\Torch">
+      <UniqueIdentifier>{413a049c-79a0-42cf-a9b0-98ae8fa53ea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map &amp; Tiles">
+      <UniqueIdentifier>{f86661d0-b1b2-4cc6-bf7c-5677888ca3dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map &amp; Tiles\.h">
+      <UniqueIdentifier>{f4cc0535-fde3-4148-a376-4f59b37c93df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map &amp; Tiles\.cpp">
+      <UniqueIdentifier>{ee313923-daa5-4437-83b5-c44164c9c84c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

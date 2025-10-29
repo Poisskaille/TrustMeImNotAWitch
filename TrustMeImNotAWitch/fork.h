@@ -1,11 +1,11 @@
 #pragma once
 #include "Ennemy.h"
 
-class fourches : public Ennemy
+class fork : public Ennemy
 {
 private:
 
 public:
-	fourches(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size);
+	fork(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size);
 	void update()override;
 };

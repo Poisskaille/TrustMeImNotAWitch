@@ -35,13 +35,13 @@ void entityManager::createEnnemies(char _tagEnnemie, sf::Texture& _text, sf::Vec
 	switch (_tagEnnemie)
 	{
 	case 'F':
-		newEnnemie = std::make_shared<fourches>(_text, _pos, _size);
+		newEnnemie = std::make_shared<fork>(_text, _pos, _size);
 		break;
 	case 'T':
-		newEnnemie = std::make_shared<torches>(_text, _pos, _size);
+		newEnnemie = std::make_shared<torch>(_text, _pos, _size);
 		break;
 	case 'B':
-		newEnnemie = std::make_shared<panneau>(_text, _pos, _size);
+		newEnnemie = std::make_shared<sign>(_text, _pos, _size);
 		break;
 	default:
 		break;
