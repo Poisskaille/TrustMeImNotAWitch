@@ -16,13 +16,14 @@ public:
 	Player(const sf::Texture& _texture);
 	~Player() {};
 
-	void Update();
+	void update() override;
 	void Draw(sf::RenderWindow& window);
 	void HandleInput();
 	void Jump();
 	void Slide();
 
 	void Collision();
+	void shoot();
 
 
 private:
