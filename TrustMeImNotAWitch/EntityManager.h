@@ -9,6 +9,9 @@
 #include "panneau.h"
 #include "Projectiles.h"
 
+class Player;
+class Map;
+
 class entityManager
 {
 private:

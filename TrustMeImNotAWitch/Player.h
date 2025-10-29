@@ -4,6 +4,9 @@
 #include "textureManager.h"
 #include "map.h"
 #include "Entity.h"
+#include "entityManager.h"
+
+class entityManager;
 
 enum class State { GROUNDED, JUMPING, SLIDING, FALLING};
 

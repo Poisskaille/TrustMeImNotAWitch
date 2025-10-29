@@ -4,11 +4,13 @@
 #include <string>
 #include <random>
 #include "textureManager.h"
-//#include "entityManager.h"
+#include "entityManager.h"
 #include <fstream>
 #include <stdexcept>
 #include <iostream>
 #include <algorithm>
+
+class entityManager;
 
 class Map {
 public:

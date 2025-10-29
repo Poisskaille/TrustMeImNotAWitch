@@ -1,5 +1,5 @@
 #pragma once
-#include "Outils.h"
+#include "Ennemy.h"
 
 class panneau : public Ennemy
 {
