@@ -4,7 +4,7 @@
 class Entity
 {
 private:
-	//c pour moi ca
+	//c pour moi ca				ok personne mysterieuse
 	sf::Vector2f ColliderSize = { 48.f,80.f };
 
 
@@ -21,5 +21,5 @@ public:
 	virtual void update(float dT) =0;
 	void Draw(sf::RenderWindow& window);
 	bool isColliding(Entity* other);
-
+	const sf::Vector2f& getPos() { return collider.getPosition(); };
 };

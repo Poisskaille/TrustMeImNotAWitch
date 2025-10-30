@@ -28,8 +28,6 @@ public:
 
 	void addSpeed();
 
-	sf::Vector2f getPos();
-
 private:
 	playerAnimation currentAnimation = playerAnimation::Idle; // default
 

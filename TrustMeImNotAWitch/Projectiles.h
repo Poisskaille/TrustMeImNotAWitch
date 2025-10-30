@@ -16,7 +16,7 @@ public:
 	void update(float dT)override;
 	void switchOwner();
 	void changeDirection();
-	void moveProjectile();
+	void moveProjectile(float dt);
 
 	bool lifeSpan();
 };

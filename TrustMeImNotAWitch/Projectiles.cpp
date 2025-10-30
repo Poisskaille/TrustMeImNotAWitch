@@ -3,13 +3,13 @@
 Projectiles::Projectiles(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _direction, char _owner) : Entity('B', _texture, _pos, sf::Vector2f(32.f, 32.f)), direction(_direction), owner(_owner)
 {
 	_time = 0.f;
-	projectileSpeed = 10.f;
+	projectileSpeed = 5000.f;
 };
 
 void Projectiles::update(float dT)
 {
 	// augmenter le time avec le deltaTime ici (mettre dT en argument d'un update globale)
-	moveProjectile();
+	moveProjectile(dT);
 }
 
 // L'owner doit seulement etre P pour player ou E pour ennemi. Un projectile ne peut pas appartenir a une tile :)
@@ -28,9 +28,9 @@ void Projectiles::changeDirection()
 	// Si c'est un ennemi qui renvoit le projectile, le renvoyé tout droit et pas dans le meme angle que le joueur
 }
 
-void Projectiles::moveProjectile()
+void Projectiles::moveProjectile(float dt)
 {
-	collider.move(direction);
+	collider.move({ direction.x * projectileSpeed * dt, direction.y * projectileSpeed * dt });
 }
 
 bool Projectiles::lifeSpan()

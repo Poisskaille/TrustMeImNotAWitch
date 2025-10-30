@@ -13,7 +13,7 @@ private:
 	gameManagment();
 
 	//Local variables
-	sf::Clock _updateClock;
+	sf::Clock _clock;
 	sf::RectangleShape background;
 
 public:
