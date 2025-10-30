@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include <unordered_map>
 #include <stdexcept>
+#include <iostream>
 
 enum class playerAnimation {
     Idle,
@@ -30,11 +31,14 @@ private:
     std::unordered_map<playerAnimation, AnimationData> playerAnimations;
     playerAnimation currentAnim = playerAnimation::Idle;
 
+    std::vector<sf::Texture> textureList;
+
 public:
     static textureManager* getInstance();
     sf::Texture grassTile;
     sf::Texture test;
     sf::Texture backgroundTexture;
+    sf::Texture coins;
     void loadAll();
     void setplayerAnimation(playerAnimation anim, sf::Sprite& player);
     void update(float deltaTime, sf::Sprite& player);

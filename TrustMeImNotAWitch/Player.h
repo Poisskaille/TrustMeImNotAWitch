@@ -28,6 +28,8 @@ public:
 
 	void addSpeed();
 
+
+
 private:
 	playerAnimation currentAnimation = playerAnimation::Idle; // default
 

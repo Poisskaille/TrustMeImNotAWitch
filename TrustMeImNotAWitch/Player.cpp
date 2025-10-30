@@ -257,7 +257,7 @@ void Player::shoot()
 	direction = direction.normalized();
 
 	//Creer le projectile ici (probleme peut pas inclure le manager d'entity ici (inclusion circulaire))
-	//managerEntity->createProjectiles();
+	//managerEntity->createProjectiles({ collider.getPosition().x + 100, collider.getPosition().y}, direction, 'P');
 }
 
 void Player::addSpeed()

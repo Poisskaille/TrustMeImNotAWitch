@@ -6,6 +6,7 @@ Entity::Entity(const char& _tag, const sf::Texture& _texture, sf::Vector2f _pos,
 	sprite.setScale(_size);
 	collider.setPosition(_pos);
 	collider.setSize(ColliderSize);
+	collider.setTexture(&_texture);
 }
 
 void Entity::Draw(sf::RenderWindow& window)

@@ -46,18 +46,7 @@ void Map::loadAllMap()
                 shape.setSize({ tileSize, tileSize });
                 shape.setPosition({ x * tileSize, y * tileSize });
                 int randC = (rand() % 3);
-                switch (randC)
-                {
-                case 0:
-                    shape.setFillColor(sf::Color::Blue);
-                    break;
-                case 1:
-                    shape.setFillColor(sf::Color::Red);
-                    break;
-                case 2:
-                    shape.setFillColor(sf::Color::Green);
-                    break;
-                }
+                shape.setTexture(&managerText->grassTile);
                 newMap.push_back(shape);
                 break;
             }
@@ -98,7 +87,10 @@ void Map::loadEntity(int index)
             managerEntity->createEnnemies(currentChar, managerText->test, { x * tileSize + offsetX, y * tileSize}, { tileSize, tileSize });
             break;
         case 'G':
-            managerEntity->createPowerUp(PowerType::GOLD, managerText->test, { x * tileSize + offsetX, y * tileSize}, { tileSize, tileSize });
+            managerEntity->createPowerUp(PowerType::GOLD, managerText->grassTile, { x * tileSize + offsetX, y * tileSize}, { tileSize, tileSize });
+            break;
+        case 'M':
+            managerEntity->createPowerUp(PowerType::SCORE_BOOST, managerText->test, { x * tileSize + offsetX, y * tileSize }, { tileSize, tileSize });
             break;
         default:
             break;

@@ -28,7 +28,7 @@ void gameManagment::update(sf::RenderWindow* _window)
 	managerCollisions->garbageClear();
 	_window->clear();
 	_window->draw(background);
-	for (auto& Ennemy : managerEntity->getAllEntities()) { Ennemy->Draw(*_window); }
+ 	for (auto& Ennemy : managerEntity->getAllEntities()) { Ennemy->Draw(*_window); }
 	managerMap->draw(_window);
 
 
@@ -61,6 +61,21 @@ void gameManagment::update(sf::RenderWindow* _window)
 				std::dynamic_pointer_cast<Projectiles>(projectiles)->update(_clock.getElapsedTime().asSeconds());
 			}
 			projectiles->Draw(*_window);
+		}
+	}
+
+	for (auto& powerup : managerEntity->getAllPowerUps())
+	{
+		if (powerup != nullptr)
+		{
+			if (managerEntity->getPlayer()->getPos().x - std::dynamic_pointer_cast<PowerUp>(powerup)->getPos().x > 500.f)
+			{
+				managerCollisions->garbageAdd(powerup);
+			}
+			else
+			{
+				std::dynamic_pointer_cast<PowerUp>(powerup)->update(_clock.getElapsedTime().asSeconds());
+			}
 		}
 	}
 

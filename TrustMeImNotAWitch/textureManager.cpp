@@ -6,7 +6,7 @@ textureManager* textureManager::getInstance()
     if (instance == nullptr) { instance = new textureManager(); }
     return instance;
 }
-
+ 
 void textureManager::loadAll() {
     if (!test.loadFromFile("../assets/test.png")) {
         throw std::runtime_error("Failed to load texture: ../assets/test.png");
@@ -18,6 +18,8 @@ void textureManager::loadAll() {
         throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
     }
 
+    if (!coins.loadFromFile("../assets/coin.png"));
+    std::cout << "CACA" << '\n';
 
     AnimationData idle, run, jump, walk, fall, slide;
 
