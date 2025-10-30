@@ -33,17 +33,17 @@ void collisionsManager::checkCollisions()
 	{
 		if (!isPaused)
 		{
-			
+
 			deltaTime = clock.getElapsedTime();
 			clock.restart();
+
 			for (auto& Entity : managerEntity->getAllEntities())
 			{
 				for (auto& EntityCheaked : managerEntity->getAllEntities())
 				{
 					try
 					{
-						if (Entity != nullptr && EntityCheaked != nullptr)
-						{
+						if(Entity != nullptr && EntityCheaked != nullptr){
 							if (Entity->tag != EntityCheaked->tag && Entity->isColliding(EntityCheaked.get()))
 							{
 								switch (EntityCheaked->tag)
@@ -75,39 +75,31 @@ void collisionsManager::checkCollisions()
 										garbageAdd(EntityCheaked);
 									}
 									break;
+								case 'U':
+									if (Entity->tag == 'P')
+									{
+										switch (std::dynamic_pointer_cast<PowerUp>(EntityCheaked)->getType())
+										{
+										case PowerType::GOLD:
+											managerScore->addScore(100);
+											break;
+										case PowerType::SCORE_BOOST:
+											managerScore->changeMultiplier(3);
+											break;
+										case PowerType::SHIELD:
+											break;
+										}
+										garbageAdd(EntityCheaked);
+									}
+									break;
 								default:
 									throw std::runtime_error("WTF did i just hitted ?\nEntity tag: " + std::string(1, Entity->tag) + "\nEntityCheaked tag: " + std::string(1, EntityCheaked->tag));
 									break;
 								}
-								else
-								{
-									garbageAdd(EntityCheaked);
-								}
-								break;
-							case 'U':
-								if(Entity->tag == 'P')
-								{
-									switch(std::dynamic_pointer_cast<PowerUp>(EntityCheaked)->getType())
-									{
-									case PowerType::GOLD:
-										managerScore->addScore(100);
-										break;
-									case PowerType::SCORE_BOOST:
-										managerScore->changeMultiplier(3);
-										break;
-									case PowerType::SHIELD:
-										break;
-									}
-									garbageAdd(EntityCheaked);
-								}
-								break;
-							default:
-								throw std::runtime_error("WTF did i just hitted ?\nEntity tag: " + std::string(1, Entity->tag) + "\nEntityCheaked tag: " + std::string(1, EntityCheaked->tag));
-								break;
 							}
 						}
 					}
-					catch (const std::exception &e)
+					catch (const std::exception& e)
 					{
 						std::cout << e.what() << '\n';
 					}
@@ -119,7 +111,7 @@ void collisionsManager::checkCollisions()
 			}
 			if (managerEntity->getAllEnnemies().size() != 0)
 			{
-				for(auto& ennemi : managerEntity->getAllEnnemies())
+				for (auto& ennemi : managerEntity->getAllEnnemies())
 				{
 					ennemi->update(deltaTime.asSeconds());
 				}

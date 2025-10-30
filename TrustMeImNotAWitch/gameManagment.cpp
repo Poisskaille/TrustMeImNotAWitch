@@ -36,7 +36,7 @@ void gameManagment::update(sf::RenderWindow* _window)
 	{ 
 		if (managerEntity->getPlayer()->getPos().x - std::dynamic_pointer_cast<Ennemy>(ennemy)->getPos().x > 500.f)
 		{
-			//managerCollisions->garbageAdd(ennemy);
+			managerCollisions->garbageAdd(ennemy);
 		}
 		else
 		{
@@ -49,7 +49,7 @@ void gameManagment::update(sf::RenderWindow* _window)
 	{
 		if (managerEntity->getPlayer()->getPos().x - std::dynamic_pointer_cast<Projectiles>(projectiles)->getPos().x > 500.f)
 		{
-			//managerCollisions->garbageAdd(projectiles);
+			managerCollisions->garbageAdd(projectiles);
 		}
 		else
 		{
