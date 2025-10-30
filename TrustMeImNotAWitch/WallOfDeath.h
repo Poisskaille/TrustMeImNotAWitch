@@ -1,7 +1,6 @@
 #pragma once
-#include "Entity.h"
 #include "EntityManager.h"
-class WallOfDeath : public Entity
+class WallOfDeath : public Ennemy
 {
 public:
 

@@ -17,7 +17,7 @@ public:
 	sf::View getCam();
 
 private:
-	float defaultView = 1.5f;
+	float defaultView = 10.5f;
 
 	const float Y_OFFSET;
 

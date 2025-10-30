@@ -61,11 +61,6 @@ void Map::loadAllMap()
                 newMap.push_back(shape);
                 break;
             }
-            case 'F':
-			case 'T':
-			case 'B':
-                managerEntity->createEnnemies(currentChar, managerText->test, { x * tileSize, y * tileSize }, { tileSize, tileSize });
-                break;
             default:
                 break;
             }
@@ -76,10 +71,48 @@ void Map::loadAllMap()
     }
 }
 
+void Map::loadEntity(int index)
+{
+    std::string currentPath = "../assets/maps/map_" + std::to_string(index) + ".txt";
+
+    std::fstream file(currentPath);
+
+    char currentChar;
+
+    const float tileSize = 100.f;
+
+    int x = 0;
+    int y = 0;
+
+    while (file.get(currentChar))
+    {
+        switch (currentChar)
+        {
+        case '\n':
+            y++;
+            x = 0;
+            break;
+        case 'F':
+        case 'T':
+        case 'B':
+            managerEntity->createEnnemies(currentChar, managerText->test, { x * tileSize + offsetX, y * tileSize}, { tileSize, tileSize });
+            break;
+        case 'G':
+            managerEntity->createPowerUp(PowerType::GOLD, managerText->test, { x * tileSize + offsetX, y * tileSize}, { tileSize, tileSize });
+            break;
+        default:
+            break;
+        }
+        x++;
+    }
+
+}
+
 void Map::loadSection(int index)
 {
-    current_map.push_back(std::make_shared<std::vector<sf::RectangleShape>>(placeTile(loaded_map[index])));
     loadIndex++;
+    current_map.push_back(std::make_shared<std::vector<sf::RectangleShape>>(placeTile(loaded_map[index])));
+    loadEntity(index);
     lastChunk = index;
 }
 
@@ -87,7 +120,7 @@ std::vector<sf::RectangleShape> Map::placeTile(std::shared_ptr<std::vector<sf::R
 {
     std::vector<sf::RectangleShape> newChunk;
 
-    float offsetX = currentEndX;
+    offsetX = currentEndX;
     for (auto& tile : *map)
     {
         sf::RectangleShape newTile = tile;
