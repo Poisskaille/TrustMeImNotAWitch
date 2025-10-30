@@ -203,8 +203,41 @@ void Player::Slide() {
 	speed = boostSpeed;
 }
 
-void Player::Collision()
-{
+void Player::Collision() {
+	//auto collidedTile = managerMap->getCollidingTile(collider.getGlobalBounds());
+	//sf::FloatRect playerBounds = collider.getGlobalBounds();
+	//std::optional<sf::FloatRect> interOpt = playerBounds.findIntersection(collidedTile.getGlobalBounds());
+	//if (!interOpt.has_value()) {
+	//	isAgainstWall = false;
+	//	return;
+	//}
+	//sf::FloatRect intersection = interOpt.value();
+	//if (managerMap->checkCollision(collider.getGlobalBounds()))
+	//{
+	//	if (intersection.size.x < intersection.size.y)
+	//	{
+	//		if ((playerBounds.position.x + collidedTile.getSize().x))
+	//			if (playerBounds.position.x < collidedTile.getPosition().x) {
+	//				collider.move(sf::Vector2f(-intersection.size.x, 0.f));
+	//			}
+	//			else {
+	//				collider.move(sf::Vector2f(intersection.size.x, 0.f)); // hit from right
+
+	//			}
+	//		isAgainstWall = true;
+	//		velocity.x = 0.f;
+	//	}
+	//	if (collidedTile.getPosition().y < playerBounds.position.y) {  //VERTICALITY
+	//		collider.setPosition({ collider.getPosition().x, collider.getPosition().y - 0.0001f });
+	//		velocity.y = 0;
+	//		if (playerState != State::SLIDING)
+	//			playerState = State::GROUNDED;
+	//	}
+	//}
+
+	//sf::FloatRect newBounds = collider.getGlobalBounds();
+	//if (!newBounds.findIntersection(collidedTile.getGlobalBounds()).has_value())
+	//	isAgainstWall = false;
 	if (managerMap->checkCollision(collider.getGlobalBounds()))
 	{
 		collider.setPosition({ collider.getPosition().x, collider.getPosition().y - 0.0001f });
@@ -229,7 +262,7 @@ void Player::shoot()
 
 void Player::addSpeed()
 {
-	speed = defaultSpeed + (rand() % 10);
+	speed = defaultSpeed + (rand() % 10) + 5;
 	walkingSpeed = speed;
 	defaultSpeed = speed;
 
