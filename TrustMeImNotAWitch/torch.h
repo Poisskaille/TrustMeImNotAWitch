@@ -1,10 +1,12 @@
 #pragma once
 #include "Ennemy.h"
 #include "entityManager.h"
+#include "textureManager.h"
 
 class torch : public Ennemy
 {
 private:
+	TorchAnim currentAnim = TorchAnim::Idle;
 	sf::Clock shootingClock;
 	int coolDown = 2000;
 
