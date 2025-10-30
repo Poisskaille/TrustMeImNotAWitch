@@ -12,6 +12,8 @@ public:
 	~PowerUp();
 	void update(float dT)override;
 
+	PowerType getType();
+
 private:
 
 	PowerType type;

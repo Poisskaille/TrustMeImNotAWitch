@@ -19,6 +19,7 @@ void gameManagment::init()
 	background.setSize(sf::Vector2f(1920.f, 1080.f));
 
 	managerEntity->createPlayer(managerText->test);
+	managerEntity->createEnnemies('W', managerText->test, {-400,-400 }, {10,10});
 }
 
 void gameManagment::update(sf::RenderWindow* _window)
@@ -26,8 +27,9 @@ void gameManagment::update(sf::RenderWindow* _window)
 	managerCollisions->garbageClear();
 	_window->clear();
 	_window->draw(background);
-	managerMap->draw(_window);
 	for (auto& Ennemy : managerEntity->getAllEntities()) { Ennemy->Draw(*_window); }
+	managerMap->draw(_window);
+
 	managerEntity->getPlayer()->Draw(*_window);
 	_window->display();
 }

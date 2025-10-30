@@ -21,6 +21,13 @@ void entityManager::createPlayer(sf::Texture& _textPlayer)
 	allEntities.push_back(p);
 }
 
+void entityManager::createPowerUp(PowerType pT, sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _size)
+{
+	std::shared_ptr<PowerUp> pr = std::make_shared<PowerUp>(_text,_pos,_size,pT);
+	allPowerUps.push_back(pr);
+	allEntities.push_back(pr);
+}
+
 void entityManager::createProjectiles(sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _direction, char c)
 {
 	std::shared_ptr<Projectiles> pr = std::make_shared<Projectiles>(_text, _pos, _direction,c);
@@ -42,6 +49,9 @@ void entityManager::createEnnemies(char _tagEnnemie, sf::Texture& _text, sf::Vec
 		break;
 	case 'B':
 		newEnnemie = std::make_shared<sign>(_text, _pos, _size);
+		break;
+	case 'W':
+		newEnnemie = std::make_shared<WallOfDeath>(_text,_pos,_size);
 		break;
 	default:
 		break;
@@ -100,6 +110,8 @@ std::vector<std::shared_ptr<Entity>> entityManager::getAllEntities() const { ret
 
 std::vector<std::shared_ptr<Entity>> entityManager::getAllPlayers() const { return allPlayers; }
 std::vector<std::shared_ptr<Entity>> entityManager::getAllEnnemies() const { return allEnnemies; }
+
+std::vector<std::shared_ptr<Entity>> entityManager::getAllPowerUps() const { return allPowerUps; }
 
 std::vector<std::shared_ptr<Entity>> entityManager::getAllProjectiles() const { return allprojectiles; }
 
