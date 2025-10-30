@@ -30,28 +30,34 @@ void gameManagment::update(sf::RenderWindow* _window)
 
 	for (auto& ennemy : managerEntity->getAllEnnemies()) 
 	{ 
-		if (managerEntity->getPlayer()->getPos().x - std::dynamic_pointer_cast<Ennemy>(ennemy)->getPos().x > 500.f)
+		if (ennemy != nullptr)
 		{
-			//managerCollisions->garbageAdd(ennemy);
+			if (managerEntity->getPlayer()->getPos().x - std::dynamic_pointer_cast<Ennemy>(ennemy)->getPos().x > 500.f)
+			{
+				managerCollisions->garbageAdd(ennemy);
+			}
+			else
+			{
+				std::dynamic_pointer_cast<Ennemy>(ennemy)->update(_clock.getElapsedTime().asSeconds());
+			}
+			ennemy->Draw(*_window);
 		}
-		else
-		{
-			std::dynamic_pointer_cast<Ennemy>(ennemy)->update(_clock.getElapsedTime().asSeconds());
-		}
-		ennemy->Draw(*_window);
 	}
 
 	for (auto& projectiles : managerEntity->getAllProjectiles())
 	{
-		if (managerEntity->getPlayer()->getPos().x - std::dynamic_pointer_cast<Projectiles>(projectiles)->getPos().x > 500.f)
+		if (projectiles != nullptr)
 		{
-			//managerCollisions->garbageAdd(projectiles);
+			if (managerEntity->getPlayer()->getPos().x - std::dynamic_pointer_cast<Projectiles>(projectiles)->getPos().x > 500.f)
+			{
+				managerCollisions->garbageAdd(projectiles);
+			}
+			else
+			{
+				std::dynamic_pointer_cast<Projectiles>(projectiles)->update(_clock.getElapsedTime().asSeconds());
+			}
+			projectiles->Draw(*_window);
 		}
-		else
-		{
-			std::dynamic_pointer_cast<Projectiles>(projectiles)->update(_clock.getElapsedTime().asSeconds());
-		}
-		projectiles->Draw(*_window);
 	}
 
 	managerMap->draw(_window);
