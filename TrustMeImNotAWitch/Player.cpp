@@ -271,8 +271,3 @@ void Player::addSpeed()
 	UIManagers::getInstance().getCamUI('v')->updateText(std::to_string(ispeed));
 	totalTime = 0.f;
 }
-
-sf::Vector2f Player::getPos()
-{
-	return collider.getPosition();
-}

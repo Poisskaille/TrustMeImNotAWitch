@@ -7,7 +7,6 @@ private:
 
 public:
 	sign(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size);
-
-	void update(float dT)override;
+	void update(float dT) override;
 };
 

@@ -10,8 +10,6 @@ private:
 public:
 	Ennemy(const char& _tagEnnemie, const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size);
 	~Ennemy() override {};
-
-	void update(float dT)override;
 	char& getTagEnnemie();
 };
 

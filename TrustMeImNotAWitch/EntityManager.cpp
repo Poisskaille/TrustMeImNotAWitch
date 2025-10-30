@@ -28,9 +28,9 @@ void entityManager::createPowerUp(PowerType pT, sf::Texture& _text, sf::Vector2f
 	allEntities.push_back(pr);
 }
 
-void entityManager::createProjectiles(sf::Texture& _text, sf::Vector2f _pos, sf::Vector2f _direction, char c)
+void entityManager::createProjectiles(sf::Vector2f _pos, sf::Vector2f _direction, char c)
 {
-	std::shared_ptr<Projectiles> pr = std::make_shared<Projectiles>(_text, _pos, _direction,c);
+	std::shared_ptr<Projectiles> pr = std::make_shared<Projectiles>(managerText->test, _pos, _direction,c);
 	allprojectiles.push_back(pr);
 	allEntities.push_back(pr);
 }
