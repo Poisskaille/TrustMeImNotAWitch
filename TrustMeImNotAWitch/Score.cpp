@@ -1,5 +1,11 @@
 #include "Score.h"
 
+Score* Score::getInstance()
+{
+	if (instance == nullptr) { instance = new Score(); }
+	return instance;
+}
+
 void Score::highScore()
 {
 	std::fstream file("../assets/Score/high_score.txt");
@@ -48,7 +54,15 @@ void Score::newScore()
 
 void Score::addScore(int value)
 {
-	score += value;
+	score += value * scoreMult;
 	std::string newValue = std::to_string(score);
 	UIManagers::getInstance().getCamUI('s')->updateText(newValue);
 }
+
+void Score::changeMultiplier(float value)
+{
+	scoreMult = value;
+}
+
+Score* Score::instance = nullptr;
+Score* managerScore = Score::getInstance();

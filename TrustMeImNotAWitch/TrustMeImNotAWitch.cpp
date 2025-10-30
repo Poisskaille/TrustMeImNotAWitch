@@ -2,7 +2,7 @@
 
 int main()
 {
-	std::srand(int(time(nullptr)));
+	srand(static_cast<unsigned>(time(0)));
 	Game* game = new Game;
 	game->run();
 	delete game;

@@ -80,6 +80,7 @@ void Map::loadSection(int index)
 {
     current_map.push_back(std::make_shared<std::vector<sf::RectangleShape>>(placeTile(loaded_map[index])));
     loadIndex++;
+    lastChunk = index;
 }
 
 std::vector<sf::RectangleShape> Map::placeTile(std::shared_ptr<std::vector<sf::RectangleShape>>& map)
@@ -109,7 +110,7 @@ void Map::unloadMap(sf::Vector2f playerPos)
     if (lastTileX < playerPos.x - 300.f)
     {
         current_map.erase(current_map.begin());
-        loadSection(0);
+        nextChunk();
     }
 }
 
@@ -127,6 +128,74 @@ void Map::draw(sf::RenderWindow * window)
             }
         }
     }
+}
+
+void Map::nextChunk()
+{
+    int possibility[5];
+    int size = 5;
+
+    switch(lastChunk)
+    {
+    case 0:
+        possibility[0] = 1;
+        size = 1;
+        break;
+    case 1: // 2 4 5 6 7
+        possibility[0] = 2;
+        possibility[1] = 4;
+        possibility[2] = 5;
+        possibility[3] = 6;
+        possibility[4] = 7;
+        break;
+    case 2: // 1 3 4 5 7
+        possibility[0] = 1;
+        possibility[1] = 3;
+        possibility[2] = 4;
+        possibility[3] = 5;
+        possibility[4] = 7;
+        break;
+    case 3: // 4 7
+        possibility[0] = 4;
+        possibility[1] = 7;
+        size = 2;
+        break;
+    case 4: // 1 2 6
+        possibility[0] = 1;
+        possibility[1] = 2;
+        possibility[2] = 6;
+        size = 2;
+        break;
+    case 5: // 1 2 4 7
+        possibility[0] = 1;
+        possibility[1] = 2;
+        possibility[2] = 4;
+        possibility[3] = 7;
+        size = 4;
+        break;
+    case 6:  // 1 2 4 5 7
+        possibility[0] = 1;
+        possibility[1] = 2;
+        possibility[2] = 4;
+        possibility[3] = 5;
+        possibility[4] = 7;
+        break;
+    case 7: // 8
+        possibility[0] = 8;
+        size = 1;
+        break;
+    case 8: // 9
+        possibility[0] = 9;
+        size = 1;
+        break;
+    case 9: // 1 2
+        possibility[0] = 1;
+        possibility[1] = 2;
+        size = 2;
+        break;
+    }
+    int random = (rand() % size);
+    loadSection(possibility[random]);
 }
 
 bool Map::checkCollision(sf::FloatRect bounds)

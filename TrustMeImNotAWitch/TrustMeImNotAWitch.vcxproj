@@ -151,6 +151,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="PowerUp.cpp" />
     <ClCompile Include="sign.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Score.cpp" />
@@ -162,6 +163,7 @@
     <ClCompile Include="UIElements.cpp" />
     <ClCompile Include="UIImage.cpp" />
     <ClCompile Include="UIManagers.cpp" />
+    <ClCompile Include="WallOfDeath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="fork.h" />
@@ -175,6 +177,7 @@
     <ClInclude Include="CameraUI.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="PowerUp.h" />
     <ClInclude Include="sign.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Score.h" />
@@ -185,6 +188,7 @@
     <ClInclude Include="UIElements.h" />
     <ClInclude Include="UIImage.h" />
     <ClInclude Include="UIManagers.h" />
+    <ClInclude Include="WallOfDeath.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\assets\maps\map_0.txt" />

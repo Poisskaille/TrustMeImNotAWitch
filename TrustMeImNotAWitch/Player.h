@@ -5,6 +5,7 @@
 #include "map.h"
 #include "Entity.h"
 #include "entityManager.h"
+#include "Score.h"
 
 class entityManager;
 
@@ -27,13 +28,18 @@ public:
 
 	void addSpeed();
 
+	sf::Vector2f getPos();
+
 private:
 	playerAnimation currentAnimation = playerAnimation::Idle; // default
 
 	sf::Vector2f defaultColliderSize = { 48.f, 80.f };
 	sf::Vector2f slideColliderSize = { 72, 48 };
 
+	sf::Vector2f playerSlideScale = { 3.f, 2.5f };
+	sf::Vector2f playerDefaultScale = { 3.f, 3.f };
 
+	sf::Vector2f slideOffset = { 0.f, 34.f };
 
 	float walkingSpeed = 100.f; //Permet d'ajuster la vitesse plus facilement
 	int runningSpeed = 200;
@@ -43,6 +49,7 @@ private:
 	float slideCooldown = 0.5f;
 	float slideRefresh = 0.5f;
 	bool isSliding = false;
+	float isAgainstWall = false;
 	State playerState;
 	float defaultSpeed = 200;
 	float speed;
@@ -55,9 +62,9 @@ private:
 
 	float deltaTime;
 	float totalTime;
+	float scoreTime;
 
 	//textureManager& texManager;
 
 	CameraUI cam;
-
 };

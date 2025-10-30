@@ -8,31 +8,37 @@ Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f
 	sprite.setPosition(sf::Vector2(0.f, 400.f));
 
 	speed = 200.f;
-	jumpForce = -600.f;
 	gravity = 1500.f;
 	velocity = sf::Vector2f(0.f, 0.f);
 
-	speed = defaultSpeed;
-	jumpForce = -600.f;
-	gravity = 1500.f;
+	jumpForce = -800.f;
 	velocity = sf::Vector2f(0.f, 0.f);
 
 	playerState = State::GROUNDED;
+	deltaTime = 0.f;
+	totalTime = 0.f;
+	scoreTime = 0.f;
 }
 
 void Player::update(float dT)
 {
-
 	deltaTime = dT;
 
 	HandleInput();
 	cam.update(collider.getPosition());
-	managerMap->unloadMap(collider.getPosition()); //TODO voir si continue a créer des exeptions: Une instruction de point d'arrêt (instruction __debugbreak() ou un appel similaire) a été exécutée dans TrustMeImNotAWitch.exe.
+	managerMap->unloadMap(collider.getPosition());
 
 	totalTime += deltaTime;
+	scoreTime += deltaTime;
 
-	if (totalTime > 1.f)
-		addSpeed();
+	if (scoreTime > 1.f)
+	{
+		scoreTime = 0.f;
+		managerScore->addScore(10 + (speed / 10));
+		if(totalTime > 5.f)
+			addSpeed();
+	}
+
 
 	//std::cout << deltaTime.asSeconds() << '\n';
 
@@ -74,12 +80,7 @@ void Player::update(float dT)
 		}
 	}
 
-
-
-
 	Collision();
-
-
 
 	//ANIMATIONS & CHECK STATES
 #pragma region ANIMATION_PLAYER_STATE
@@ -202,8 +203,41 @@ void Player::Slide() {
 	speed = boostSpeed;
 }
 
-void Player::Collision()
-{
+void Player::Collision() {
+	//auto collidedTile = managerMap->getCollidingTile(collider.getGlobalBounds());
+	//sf::FloatRect playerBounds = collider.getGlobalBounds();
+	//std::optional<sf::FloatRect> interOpt = playerBounds.findIntersection(collidedTile.getGlobalBounds());
+	//if (!interOpt.has_value()) {
+	//	isAgainstWall = false;
+	//	return;
+	//}
+	//sf::FloatRect intersection = interOpt.value();
+	//if (managerMap->checkCollision(collider.getGlobalBounds()))
+	//{
+	//	if (intersection.size.x < intersection.size.y)
+	//	{
+	//		if ((playerBounds.position.x + collidedTile.getSize().x))
+	//			if (playerBounds.position.x < collidedTile.getPosition().x) {
+	//				collider.move(sf::Vector2f(-intersection.size.x, 0.f));
+	//			}
+	//			else {
+	//				collider.move(sf::Vector2f(intersection.size.x, 0.f)); // hit from right
+
+	//			}
+	//		isAgainstWall = true;
+	//		velocity.x = 0.f;
+	//	}
+	//	if (collidedTile.getPosition().y < playerBounds.position.y) {  //VERTICALITY
+	//		collider.setPosition({ collider.getPosition().x, collider.getPosition().y - 0.0001f });
+	//		velocity.y = 0;
+	//		if (playerState != State::SLIDING)
+	//			playerState = State::GROUNDED;
+	//	}
+	//}
+
+	//sf::FloatRect newBounds = collider.getGlobalBounds();
+	//if (!newBounds.findIntersection(collidedTile.getGlobalBounds()).has_value())
+	//	isAgainstWall = false;
 	if (managerMap->checkCollision(collider.getGlobalBounds()))
 	{
 		collider.setPosition({ collider.getPosition().x, collider.getPosition().y - 0.0001f });
@@ -220,7 +254,7 @@ void Player::shoot()
 	mousePositionFloat.y = sf::Mouse::getPosition().y;
 
 	sf::Vector2f direction = mousePositionFloat - collider.getPosition();
-	direction.normalized();
+	direction = direction.normalized();
 
 	//Creer le projectile ici (probleme peut pas inclure le manager d'entity ici (inclusion circulaire))
 	//managerEntity->createProjectiles();
@@ -228,8 +262,17 @@ void Player::shoot()
 
 void Player::addSpeed()
 {
-	speed = defaultSpeed + 500.f;
+	speed = defaultSpeed + (rand() % 10) + 5;
 	walkingSpeed = speed;
 	defaultSpeed = speed;
+
+	int ispeed = speed;
+
+	UIManagers::getInstance().getCamUI('v')->updateText(std::to_string(ispeed));
 	totalTime = 0.f;
+}
+
+sf::Vector2f Player::getPos()
+{
+	return collider.getPosition();
 }
