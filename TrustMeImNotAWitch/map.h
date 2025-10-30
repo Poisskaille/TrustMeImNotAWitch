@@ -20,6 +20,7 @@ public:
 	void initMap();
 
 	void loadAllMap();
+	void loadEntity(int index);
 	void loadSection(int index);
 	std::vector<sf::RectangleShape> placeTile(std::shared_ptr<std::vector<sf::RectangleShape>>& map);
 
@@ -42,6 +43,8 @@ private:
 	int loadIndex;
 	float currentEndX;
 	int lastChunk;
+
+	float offsetX;
 };
 
 extern Map* managerMap;

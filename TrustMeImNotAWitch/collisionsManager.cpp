@@ -79,6 +79,31 @@ void collisionsManager::checkCollisions()
 									throw std::runtime_error("WTF did i just hitted ?\nEntity tag: " + std::string(1, Entity->tag) + "\nEntityCheaked tag: " + std::string(1, EntityCheaked->tag));
 									break;
 								}
+								else
+								{
+									garbageAdd(EntityCheaked);
+								}
+								break;
+							case 'U':
+								if(Entity->tag == 'P')
+								{
+									switch(std::dynamic_pointer_cast<PowerUp>(EntityCheaked)->getType())
+									{
+									case PowerType::GOLD:
+										managerScore->addScore(100);
+										break;
+									case PowerType::SCORE_BOOST:
+										managerScore->changeMultiplier(3);
+										break;
+									case PowerType::SHIELD:
+										break;
+									}
+									garbageAdd(EntityCheaked);
+								}
+								break;
+							default:
+								throw std::runtime_error("WTF did i just hitted ?\nEntity tag: " + std::string(1, Entity->tag) + "\nEntityCheaked tag: " + std::string(1, EntityCheaked->tag));
+								break;
 							}
 						}
 					}
@@ -91,6 +116,13 @@ void collisionsManager::checkCollisions()
 			if (managerEntity->getAllPlayers().size() != 0)
 			{
 				managerEntity->getPlayer()->update(deltaTime.asSeconds());
+			}
+			if (managerEntity->getAllEnnemies().size() != 0)
+			{
+				for(auto& ennemi : managerEntity->getAllEnnemies())
+				{
+					ennemi->update(deltaTime.asSeconds());
+				}
 			}
 			if (lagClock.getElapsedTime().asMilliseconds() >= 1000.f)
 			{
