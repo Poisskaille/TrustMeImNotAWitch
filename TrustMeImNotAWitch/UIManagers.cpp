@@ -23,7 +23,7 @@ void UIManagers::drawCam(sf::RenderWindow& window)
 	{
 		for (auto& _ui : uiCamera)
 		{
-			_ui->draw(window);
+ 			_ui->draw(window);
 		}
 	}
 }
