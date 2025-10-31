@@ -36,7 +36,8 @@ void collisionsManager::checkCollisions()
 
 			deltaTime = clock.getElapsedTime();
 			clock.restart();
-
+			isUsingEntities = true;
+			while (isDeletingEntities || isDrawingEntities) {}
 			for (auto& Entity : managerEntity->getAllEntities())
 			{
 				for (auto& EntityCheaked : managerEntity->getAllEntities())
@@ -116,6 +117,7 @@ void collisionsManager::checkCollisions()
 					ennemi->update(deltaTime.asSeconds());
 				}
 			}
+			isUsingEntities = false;
 			if (lagClock.getElapsedTime().asMilliseconds() >= 1000.f)
 			{
 				std::cout << iterations << " TPS" << std::endl;
@@ -132,11 +134,14 @@ void collisionsManager::checkCollisions()
 
 void collisionsManager::garbageClear()
 {
+	while (isUsingEntities || isDrawingEntities) {}
+	isDeletingEntities = true;
 	for (auto& Entity : garbage)
 	{
 		managerEntity->deleteEntity(Entity);
 	}
 	garbage.clear();
+	isDeletingEntities = false;
 };
 
 collisionsManager* collisionsManager::instance = nullptr;

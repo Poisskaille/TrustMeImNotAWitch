@@ -28,7 +28,10 @@ void gameManagment::update(sf::RenderWindow* _window)
 	managerCollisions->garbageClear();
 	_window->clear();
 	_window->draw(background);
- 	for (auto& Ennemy : managerEntity->getAllEntities()) { Ennemy->Draw(*_window); }
+	while (managerCollisions->isDeletingEntities || managerCollisions->isUsingEntities) {}
+	managerCollisions->isDrawingEntities = true;
+	for (auto& Ennemy : managerEntity->getAllEntities()) { Ennemy->Draw(*_window); }
+	managerCollisions->isDrawingEntities = false;
 	managerMap->draw(_window);
 
 
