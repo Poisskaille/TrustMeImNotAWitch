@@ -99,7 +99,7 @@ public:
     sf::Texture& getTexture(const std::string&);
 
 public:
-    const AnimationData& getSignAnimationData(SignAnim anim);
+    AnimationData& getSignAnimationData(animationType anim);
 
 };
 

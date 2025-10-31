@@ -148,12 +148,12 @@ void Player::HandleInput()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState != State::GROUNDED)
 		velocity.y = 1000.f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState == State::GROUNDED && !isSliding && slideRefresh >= slideCooldown)
-	{
-		Slide(); // start the slide
-		//collider.move(sf::Vector2f(0.f, -0.5f));
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && playerState == State::GROUNDED && !isSliding && slideRefresh >= slideCooldown)
+	//{
+	//	Slide(); // start the slide
+	//	//collider.move(sf::Vector2f(0.f, -0.5f));
 
-	}
+	//}
 
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 		shoot();

@@ -216,6 +216,7 @@ void textureManager::loadAll() {
     }
     signReflect.frameCount = 8;
     signReflect.frameSize = { 32, 32 };
+    signReflect.frameTime = 0.08f;
 
 
     signAnimations[SignAnim::Idle] = signIdle;
@@ -410,8 +411,30 @@ sf::Texture& textureManager::getTexture(const std::string& key)
     return texture->second;
 }
 
-const AnimationData& textureManager::getSignAnimationData(SignAnim anim) {
-    return signAnimations.at(anim);
+AnimationData& textureManager::getSignAnimationData(animationType anim) {
+    switch (anim) {
+    case animationType::Idle:
+        return signAnimations.at(SignAnim::Idle);
+        break;
+    case animationType::DeathBack:
+        return signAnimations.at(SignAnim::DeathBack);
+        break;
+    case animationType::DeathFront:
+        return signAnimations.at(SignAnim::DeathFront);
+        break;
+    case animationType::Readying:
+        return signAnimations.at(SignAnim::Readying);
+        break;
+    case animationType::ReadyIdle:
+        return signAnimations.at(SignAnim::ReadyIdle);
+        break;
+    case animationType::Reflect:
+        return signAnimations.at(SignAnim::Reflect);
+        break;
+    default:
+        throw std::runtime_error("Invalid animationType in getSignAnimationData");
+    }
+    
 }
 
 textureManager* textureManager::instance = nullptr;

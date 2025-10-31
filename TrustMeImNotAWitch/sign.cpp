@@ -17,22 +17,45 @@ void sign::update(float dT)
     if (currentType == animationType::Readying)
     {
         animTimer += dT;
-
-        // grab the animation data from textureManager
-        const AnimationData& animData = managerText->getSignAnimationData(SignAnim::Readying);
-        float animDuration = animData.frameTime * animData.frameCount;
+        const AnimationData* animData = &managerText->getSignAnimationData(currentType);
+        float animDuration = animData->frameTime * animData->frameCount;
 
         if (animTimer >= animDuration)
         {
-            // switch automatically to ReadyIdle when done
-            currentType = animationType::ReadyIdle;
+            currentType = animationType::ReadyIdle;  // auto-switch when done
             animTimer = 0.f;
+        }
+    }
+    else if (currentType == animationType::Reflect)
+    {
+        animTimer += dT;
+        const AnimationData* animData = &managerText->getSignAnimationData(currentType);
+        float animDuration = animData->frameTime * animData->frameCount;
+
+        if (animTimer >= animDuration)
+        {
+            animTypeSetter(animationType::Idle);  // Use setter to reset everything
         }
     }
 }
 
-void sign::animTypeSetter(animationType type)
-{
-    currentType = type;
-    animTimer = 0.f;
+
+void sign::animTypeSetter(animationType anim) {
+    currentType = anim;  // Make sure currentType is updated!
+    animTimer = 0.f;     // Reset the timer used in sign::update
+
+    auto& animData = textureManager::getInstance()->getSignAnimationData(anim);
+    animData.currentFrame = 0;
+    animData.timer = 0.f;
+
+    sprite.setTexture(animData.texture);
+    sprite.setTextureRect(sf::IntRect(
+        { 0, 0 },
+        { animData.frameSize.x, animData.frameSize.y }
+    ));
+}
+
+
+animationType sign::animTypeGetter() {
+    return currentType;
 }

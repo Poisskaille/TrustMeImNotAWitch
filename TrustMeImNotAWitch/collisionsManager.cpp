@@ -50,11 +50,8 @@ void collisionsManager::checkCollisions()
 								switch (EntityCheaked->tag)
 								{
 								case 'P':
-									if (!(Entity->tag == 'U'))
-									{
-										std::cout << "Player hitted" << '\n';
-										//garbageAdd(EntityCheaked);
-									}
+									std::cout << "Player hitted" << '\n';
+									//garbageAdd(EntityCheaked);
 									break;
 								case 'E':
 									if (!(std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'B' && Entity->tag == 'B'))
@@ -70,15 +67,12 @@ void collisionsManager::checkCollisions()
 
 											// Change Sign animation to Reflect
 											auto signPtr = std::dynamic_pointer_cast<sign>(std::dynamic_pointer_cast<Ennemy>(EntityCheaked));
-											if (signPtr)
+											if (signPtr && signPtr->animTypeGetter() != animationType::Reflect)
+											{
 												signPtr->animTypeSetter(animationType::Reflect);
-										}
-										else
-										{
-											// If projectile is near Ready state
-											auto signPtr = std::dynamic_pointer_cast<sign>(std::dynamic_pointer_cast<Ennemy>(EntityCheaked));
-											if (signPtr)
-												signPtr->animTypeSetter(animationType::Readying);
+											}
+
+
 										}
 									}
 									break;
