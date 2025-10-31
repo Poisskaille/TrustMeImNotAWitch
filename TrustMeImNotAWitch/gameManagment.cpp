@@ -16,7 +16,7 @@ void gameManagment::init()
 	sf::Clock clock;
 
 	managerEntity->createPlayer(managerText->getTexture("coin"));
-	managerEntity->createEnnemies('W', managerText->getTexture("walldeath"), {-400,-400}, {10,10});
+	managerEntity->createEnnemies('W', managerText->getTexture("walldeath"), {-400,-400}, {2,2});
 }
 
 void gameManagment::update(sf::RenderWindow* _window)
