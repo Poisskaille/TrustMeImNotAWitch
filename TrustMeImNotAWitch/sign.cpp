@@ -6,5 +6,5 @@ sign::sign(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size) :
 
 void sign::update(float dT)
 {
-	managerText->updateEnemy(EnemyType::Sign, currentAnim, dT, sprite);
+	//managerText->updateEnemy(EnemyType::Sign, currentAnim, dT, sprite);
 }
