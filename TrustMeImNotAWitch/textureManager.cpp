@@ -378,6 +378,7 @@ void textureManager::updateEnemy(EnemyType type, animationType animType, float d
         default:
             throw std::runtime_error("Ennemy WOF doesn't have such animType");
         }
+        break;
     default:
         break;
     }
@@ -407,6 +408,10 @@ sf::Texture& textureManager::getTexture(const std::string& key)
     if (texture == textureList.end())
         std::cout << "Impossible de trouver la texture";
     return texture->second;
+}
+
+const AnimationData& textureManager::getSignAnimationData(SignAnim anim) {
+    return signAnimations.at(anim);
 }
 
 textureManager* textureManager::instance = nullptr;

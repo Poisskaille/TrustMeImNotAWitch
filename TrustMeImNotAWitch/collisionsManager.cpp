@@ -60,12 +60,26 @@ void collisionsManager::checkCollisions()
 									}
 									else
 									{
+										// It's a Sign ('B') being hit by a projectile
 										if (std::dynamic_pointer_cast<Projectiles>(Entity)->getOwner() == 'P')
 										{
 											std::dynamic_pointer_cast<Projectiles>(Entity)->switchOwner();
+
+											// Change Sign animation to Reflect
+											auto signPtr = std::dynamic_pointer_cast<sign>(std::dynamic_pointer_cast<Ennemy>(EntityCheaked));
+											if (signPtr)
+												signPtr->animTypeSetter(animationType::Reflect);
+										}
+										else
+										{
+											// If projectile is near Ready state
+											auto signPtr = std::dynamic_pointer_cast<sign>(std::dynamic_pointer_cast<Ennemy>(EntityCheaked));
+											if (signPtr)
+												signPtr->animTypeSetter(animationType::Readying);
 										}
 									}
 									break;
+
 								case 'B':
 									if (Entity->tag == 'E')
 									{
