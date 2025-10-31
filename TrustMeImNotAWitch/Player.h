@@ -28,6 +28,8 @@ public:
 
 	void addSpeed();
 
+
+
 private:
 	playerAnimation currentAnimation = playerAnimation::Idle; // default
 
@@ -63,6 +65,9 @@ private:
 	float scoreTime;
 
 	//textureManager& texManager;
+
+	sf::RectangleShape rightCollider;
+	sf::RectangleShape topCollider;
 
 	CameraUI cam;
 };

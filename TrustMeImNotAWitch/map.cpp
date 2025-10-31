@@ -46,18 +46,7 @@ void Map::loadAllMap()
                 shape.setSize({ tileSize, tileSize });
                 shape.setPosition({ x * tileSize, y * tileSize });
                 int randC = (rand() % 3);
-                switch (randC)
-                {
-                case 0:
-                    shape.setFillColor(sf::Color::Blue);
-                    break;
-                case 1:
-                    shape.setFillColor(sf::Color::Red);
-                    break;
-                case 2:
-                    shape.setFillColor(sf::Color::Green);
-                    break;
-                }
+                shape.setTexture(&managerText->getTexture("grass"));
                 newMap.push_back(shape);
                 break;
             }
@@ -76,7 +65,6 @@ void Map::loadEntity(int index)
     std::string currentPath = "../assets/maps/map_" + std::to_string(index) + ".txt";
 
     std::fstream file(currentPath);
-
     char currentChar;
 
     const float tileSize = 100.f;
@@ -95,10 +83,13 @@ void Map::loadEntity(int index)
         case 'F':
         case 'T':
         case 'B':
-            managerEntity->createEnnemies(currentChar, managerText->test, { x * tileSize + offsetX, y * tileSize}, { tileSize, tileSize });
+            managerEntity->createEnnemies(currentChar, managerText->getTexture("coin"), {x * tileSize + offsetX, y * tileSize}, {tileSize, tileSize});
             break;
         case 'G':
-            managerEntity->createPowerUp(PowerType::GOLD, managerText->test, { x * tileSize + offsetX, y * tileSize}, { tileSize, tileSize });
+            managerEntity->createPowerUp(PowerType::GOLD, managerText->getTexture("coin"), {x * tileSize + offsetX, y * tileSize}, {1 , 1});
+            break;
+        case 'M':
+            managerEntity->createPowerUp(PowerType::SCORE_BOOST, managerText->getTexture("coin"), {x * tileSize + offsetX, y * tileSize}, {tileSize, tileSize});
             break;
         default:
             break;

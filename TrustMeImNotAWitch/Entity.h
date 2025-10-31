@@ -4,12 +4,13 @@
 class Entity
 {
 private:
-	//c pour moi ca				ok personne mysterieuse
+	//c pour moi ca				ok personne mysterieuse                   sympa ici
 	sf::Vector2f ColliderSize = { 48.f,80.f };
 
 
 protected:
 	sf::Sprite sprite;
+	sf::Texture texture;
 	sf::RectangleShape collider;
 
 public:

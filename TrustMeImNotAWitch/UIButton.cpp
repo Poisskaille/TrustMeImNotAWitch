@@ -1,11 +1,11 @@
 #include "UIButton.h"
 
-UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size, const sf::Color& color, const std::string&, const char& c) : OFFSET(offset), text(font), str(str), index(c)
+UIButton::UIButton(const sf::Vector2f& offset, const sf::Vector2f& size,const std::string&, const char& c, sf::Texture& fT, sf::Texture& sT) : 
+	OFFSET(offset), text(font), str(str), index(c), normalTexture(fT), hoveredTexture(sT)
 {
 	if (!font.openFromFile("../assets/font/Enchanted Land.otf"))
 		std::cout << "Error loading font" << '\n';
 	shape.setSize(size);
-	shape.setFillColor(color);
 	shape.setOrigin(sf::Vector2f(size.x / 2, size.y / 2));
 
 	text.setString(str);
@@ -21,6 +21,7 @@ void UIButton::draw(sf::RenderWindow& window)
 	window.draw(shape);
 	window.draw(text);
 	onClick(window);
+	onHover(window);
 }
 
 // Pas besoin d'appeler cette m�htode s'il s'agit de l'UI du menu
@@ -48,4 +49,15 @@ bool UIButton::onClick(sf::RenderWindow& window)
 		return true;
 	else
 		return false;
+}
+
+void UIButton::onHover(sf::RenderWindow& winwdow)
+{
+	sf::FloatRect shapeBounds = shape.getGlobalBounds();
+	sf::Vector2i mousePos = sf::Mouse::getPosition(winwdow);
+	sf::Vector2f mousePosF = winwdow.mapPixelToCoords(mousePos);
+	if (shapeBounds.contains(mousePosF))
+		shape.setTexture(&hoveredTexture);
+	else
+		shape.setTexture(&normalTexture);
 }

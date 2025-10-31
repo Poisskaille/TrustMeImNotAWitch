@@ -6,12 +6,14 @@ Entity::Entity(const char& _tag, const sf::Texture& _texture, sf::Vector2f _pos,
 	sprite.setScale(_size);
 	collider.setPosition(_pos);
 	collider.setSize(ColliderSize);
+	texture = _texture;
+	sprite.setTexture(_texture);
 }
 
 void Entity::Draw(sf::RenderWindow& window)
 {
-	//window.draw(sprite);
-	window.draw(collider);
+	window.draw(sprite);
+	//window.draw(collider);
 }
 
 bool Entity::isColliding(Entity* other)

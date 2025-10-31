@@ -1,5 +1,7 @@
 #pragma once
 #include "UIManagers.h"
+#include "Score.h"
+#include "textureManager.h"
 
 class Menu
 {

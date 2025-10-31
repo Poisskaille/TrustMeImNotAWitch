@@ -4,7 +4,7 @@
 class UIImage: public UIElements
 {
 public:
-	UIImage(const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color, const std::string&, const char&);
+	UIImage(const sf::Vector2f& pos, const sf::Vector2f& size, const std::string&, const char&, sf::Texture& texture);
 
 	void draw(sf::RenderWindow& window)override;
 	void updatePosition(sf::Vector2f camPos)override;
