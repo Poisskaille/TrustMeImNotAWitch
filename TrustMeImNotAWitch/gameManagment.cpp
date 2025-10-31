@@ -12,11 +12,8 @@ void gameManagment::init()
 {
 	managerText->loadAll();
 	managerMap->initMap();
-
+	bg.init(managerText->getTexture("background"));
 	sf::Clock clock;
-
-	background.setTexture(&managerText->getTexture("background"));
-	background.setSize(sf::Vector2f(1920.f, 1080.f));
 
 	managerEntity->createPlayer(managerText->getTexture("coin"));
 	managerEntity->createEnnemies('W', managerText->getTexture("walldeath"), {-400,-400}, {10,10});
@@ -27,13 +24,13 @@ void gameManagment::update(sf::RenderWindow* _window)
 	_clock.restart();
 	managerCollisions->garbageClear();
 	_window->clear();
-	_window->draw(background);
+	bg.updateParalax();
+	bg.draw(*_window);
 	while (managerCollisions->isDeletingEntities || managerCollisions->isUsingEntities) {}
 	managerCollisions->isDrawingEntities = true;
 	for (auto& Ennemy : managerEntity->getAllEntities()) { Ennemy->Draw(*_window); }
 	managerCollisions->isDrawingEntities = false;
 	managerMap->draw(_window);
-
 
 	for (auto& ennemy : managerEntity->getAllEnnemies()) 
 	{ 

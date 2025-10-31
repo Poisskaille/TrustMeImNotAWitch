@@ -28,7 +28,7 @@ public:
 
 	void addSpeed();
 
-
+	CameraUI cam;
 
 private:
 	playerAnimation currentAnimation = playerAnimation::Idle; // default
@@ -70,6 +70,4 @@ private:
 
 	sf::RectangleShape rightCollider;
 	sf::RectangleShape topCollider;
-
-	CameraUI cam;
 };
