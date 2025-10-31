@@ -55,13 +55,13 @@ void gameManagment::update(sf::RenderWindow* _window)
 	{
 		if (projectiles != nullptr)
 		{
-			if (managerEntity->getPlayer()->getPos().x - std::dynamic_pointer_cast<Projectiles>(projectiles)->getPos().x > 500.f)
+			if (managerEntity->getPlayer()->getPos().x - std::dynamic_pointer_cast<Projectiles>(projectiles)->getPos().x > 500.f || managerEntity->getPlayer()->getPos().x - std::dynamic_pointer_cast<Projectiles>(projectiles)->getPos().x < -1000.f)
 			{
 				managerCollisions->garbageAdd(projectiles);
 			}
 			else
 			{
-				std::dynamic_pointer_cast<Projectiles>(projectiles)->update(_clock.getElapsedTime().asSeconds());
+				std::dynamic_pointer_cast<Projectiles>(projectiles)->moveProjectile(_clock.getElapsedTime().asSeconds());
 			}
 			projectiles->Draw(*_window);
 		}
