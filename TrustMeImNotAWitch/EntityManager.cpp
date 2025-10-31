@@ -54,7 +54,7 @@ void entityManager::createEnnemies(char _tagEnnemie, sf::Texture& _text, sf::Vec
 		newEnnemie = std::make_shared<WallOfDeath>(_text,_pos,_size);
 		break;
 	case 'O':
-		newEnnemie = std::make_shared<Barricades>(_text, _pos, _size);
+		newEnnemie = std::make_shared<Barricade>(_text, _pos, _size);
 		break;
 	default:
 		break;

@@ -26,6 +26,7 @@ void Map::loadAllMap()
 
         char currentChar;
         std::vector<sf::RectangleShape> newMap;
+        sf::RectangleShape shape;
 
         const float tileSize = 100.f;
 
@@ -42,11 +43,18 @@ void Map::loadAllMap()
                 break;
             case '#':
             {
-                sf::RectangleShape shape;
+
                 shape.setSize({ tileSize, tileSize });
                 shape.setPosition({ x * tileSize, y * tileSize });
-                int randC = (rand() % 3);
                 shape.setTexture(&managerText->getTexture("grass"));
+                newMap.push_back(shape);
+                break;
+            }
+            case '/':
+            {
+                shape.setSize({ tileSize, tileSize });
+                shape.setPosition({ x * tileSize, y * tileSize });
+                shape.setTexture(&managerText->getTexture("dirt"));
                 newMap.push_back(shape);
                 break;
             }
@@ -86,7 +94,7 @@ void Map::loadEntity(int index)
         case 'T':
             managerEntity->createEnnemies(currentChar, managerText->getEnemyTexture(EnemyType::Torch, animationType::Idle), { x * tileSize + offsetX, y * tileSize }, { 0, 0 });
             break;
-        case 'O':
+        case'O':
             managerEntity->createEnnemies(currentChar, managerText->getTexture("barricade"), {x * tileSize + offsetX, y * tileSize}, {1, 1});
             break;
         case 'B':
