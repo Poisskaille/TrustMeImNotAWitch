@@ -19,7 +19,7 @@ void gameManagment::init()
 	background.setSize(sf::Vector2f(1920.f, 1080.f));
 
 	managerEntity->createPlayer(managerText->getTexture("coin"));
-	managerEntity->createEnnemies('W', managerText->getTexture("coin"), {-400,-400}, {10,10});
+	managerEntity->createEnnemies('W', managerText->getTexture("walldeath"), {-400,-400}, {10,10});
 }
 
 void gameManagment::update(sf::RenderWindow* _window)

@@ -57,6 +57,21 @@ void textureManager::loadAll() {
         throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
     textureList.insert({ "menu",menu });
 
+    sf::Texture wof;
+    if (!wof.loadFromFile("../assets/wallofflesh.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "walldeath",wof });
+
+    sf::Texture fireball;
+    if(!fireball.loadFromFile("../assets/fireball1.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "fireball",fireball });
+
+    sf::Texture barricade;
+    if(!barricade.loadFromFile("../assets/tiles/obstacles/barricade.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "barricade",barricade });
+
     AnimationData idle, run, jump, walk, fall, slide;
 	AnimationData fireBallIdle ,forkIdle, torchIdle, signIdle, signReadying, signReadyIdle, signReflect, deathWallIdle;
 	AnimationData forkDeathFront, forkDeathBack, torchDeathFront, torchDeathBack, signDeathFront, signDeathBack;
@@ -117,6 +132,7 @@ void textureManager::loadAll() {
     }
     forkIdle.frameCount = 2;
     forkIdle.frameSize = { 32, 32 };
+    forkIdle.frameTime = 0.10f;
 
     if (!forkDeathBack.texture.loadFromFile("../assets/character/enemies/fork/forkDeathBackHit.png")) {
         throw std::runtime_error("Failed to load texture: ../assets/character/enemies/fork/forkDeathBackHit.png");
@@ -202,9 +218,12 @@ void textureManager::loadAll() {
     signReflect.frameSize = { 32, 32 };
 
 
-    torchAnimations[TorchAnim::Idle] = torchIdle;
-    torchAnimations[TorchAnim::DeathFront] = torchDeathFront;
-    torchAnimations[TorchAnim::DeathBack] = torchDeathBack;
+    signAnimations[SignAnim::Idle] = signIdle;
+    signAnimations[SignAnim::DeathFront] = signDeathFront;
+    signAnimations[SignAnim::DeathBack] = signDeathBack;
+    signAnimations[SignAnim::Readying] = signReadying;
+    signAnimations[SignAnim::ReadyIdle] = signReadyIdle;
+    signAnimations[SignAnim::Reflect] = signReflect;
 }
 
 void textureManager::setplayerAnimation(playerAnimation anim, sf::Sprite& player) {
@@ -257,6 +276,7 @@ sf::Texture& textureManager::getEnemyTexture(EnemyType type, animationType animT
             return torchAnimations[TorchAnim::DeathFront].texture;
         else if (animType == animationType::DeathBack)
 			return torchAnimations[TorchAnim::DeathBack].texture;
+        break;
     case EnemyType::Sign:
         if (animType == animationType::Idle)
             return signAnimations[SignAnim::Idle].texture;
@@ -270,40 +290,110 @@ sf::Texture& textureManager::getEnemyTexture(EnemyType type, animationType animT
             return signAnimations[SignAnim::ReadyIdle].texture;
         else if (animType == animationType::Reflect)
 			return signAnimations[SignAnim::Reflect].texture;
+        break;
     case EnemyType::DeathWall:
 		if (animType == animationType::Idle)
         return wallAnimations[deathWallAnim::Idle].texture;
+        break;
     default:
         throw std::runtime_error("Unknown EnemyType in getEnemyTexture()");
+        break;
     }
 }
 
-//void textureManager::setEnemyAnimation(EnemyType type, ForkAnim anim, sf::Sprite& enemy)
-//{
-//    auto& animData = forkAnimations[anim];
-//    animData.currentFrame = 0;
-//    animData.timer = 0.0f;
-//
-//    enemy.setTexture(animData.texture);
-//    enemy.setTextureRect(sf::IntRect(
-//        { animData.currentFrame * animData.frameSize.x, 0 },
-//        { animData.frameSize.x, animData.frameSize.y }
-//    ));
-//}
-
-void textureManager::updateEnemy(EnemyType type, ForkAnim anim, float deltaTime, sf::Sprite& enemy)
+void textureManager::updateEnemy(EnemyType type, animationType animType, float deltaTime, sf::Sprite& enemy)
 {
-    auto& animData = forkAnimations[anim];
-    animData.timer += deltaTime;
+    AnimationData* animData = nullptr;
 
-    if (animData.timer >= animData.frameTime)
+    switch (type) {
+    case EnemyType::Fork:
+        switch (animType) {
+        case animationType::Idle:
+            animData = &forkAnimations[ForkAnim::Idle];
+            break;
+        case animationType::DeathBack:
+            animData = &forkAnimations[ForkAnim::DeathBack];
+            break;
+        case animationType::DeathFront:
+            animData = &forkAnimations[ForkAnim::DeathFront];
+            break;
+        default:
+            throw std::runtime_error("Ennemy fork doesn't have such animType");
+            break;
+        }
+        break;
+    case EnemyType::Torch:
+        switch (animType) {
+        case animationType::Idle:
+            animData = &torchAnimations[TorchAnim::Idle];
+            break;
+        case animationType::DeathBack:
+            animData = &torchAnimations[TorchAnim::DeathBack];
+            break;
+        case animationType::DeathFront:
+            animData = &torchAnimations[TorchAnim::DeathFront];
+            break;
+        default:
+            throw std::runtime_error("Ennemy Torch doesn't have such animType");
+        }
+        break;
+    case EnemyType::Sign:
+        switch (animType) {
+        case animationType::Idle:
+            animData = &signAnimations[SignAnim::Idle];
+            break;
+        case animationType::DeathBack:
+            animData = &signAnimations[SignAnim::DeathBack];
+            break;
+        case animationType::DeathFront:
+            animData = &signAnimations[SignAnim::DeathFront];
+            break;
+        case animationType::Readying:
+            animData = &signAnimations[SignAnim::Readying];
+            break;
+        case animationType::ReadyIdle:
+            animData = &signAnimations[SignAnim::ReadyIdle];
+            break;
+        case animationType::Reflect:
+            animData = &signAnimations[SignAnim::Reflect];
+            break;
+        default:
+            throw std::runtime_error("Ennemy Sign doesn't have such animType");
+        }
+        break;
+    case EnemyType::Fireball:
+        switch (animType) {
+        case animationType::Idle:
+            animData = &fireBallAnimations[FireballAnim::Idle];
+            break;
+        default:
+            throw std::runtime_error("Fireball doesn't have such animType");
+        }
+        break;
+    case EnemyType::DeathWall:
+        switch (animType) {
+        case animationType::Idle:
+            animData = & wallAnimations[deathWallAnim::Idle];
+            break;
+        default:
+            throw std::runtime_error("Ennemy WOF doesn't have such animType");
+        }
+    default:
+        break;
+    }
+
+
+    
+    animData->timer += deltaTime;
+
+    if (animData->timer >= animData->frameTime)
     {
-        animData.timer -= animData.frameTime;
-        animData.currentFrame = (animData.currentFrame + 1) % animData.frameCount;
+        animData->timer -= animData->frameTime;
+        animData->currentFrame = (animData->currentFrame + 1) % animData->frameCount;
 
         enemy.setTextureRect(sf::IntRect(
-            { animData.currentFrame * animData.frameSize.x, 0 },
-            { animData.frameSize.x, animData.frameSize.y }
+            { animData->currentFrame * animData->frameSize.x, 0 },
+            { animData->frameSize.x, animData->frameSize.y }
         ));
     }
 }

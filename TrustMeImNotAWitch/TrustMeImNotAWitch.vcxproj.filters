@@ -57,6 +57,11 @@
     <ClCompile Include="map.cpp">
       <Filter>Map &amp; Tiles\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="PowerUp.cpp" />
+    <ClCompile Include="WallOfDeath.cpp" />
+    <ClCompile Include="barricades.cpp">
+      <Filter>Entities &amp; Collision\Enemy Types\barricade</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -114,6 +119,11 @@
     <ClInclude Include="map.h">
       <Filter>Map &amp; Tiles\.h</Filter>
     </ClInclude>
+    <ClInclude Include="PowerUp.h" />
+    <ClInclude Include="WallOfDeath.h" />
+    <ClInclude Include="barricades.h">
+      <Filter>Entities &amp; Collision\Enemy Types\barricade</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Camera &amp; UI">
@@ -157,6 +167,9 @@
     </Filter>
     <Filter Include="Map &amp; Tiles\Map Files">
       <UniqueIdentifier>{83805aca-757f-4dbb-99b4-bf0714a8a38f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entities &amp; Collision\Enemy Types\barricade">
+      <UniqueIdentifier>{48fd6fd7-a799-4ac1-a80e-944d09298751}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
