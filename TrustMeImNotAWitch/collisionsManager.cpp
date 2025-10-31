@@ -64,10 +64,6 @@ void collisionsManager::checkCollisions()
 										{
 											std::dynamic_pointer_cast<Projectiles>(Entity)->switchOwner();
 										}
-										else
-										{
-											garbageAdd(EntityCheaked);
-										}
 									}
 									break;
 								case 'B':
