@@ -8,7 +8,6 @@ Projectiles::Projectiles(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vec
 void Projectiles::update(float dT)
 {
 	// augmenter le time avec le deltaTime ici (mettre dT en argument d'un update globale)
-	moveProjectile(dT);
 }
 
 // L'owner doit seulement etre P pour player ou E pour ennemi. Un projectile ne peut pas appartenir a une tile :)
@@ -31,4 +30,5 @@ void Projectiles::changeDirection()
 void Projectiles::moveProjectile(float dt)
 {
 	collider.move({ direction.x * projectileSpeed * dt, direction.y * projectileSpeed * dt });
+	sprite.setPosition(collider.getPosition());
 }
