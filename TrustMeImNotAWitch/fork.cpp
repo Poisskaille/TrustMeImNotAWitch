@@ -7,5 +7,5 @@ fork::fork(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size) :
 
 void fork::update(float dT)
 {
-    managerText->updateEnemy(EnemyType::Fork, currentAnim, dT, sprite);
+    managerText->updateEnemy(EnemyType::Fork, animationType::Idle, dT, sprite);
 }
