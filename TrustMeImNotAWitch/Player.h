@@ -55,8 +55,8 @@ private:
 	float speed;
 	float boostSpeed = 350;
 	sf::Clock _updateClock;
-	sf::Clock _shootCooldown; //en millisecondes
-	int _coolDown = 5000;
+	sf::Clock _shootCooldown;
+	int _coolDown = 500; //en millisecondes
 
 	sf::Vector2f velocity;
 	float jumpForce;

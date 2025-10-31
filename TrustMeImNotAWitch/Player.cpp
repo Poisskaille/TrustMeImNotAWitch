@@ -241,7 +241,8 @@ void Player::shoot()
 	//Creer le projectile ici (probleme peut pas inclure le manager d'entity ici (inclusion circulaire))
 	if (_shootCooldown.getElapsedTime().asMilliseconds() > _coolDown)
 	{
-		managerEntity->createProjectiles({ collider.getPosition().x + 100, collider.getPosition().y }, direction, 'P');
+		managerEntity->createProjectiles({ collider.getPosition().x + 50, collider.getPosition().y }, direction, 'P');
+		_shootCooldown.restart();
 	}
 }
 
