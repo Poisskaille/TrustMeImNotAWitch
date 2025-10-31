@@ -6,12 +6,13 @@
 class torch : public Ennemy
 {
 private:
-	TorchAnim currentAnim = TorchAnim::Idle;
+	animationType currentType = animationType::Idle;
 	sf::Clock shootingClock;
 	int coolDown = 2000;
 
 public:
 	torch(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _size);
 	void update(float dT) override;
+	void animTypeSetter(animationType type);
 };
 
