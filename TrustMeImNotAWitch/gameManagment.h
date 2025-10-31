@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "entityManager.h"
 #include "collisionsManager.h"
+#include "Background.h"
 #include "map.h"
 
 class gameManagment
@@ -14,7 +15,8 @@ private:
 
 	//Local variables
 	sf::Clock _clock;
-	sf::RectangleShape background;
+
+	Background bg;
 
 public:
 

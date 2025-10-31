@@ -10,7 +10,7 @@
 #include "Projectiles.h"
 #include "WallOfDeath.h"
 #include "PowerUp.h"
-#include "barricades.h"
+#include "Barricade.h"
 
 class Player;
 class Map;
