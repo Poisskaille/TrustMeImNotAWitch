@@ -13,7 +13,7 @@ Entity::Entity(const char& _tag, const sf::Texture& _texture, sf::Vector2f _pos,
 void Entity::Draw(sf::RenderWindow& window)
 {
 	window.draw(sprite);
-	//window.draw(collider);
+	window.draw(collider);
 }
 
 bool Entity::isColliding(Entity* other)

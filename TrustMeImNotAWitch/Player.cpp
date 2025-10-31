@@ -234,15 +234,15 @@ void Player::Collision() {
 
 void Player::shoot()
 {
-	sf::Vector2f mousePositionFloat;
-	mousePositionFloat.x = sf::Mouse::getPosition().x;
-	mousePositionFloat.y = sf::Mouse::getPosition().y;
-
-	sf::Vector2f direction = mousePositionFloat - collider.getPosition();
+	sf::Vector2f mousePositionFloat(sf::Mouse::getPosition().x, sf::Mouse::getPosition().y);
+	sf::Vector2f direction = mousePositionFloat - sf::Vector2f(collider.getPosition().x - cam.getCam().getCenter().x, collider.getPosition().y);
 	direction = direction.normalized();
 
 	//Creer le projectile ici (probleme peut pas inclure le manager d'entity ici (inclusion circulaire))
-	//managerEntity->createProjectiles({ collider.getPosition().x + 100, collider.getPosition().y}, direction, 'P');
+	if (_shootCooldown.getElapsedTime().asMilliseconds() > _coolDown)
+	{
+		managerEntity->createProjectiles({ collider.getPosition().x + 100, collider.getPosition().y }, direction, 'P');
+	}
 }
 
 void Player::addSpeed()
