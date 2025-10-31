@@ -57,6 +57,21 @@ void textureManager::loadAll() {
         throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
     textureList.insert({ "menu",menu });
 
+    sf::Texture wof;
+    if (!wof.loadFromFile("../assets/wallofflesh.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "walldeath",wof });
+
+    sf::Texture fireball;
+    if(!fireball.loadFromFile("../assets/fireball1.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "fireball",fireball });
+
+    sf::Texture barricade;
+    if(!barricade.loadFromFile("../assets/tiles/obstacles/barricade.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "barricade",barricade });
+
     AnimationData idle, run, jump, walk, fall, slide;
 	AnimationData fireBallIdle ,forkIdle, torchIdle, signIdle, signReadying, signReadyIdle, signReflect, deathWallIdle;
 	AnimationData forkDeathFront, forkDeathBack, torchDeathFront, torchDeathBack, signDeathFront, signDeathBack;

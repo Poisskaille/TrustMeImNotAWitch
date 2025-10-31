@@ -54,26 +54,25 @@ void collisionsManager::checkCollisions()
 									//garbageAdd(EntityCheaked);
 									break;
 								case 'E':
-									if (!(std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'P' && Entity->tag == 'B'))
+									if (!(std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'B' && Entity->tag == 'B'))
 									{
 										garbageAdd(EntityCheaked);
 									}
 									else
 									{
-										//TODO ennemie panneau, logic renvoie de balle
+										if (std::dynamic_pointer_cast<Projectiles>(Entity)->getOwner() == 'P')
+										{
+											std::dynamic_pointer_cast<Projectiles>(Entity)->switchOwner();
+										}
 									}
 									break;
 								case 'B':
 									if (Entity->tag == 'E')
 									{
-										if (!(std::dynamic_pointer_cast<Ennemy>(Entity)->getTagEnnemie() == 'P'))
+										if (!(std::dynamic_pointer_cast<Ennemy>(Entity)->getTagEnnemie() == 'B'))
 										{
 											garbageAdd(EntityCheaked);
 										}
-									}
-									else
-									{
-										garbageAdd(EntityCheaked);
 									}
 									break;
 								case 'U':

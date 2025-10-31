@@ -86,6 +86,9 @@ void Map::loadEntity(int index)
         case 'T':
             managerEntity->createEnnemies(currentChar, managerText->getEnemyTexture(EnemyType::Torch, animationType::Idle), { x * tileSize + offsetX, y * tileSize }, { 0, 0 });
             break;
+        case 'O':
+            managerEntity->createEnnemies(currentChar, managerText->getTexture("barricade"), {x * tileSize + offsetX, y * tileSize}, {1, 1});
+            break;
         case 'B':
             managerEntity->createEnnemies(currentChar, managerText->getEnemyTexture(EnemyType::Sign, animationType::Idle), { x * tileSize + offsetX, y * tileSize }, { 0, 0 });
             break;

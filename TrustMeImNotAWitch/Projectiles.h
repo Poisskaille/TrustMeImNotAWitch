@@ -18,5 +18,7 @@ public:
 	void changeDirection();
 	void moveProjectile(float dt);
 
+	char &getOwner() { return owner; }
+
 	bool lifeSpan();
 };

@@ -30,7 +30,7 @@ void entityManager::createPowerUp(PowerType pT, sf::Texture& _text, sf::Vector2f
 
 void entityManager::createProjectiles(sf::Vector2f _pos, sf::Vector2f _direction, char c)
 {
-	std::shared_ptr<Projectiles> pr = std::make_shared<Projectiles>(managerText->getTexture("coins"), _pos, _direction, c);
+	std::shared_ptr<Projectiles> pr = std::make_shared<Projectiles>(managerText->getTexture("fireball"), _pos, _direction, c);
 	allprojectiles.push_back(pr);
 	allEntities.push_back(pr);
 }
@@ -52,6 +52,9 @@ void entityManager::createEnnemies(char _tagEnnemie, sf::Texture& _text, sf::Vec
 		break;
 	case 'W':
 		newEnnemie = std::make_shared<WallOfDeath>(_text,_pos,_size);
+		break;
+	case 'O':
+		newEnnemie = std::make_shared<Barricades>(_text, _pos, _size);
 		break;
 	default:
 		break;

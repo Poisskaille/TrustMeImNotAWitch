@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="barricades.cpp" />
     <ClCompile Include="fork.cpp" />
     <ClCompile Include="collisionsManager.cpp" />
     <ClCompile Include="Ennemy.cpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="WallOfDeath.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="barricades.h" />
     <ClInclude Include="fork.h" />
     <ClInclude Include="collisionsManager.h" />
     <ClInclude Include="Ennemy.h" />
