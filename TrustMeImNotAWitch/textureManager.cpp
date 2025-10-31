@@ -9,11 +9,41 @@ textureManager* textureManager::getInstance()
  
 void textureManager::loadAll() {
 
-    sf::Texture backgroundTexture;
-    if (!backgroundTexture.loadFromFile("../assets/background.png")) {
-        throw std::runtime_error("Failed to load texture: ../assets/background.png");
+    sf::Texture skyBackgroundText;
+    if (!skyBackgroundText.loadFromFile("../assets/Background/sky.png")) {
+        throw std::runtime_error("Failed to load texture: ../assets/Background/sky.png");
     }
-    textureList.insert({ "background",backgroundTexture });
+    textureList.insert({ "skyBackgroundText",skyBackgroundText });
+
+    sf::Texture firstTrees;
+    if (!firstTrees.loadFromFile("../assets/Background/Layer_0003_6.png")) {
+        throw std::runtime_error("Failed to load texture: ../assets/Background/Layer_0003_6.png");
+    }
+    textureList.insert({ "firsTrees",firstTrees });
+
+    sf::Texture leaves;
+    if (!leaves.loadFromFile("../assets/Background/Layer_0002_7.png")) {
+        throw std::runtime_error("Failed to load texture: ../assets/Background/Layer_0002_7.png");
+    }
+    textureList.insert({ "leaves",leaves });
+
+    sf::Texture secondTrees;
+    if (!secondTrees.loadFromFile("../assets/Background/Layer_0005_5.png")) {
+        throw std::runtime_error("Failed to load texture: ../assets/Background/Layer_0005_5.png");
+    }
+    textureList.insert({ "secondTrees",secondTrees });
+
+    sf::Texture floor;
+    if (!floor.loadFromFile("../assets/Background/Layer_0001_8.png")) {
+        throw std::runtime_error("Failed to load texture: ../assets/Background/Layer_0001_8.png");
+    }
+    textureList.insert({ "floor",floor });
+
+    sf::Texture dirtBackground;
+    if (!dirtBackground.loadFromFile("../assets/Background/Layer_0000_9.png")) {
+        throw std::runtime_error("Failed to load texture: ../assets/Background/Layer_0000_9.png");
+    }
+    textureList.insert({ "dirtBackground",dirtBackground });
 
     sf::Texture grassTile;
     if (!grassTile.loadFromFile("../assets/tiles/ground.png")) {

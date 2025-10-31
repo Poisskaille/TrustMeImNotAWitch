@@ -1,6 +1,6 @@
 #include "Projectiles.h"
 
-Projectiles::Projectiles(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _direction, char _owner) : Entity('B', _texture, _pos, sf::Vector2f(2.f, 2.f)), direction(_direction), owner(_owner)
+Projectiles::Projectiles(const sf::Texture& _texture, sf::Vector2f _pos, sf::Vector2f _direction, char _owner) : Entity('B', _texture, _pos, sf::Vector2f(1.f, 1.f)), direction(_direction), owner(_owner)
 {
 	projectileSpeed = 3500.f;
 	if(_owner != 'P')

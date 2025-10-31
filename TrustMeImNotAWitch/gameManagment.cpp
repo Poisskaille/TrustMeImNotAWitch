@@ -12,7 +12,7 @@ void gameManagment::init()
 {
 	managerText->loadAll();
 	managerMap->initMap();
-	bg.init(managerText->getTexture("background"));
+	bg.init();
 	sf::Clock clock;
 
 	managerEntity->createPlayer(managerText->getTexture("coin"));
