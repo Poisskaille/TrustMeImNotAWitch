@@ -119,7 +119,7 @@ void Player::update(float dT)
 	}
 
 	// Always update the current animation
-	managerText->update(deltaTime, sprite);
+	managerText->updatePlayer(deltaTime, sprite);
 #pragma endregion
 }
 

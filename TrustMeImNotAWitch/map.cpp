@@ -81,9 +81,12 @@ void Map::loadEntity(int index)
             x = 0;
             break;
         case 'F':
+            managerEntity->createEnnemies(currentChar, managerText->getEnemyTexture(EnemyType::Fork,animationType::Idle), { x * tileSize + offsetX, y * tileSize }, { 0, 0});
+            break;
         case 'T':
+            managerEntity->createEnnemies(currentChar, managerText->getEnemyTexture(EnemyType::Torch, animationType::Idle), { x * tileSize + offsetX, y * tileSize }, { 0, 0 });
         case 'B':
-            managerEntity->createEnnemies(currentChar, managerText->getTexture("coin"), {x * tileSize + offsetX, y * tileSize}, {tileSize, tileSize});
+            managerEntity->createEnnemies(currentChar, managerText->getEnemyTexture(EnemyType::Sign, animationType::Idle), { x * tileSize + offsetX, y * tileSize }, { 0, 0 });
             break;
         case 'G':
             managerEntity->createPowerUp(PowerType::GOLD, managerText->getTexture("coin"), {x * tileSize + offsetX, y * tileSize}, {1 , 1});
