@@ -13,5 +13,9 @@ void torch::update(float dT)
 		managerEntity->createProjectiles({collider.getPosition().x - 50.f, collider.getPosition().y}, { -1.f, 0.f }, 'E');
 	}
 
-	managerText->updateEnemy(EnemyType::Torch, animationType::Idle, dT, sprite);
+	managerText->updateEnemy(EnemyType::Torch, currentType, dT, sprite);
+}
+
+void torch::animTypeSetter(animationType type) {
+	currentType = type;
 }
