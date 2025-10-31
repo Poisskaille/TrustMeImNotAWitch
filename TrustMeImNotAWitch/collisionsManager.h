@@ -8,7 +8,6 @@ private:
 	static collisionsManager* instance;
 
 	bool isPaused;
-	bool isGameRunning;
 
 	std::vector<std::shared_ptr<Entity>> garbage;
 
@@ -23,6 +22,7 @@ public:
 	bool isUsingEntities;
 	bool isDeletingEntities;
 	bool isDrawingEntities;
+	bool isGameRunning;
 
 	void checkCollisions();
 

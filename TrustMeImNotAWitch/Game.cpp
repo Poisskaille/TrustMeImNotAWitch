@@ -30,7 +30,11 @@ void Game::run()
         clock.restart();
 
         managerGame->update(&window);
-
+        if (!managerCollisions->isGameRunning)
+        {
+            tCollisions.join();
+            window.close();
+        }
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
