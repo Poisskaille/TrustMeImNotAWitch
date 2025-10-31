@@ -92,8 +92,7 @@ public:
     void updatePlayer(float deltaTime, sf::Sprite& player);
     sf::Texture& getEnemyTexture(EnemyType type, animationType animType);
     void setEnemyAnimation(EnemyType type, ForkAnim anim, sf::Sprite& enemy);
-    void updateEnemy(EnemyType type, ForkAnim anim, float deltaTime, sf::Sprite& enemy);
-
+    void updateEnemy(EnemyType type, animationType animType, float deltaTime, sf::Sprite& enemy);
 
     void update(float deltaTime, sf::Sprite& player);
 
