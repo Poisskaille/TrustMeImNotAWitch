@@ -4,7 +4,7 @@
 class Entity
 {
 private:
-	//c pour moi ca				ok personne mysterieuse                   sympa ici
+	//c pour moi ca				ok personne mysterieuse                   sympa ici						AH LA, ON EST BIEN
 	sf::Vector2f ColliderSize = { 48.f,80.f };
 
 
