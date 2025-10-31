@@ -10,6 +10,7 @@ private:
 
 protected:
 	sf::Sprite sprite;
+	sf::Texture texture;
 	sf::RectangleShape collider;
 
 public:

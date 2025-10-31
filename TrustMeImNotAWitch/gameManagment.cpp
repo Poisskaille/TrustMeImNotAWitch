@@ -15,11 +15,11 @@ void gameManagment::init()
 
 	sf::Clock clock;
 
-	background.setTexture(&managerText->backgroundTexture);
+	background.setTexture(&managerText->getTexture("background"));
 	background.setSize(sf::Vector2f(1920.f, 1080.f));
 
-	managerEntity->createPlayer(managerText->test);
-	managerEntity->createEnnemies('W', managerText->test, {-400,-400 }, {10,10});
+	managerEntity->createPlayer(managerText->getTexture("coin"));
+	managerEntity->createEnnemies('W', managerText->getTexture("coin"), {-400,-400}, {10,10});
 }
 
 void gameManagment::update(sf::RenderWindow* _window)

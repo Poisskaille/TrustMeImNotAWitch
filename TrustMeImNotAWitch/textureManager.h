@@ -31,17 +31,16 @@ private:
     std::unordered_map<playerAnimation, AnimationData> playerAnimations;
     playerAnimation currentAnim = playerAnimation::Idle;
 
-    std::vector<sf::Texture> textureList;
+    std::unordered_map<std::string, sf::Texture> textureList;
 
 public:
     static textureManager* getInstance();
-    sf::Texture grassTile;
-    sf::Texture test;
-    sf::Texture backgroundTexture;
-    sf::Texture coins;
+
     void loadAll();
     void setplayerAnimation(playerAnimation anim, sf::Sprite& player);
     void update(float deltaTime, sf::Sprite& player);
+
+    sf::Texture& getTexture(const std::string&);
 };
 
 extern textureManager* managerText;

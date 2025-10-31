@@ -64,5 +64,10 @@ void Score::changeMultiplier(float value)
 	scoreMult = value;
 }
 
+std::vector<int> Score::getScore()
+{
+	return scoreList;
+}
+
 Score* Score::instance = nullptr;
 Score* managerScore = Score::getInstance();

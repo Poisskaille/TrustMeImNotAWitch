@@ -13,6 +13,8 @@ public:
 
 	void changeMultiplier(float value);
 
+	std::vector<int> getScore();
+
 private:
 
 	int score = 0;
