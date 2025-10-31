@@ -20,6 +20,10 @@ private:
 public:
 	static collisionsManager* getInstance();
 
+	bool isUsingEntities;
+	bool isDeletingEntities;
+	bool isDrawingEntities;
+
 	void checkCollisions();
 
 	void garbageClear();

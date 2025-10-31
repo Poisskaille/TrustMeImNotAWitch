@@ -18,6 +18,12 @@ Player::Player(const sf::Texture& _texture) : Entity('P', _texture, sf::Vector2f
 	deltaTime = 0.f;
 	totalTime = 0.f;
 	scoreTime = 0.f;
+
+	topCollider.setSize({collider.getSize().x, 20});
+	topCollider.setOrigin({collider.getSize().x / 2, collider.getSize().y / 2});
+
+	rightCollider.setSize({20,collider.getSize().y});
+	rightCollider.setOrigin({ collider.getSize().x / 2, collider.getSize().y / 2 });
 }
 
 void Player::update(float dT)
@@ -119,7 +125,6 @@ void Player::update(float dT)
 
 void Player::Draw(sf::RenderWindow& window)
 {
-	window.draw(collider);
 	window.draw(sprite);
 	window.setView(cam.getCam());
 	cam.drawUI(window);
@@ -127,9 +132,10 @@ void Player::Draw(sf::RenderWindow& window)
 
 void Player::HandleInput()
 {
-	velocity.x = speed * deltaTime;
+
 	//std::cout << "velocity.x = " << velocity.x  << ", speed = " << speed << ", deltaTime.asSeconds() = " << deltaTime.asSeconds() << '\n';
 	collider.move(sf::Vector2(velocity.x, velocity.y * deltaTime));
+	velocity.x = speed * deltaTime;
 	velocity.y += gravity * deltaTime;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && playerState == State::GROUNDED && !isWalking) { Jump(); }
@@ -174,6 +180,8 @@ void Player::HandleInput()
 	}
 
 	sprite.setPosition(sf::Vector2f(collider.getPosition().x + 8, collider.getPosition().y + 8));
+	topCollider.setPosition({ sprite.getPosition().x, sprite.getPosition().y + 20 });
+	rightCollider.setPosition({ sprite.getPosition().x + 50, sprite.getPosition().y + 20 });
 }
 
 void Player::Jump()
@@ -204,46 +212,23 @@ void Player::Slide() {
 }
 
 void Player::Collision() {
-	//auto collidedTile = managerMap->getCollidingTile(collider.getGlobalBounds());
-	//sf::FloatRect playerBounds = collider.getGlobalBounds();
-	//std::optional<sf::FloatRect> interOpt = playerBounds.findIntersection(collidedTile.getGlobalBounds());
-	//if (!interOpt.has_value()) {
-	//	isAgainstWall = false;
-	//	return;
-	//}
-	//sf::FloatRect intersection = interOpt.value();
-	//if (managerMap->checkCollision(collider.getGlobalBounds()))
-	//{
-	//	if (intersection.size.x < intersection.size.y)
-	//	{
-	//		if ((playerBounds.position.x + collidedTile.getSize().x))
-	//			if (playerBounds.position.x < collidedTile.getPosition().x) {
-	//				collider.move(sf::Vector2f(-intersection.size.x, 0.f));
-	//			}
-	//			else {
-	//				collider.move(sf::Vector2f(intersection.size.x, 0.f)); // hit from right
 
-	//			}
-	//		isAgainstWall = true;
-	//		velocity.x = 0.f;
-	//	}
-	//	if (collidedTile.getPosition().y < playerBounds.position.y) {  //VERTICALITY
-	//		collider.setPosition({ collider.getPosition().x, collider.getPosition().y - 0.0001f });
-	//		velocity.y = 0;
-	//		if (playerState != State::SLIDING)
-	//			playerState = State::GROUNDED;
-	//	}
-	//}
-
-	//sf::FloatRect newBounds = collider.getGlobalBounds();
-	//if (!newBounds.findIntersection(collidedTile.getGlobalBounds()).has_value())
-	//	isAgainstWall = false;
 	if (managerMap->checkCollision(collider.getGlobalBounds()))
 	{
 		collider.setPosition({ collider.getPosition().x, collider.getPosition().y - 0.0001f });
 		velocity.y = 0;
 		if (playerState != State::SLIDING)
 			playerState = State::GROUNDED;
+	}
+	if (managerMap->checkCollision(rightCollider.getGlobalBounds()))
+	{
+		collider.setPosition({ collider.getPosition().x + 0.0001f, collider.getPosition().y });
+		velocity.x = 0;
+	}
+	if (managerMap->checkCollision(topCollider.getGlobalBounds()))
+	{
+		collider.setPosition({ collider.getPosition().x, collider.getPosition().y + 0.0001f });
+		velocity.y = 0;
 	}
 }
 

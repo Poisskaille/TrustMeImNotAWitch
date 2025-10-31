@@ -8,19 +8,18 @@ Game::~Game(){}
 
 void Game::run()
 {
+    managerText->loadAll();
     std::unique_ptr<Menu> menu = std::make_unique<Menu>();
     if (!menu->runMain(window))
         return;
 
-    managerText->loadAll();
+    UIManagers().getInstance().clearMenu();
+
     managerGame->init();
-	
-    managerScore->highScore();
     sf::Clock clock;
 
     //Threads
     std::thread tCollisions(&collisionsManager::checkCollisions, managerCollisions);
-    //managerEntity->createPlayer(managerText->test);
 
     while (window.isOpen())
     {

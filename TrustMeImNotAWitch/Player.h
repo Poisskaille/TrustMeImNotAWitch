@@ -66,5 +66,8 @@ private:
 
 	//textureManager& texManager;
 
+	sf::RectangleShape rightCollider;
+	sf::RectangleShape topCollider;
+
 	CameraUI cam;
 };

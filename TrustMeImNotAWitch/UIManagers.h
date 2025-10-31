@@ -16,7 +16,11 @@ public:
 	void drawCam(sf::RenderWindow& window);
 	void drawMenu(sf::RenderWindow& window);
 
-	void createUI(UI_TYPE type, UI_LIST, const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color, const std::string&, const char);
+	void createButton(UI_LIST, const sf::Vector2f& pos, const sf::Vector2f& size,const std::string&, const char, sf::Texture& text1, sf::Texture& text2);
+	void createImage(UI_LIST, const sf::Vector2f& pos, const sf::Vector2f& size, const std::string&, const char, sf::Texture&);
+
+	void clearCam();
+	void clearMenu();
 	
 	std::shared_ptr<UIElements> getCamUI(const char i);
 	std::shared_ptr<UIElements> getMenuUI(const char i);

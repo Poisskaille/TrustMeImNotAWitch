@@ -8,18 +8,54 @@ textureManager* textureManager::getInstance()
 }
  
 void textureManager::loadAll() {
-    if (!test.loadFromFile("../assets/test.png")) {
-        throw std::runtime_error("Failed to load texture: ../assets/test.png");
-    }
+
+    sf::Texture backgroundTexture;
     if (!backgroundTexture.loadFromFile("../assets/background.png")) {
         throw std::runtime_error("Failed to load texture: ../assets/background.png");
     }
+    textureList.insert({ "background",backgroundTexture });
+
+    sf::Texture grassTile;
     if (!grassTile.loadFromFile("../assets/tiles/ground.png")) {
         throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
     }
+    textureList.insert({ "grass",grassTile });
 
-    if (!coins.loadFromFile("../assets/coin.png"));
-    std::cout << "CACA" << '\n';
+    sf::Texture coins;
+    if (!coins.loadFromFile("../assets/coin.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "coin",coins });
+
+    sf::Texture playButton;
+        if(!playButton.loadFromFile("../assets/UI/menu/playButton.png"))
+            throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "normalPlay",playButton });
+
+
+    sf::Texture playButtonHover;
+    if(!playButtonHover.loadFromFile("../assets/UI/menu/playButtonHover.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "hoverPlay",playButtonHover });
+
+    sf::Texture exitButton;
+    if(!exitButton.loadFromFile("../assets/UI/menu/exitButton.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "normalExit",exitButton });
+
+    sf::Texture exitButtonHover;
+    if(!exitButtonHover.loadFromFile("../assets/UI/menu/exitButtonHover.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "hoverExit",exitButtonHover });
+
+    sf::Texture nottaHat;
+    if(!nottaHat.loadFromFile("../assets/UI/menu/nottaHat.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "nottaHat",nottaHat });
+
+    sf::Texture menu;
+    if (!menu.loadFromFile("../assets/UI/MainMenu.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "menu",menu });
 
     AnimationData idle, run, jump, walk, fall, slide;
 	AnimationData fireBallIdle ,forkIdle, torchIdle, signIdle, signReadying, signReadyIdle, signReflect, deathWallIdle;
@@ -274,6 +310,14 @@ void textureManager::updateEnemy(EnemyType type, ForkAnim anim, float deltaTime,
 
 
 
+
+sf::Texture& textureManager::getTexture(const std::string& key)
+{
+    auto texture = textureList.find(key);
+    if (texture == textureList.end())
+        std::cout << "Impossible de trouver la texture";
+    return texture->second;
+}
 
 textureManager* textureManager::instance = nullptr;
 textureManager* managerText = textureManager::getInstance();

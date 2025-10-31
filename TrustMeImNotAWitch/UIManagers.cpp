@@ -23,7 +23,7 @@ void UIManagers::drawCam(sf::RenderWindow& window)
 	{
 		for (auto& _ui : uiCamera)
 		{
-			_ui->draw(window);
+ 			_ui->draw(window);
 		}
 	}
 }
@@ -39,25 +39,40 @@ void UIManagers::drawMenu(sf::RenderWindow& window)
 	}
 }
 
-void UIManagers::createUI(UI_TYPE type, UI_LIST list, const sf::Vector2f& pos, const sf::Vector2f& size, const sf::Color& color, const std::string& str, const char c)
+void UIManagers::createButton(UI_LIST list, const sf::Vector2f& pos, const sf::Vector2f& size,const std::string& str, const char c, sf::Texture& text1, sf::Texture& text2)
 {
-	switch(type)
+	switch(list)
 	{
-	case UI_TYPE::IMAGE:
-		if(list == UI_LIST::CAMERA)
-			uiCamera.push_back(std::make_shared<UIImage>(pos, size, color, str,c));
-		else
-			uiMenu.push_back(std::make_shared<UIImage>(pos, size, color, str,c));
+	case UI_LIST::CAMERA:
+		uiCamera.push_back(std::make_shared<UIButton>(pos, size,str, c, text1, text2));
 		break;
-	case UI_TYPE::BUTTON:
-		if(list == UI_LIST::CAMERA)
-		{ 
-			uiCamera.push_back(std::make_shared<UIButton>(pos, size, color, str,c)); }
-
-		else
-			uiMenu.push_back(std::make_shared<UIButton>(pos, size, color, str,c));
+	case UI_LIST::MENU:
+		uiMenu.push_back(std::make_shared<UIButton>(pos, size, str, c, text1, text2));
 		break;
 	}
+}
+
+void UIManagers::createImage(UI_LIST list, const sf::Vector2f& pos, const sf::Vector2f& size, const std::string& str, const char c, sf::Texture& text)
+{
+	switch (list)
+	{
+	case UI_LIST::CAMERA:
+		uiCamera.push_back(std::make_shared<UIImage>(pos, size, str, c,text));
+		break;
+	case UI_LIST::MENU:
+		uiMenu.push_back(std::make_shared<UIImage>(pos, size, str, c,text));
+		break;
+	}
+}
+
+void UIManagers::clearCam()
+{
+	uiCamera.clear();
+}
+
+void UIManagers::clearMenu()
+{
+	uiMenu.clear();
 }
 
 std::shared_ptr<UIElements> UIManagers::getCamUI(const char i)

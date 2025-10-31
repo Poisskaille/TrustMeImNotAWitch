@@ -82,14 +82,11 @@ private:
     std::unordered_map<FireballAnim, AnimationData> fireBallAnimations;
     playerAnimation currentAnim = playerAnimation::Idle;
 
-    std::vector<sf::Texture> textureList;
+    std::unordered_map<std::string, sf::Texture> textureList;
 
 public:
     static textureManager* getInstance();
-    sf::Texture grassTile;
-    sf::Texture test;
-    sf::Texture backgroundTexture;
-    sf::Texture coins;
+
     void loadAll();
     void setplayerAnimation(playerAnimation anim, sf::Sprite& player);
     void updatePlayer(float deltaTime, sf::Sprite& player);
@@ -98,6 +95,9 @@ public:
     void updateEnemy(EnemyType type, ForkAnim anim, float deltaTime, sf::Sprite& enemy);
 
 
+    void update(float deltaTime, sf::Sprite& player);
+
+    sf::Texture& getTexture(const std::string&);
 };
 
 extern textureManager* managerText;
