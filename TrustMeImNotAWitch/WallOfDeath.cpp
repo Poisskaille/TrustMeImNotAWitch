@@ -14,8 +14,9 @@ void WallOfDeath::move(float dT)
 {
 	collider.move({wallSpeed * dT,0});
 	collider.setPosition({collider.getPosition().x, managerEntity->getPlayer()->getPos().y});
+	sprite.setPosition(collider.getPosition());
 
-	if (managerEntity->getPlayer()->getPos().x - collider.getPosition().x > 500.f)
+	if (managerEntity->getPlayer()->getPos().x - collider.getPosition().x > 800.f)
 		wallSpeed += wallSpeed * dT;
 	else
 		wallSpeed = 200.f;
