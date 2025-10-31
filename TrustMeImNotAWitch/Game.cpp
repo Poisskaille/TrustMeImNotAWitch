@@ -3,6 +3,9 @@
 Game::Game()
 	:window(sf::VideoMode({ 1920, 1080 }), "Trust Me, I'm Not A Witch!")
 {
+    sf::Image icon;
+    icon.loadFromFile("../assets/UI/menu/nottaHat.png");
+    window.setIcon(icon);
 }
 Game::~Game(){}
 
