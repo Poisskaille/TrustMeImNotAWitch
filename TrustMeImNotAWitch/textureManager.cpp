@@ -102,6 +102,11 @@ void textureManager::loadAll() {
         throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
     textureList.insert({ "barricade",barricade });
 
+    sf::Texture dirt;
+    if (!dirt.loadFromFile("../assets/tiles/dirt.png"))
+        throw std::runtime_error("Failed to load texture: ../assets/tiles/ground.png");
+    textureList.insert({ "dirt",dirt });
+
     AnimationData idle, run, jump, walk, fall, slide;
 	AnimationData fireBallIdle ,forkIdle, torchIdle, signIdle, signReadying, signReadyIdle, signReflect, deathWallIdle;
 	AnimationData forkDeathFront, forkDeathBack, torchDeathFront, torchDeathBack, signDeathFront, signDeathBack;
@@ -246,6 +251,7 @@ void textureManager::loadAll() {
     }
     signReflect.frameCount = 8;
     signReflect.frameSize = { 32, 32 };
+    signReflect.frameTime = 0.08f;
 
 
     signAnimations[SignAnim::Idle] = signIdle;
@@ -408,6 +414,7 @@ void textureManager::updateEnemy(EnemyType type, animationType animType, float d
         default:
             throw std::runtime_error("Ennemy WOF doesn't have such animType");
         }
+        break;
     default:
         break;
     }
@@ -437,6 +444,32 @@ sf::Texture& textureManager::getTexture(const std::string& key)
     if (texture == textureList.end())
         std::cout << "Impossible de trouver la texture";
     return texture->second;
+}
+
+AnimationData& textureManager::getSignAnimationData(animationType anim) {
+    switch (anim) {
+    case animationType::Idle:
+        return signAnimations.at(SignAnim::Idle);
+        break;
+    case animationType::DeathBack:
+        return signAnimations.at(SignAnim::DeathBack);
+        break;
+    case animationType::DeathFront:
+        return signAnimations.at(SignAnim::DeathFront);
+        break;
+    case animationType::Readying:
+        return signAnimations.at(SignAnim::Readying);
+        break;
+    case animationType::ReadyIdle:
+        return signAnimations.at(SignAnim::ReadyIdle);
+        break;
+    case animationType::Reflect:
+        return signAnimations.at(SignAnim::Reflect);
+        break;
+    default:
+        throw std::runtime_error("Invalid animationType in getSignAnimationData");
+    }
+    
 }
 
 textureManager* textureManager::instance = nullptr;

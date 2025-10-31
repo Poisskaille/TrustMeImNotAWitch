@@ -97,6 +97,10 @@ public:
     void update(float deltaTime, sf::Sprite& player);
 
     sf::Texture& getTexture(const std::string&);
+
+public:
+    AnimationData& getSignAnimationData(animationType anim);
+
 };
 
 extern textureManager* managerText;

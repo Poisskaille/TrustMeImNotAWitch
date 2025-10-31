@@ -12,7 +12,7 @@ void WallOfDeath::update(float dT)
 
 void WallOfDeath::move(float dT)
 {
-	collider.move({wallSpeed * dT,0});
+	collider.move({wallSpeed * dT * 0.75f,0});
 	collider.setPosition({collider.getPosition().x, managerEntity->getPlayer()->getPos().y});
 	sprite.setPosition(collider.getPosition());
 
