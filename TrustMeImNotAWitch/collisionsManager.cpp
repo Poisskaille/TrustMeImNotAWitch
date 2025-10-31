@@ -50,8 +50,11 @@ void collisionsManager::checkCollisions()
 								switch (EntityCheaked->tag)
 								{
 								case 'P':
-									std::cout << "Player hitted" << '\n';
-									//garbageAdd(EntityCheaked);
+									if (!(Entity->tag == 'U'))
+									{
+										std::cout << "Player hitted" << '\n';
+										//garbageAdd(EntityCheaked);
+									}
 									break;
 								case 'E':
 									if (!(std::dynamic_pointer_cast<Ennemy>(EntityCheaked)->getTagEnnemie() == 'B' && Entity->tag == 'B'))
